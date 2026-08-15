@@ -409,7 +409,7 @@
     }
 
     focusedForm = form;
-    form.classList.add("is-focused");
+    centreForm(form);
     // Force a frame so the transition runs rather than snapping on. Re-check
     // on the way in: if focus mode was exited in between (a fast submit, for
     // instance), this frame must not switch the veil back on.
@@ -420,9 +420,57 @@
 
   function exitFocusMode() {
     if (!focusedForm) return;
-    focusedForm.classList.remove("is-focused");
+    uncentreForm(focusedForm);
     focusedForm = null;
     if (veil) veil.classList.remove("is-on");
+  }
+
+  /* Moves the card to the middle of the screen and back.
+
+     The card is taken out of the document to be centred, so its wrapper is
+     pinned to its current height first, otherwise the page collapses behind
+     the blur and jolts back on release.
+
+     Both directions animate with FLIP: read the position before the change,
+     apply the change, read the new position, then start from the difference
+     and let a transition run it to zero. Centring is done with the `translate`
+     property rather than `transform`, which leaves `transform` free for the
+     animation itself. */
+  function flip(form, mutate) {
+    var first = form.getBoundingClientRect();
+    mutate();
+    var last = form.getBoundingClientRect();
+
+    var dx = first.left - last.left;
+    var dy = first.top - last.top;
+    var scale = last.width ? first.width / last.width : 1;
+
+    form.style.transition = "none";
+    form.style.transform = "translate(" + dx + "px," + dy + "px) scale(" + scale + ")";
+
+    // Read a layout property to force the browser to commit that starting
+    // position. Without this the set and the clear collapse into the same
+    // frame, nothing appears to change, and the card jumps instead of moving.
+    void form.offsetHeight;
+
+    form.style.transition = "";
+    form.style.transform = "";
+  }
+
+  function centreForm(form) {
+    var wrap = form.parentElement;
+    flip(form, function () {
+      wrap.style.height = wrap.offsetHeight + "px";
+      form.classList.add("is-focused");
+    });
+  }
+
+  function uncentreForm(form) {
+    var wrap = form.parentElement;
+    flip(form, function () {
+      form.classList.remove("is-focused");
+      wrap.style.height = "";
+    });
   }
 
   function initFocusMode(form) {

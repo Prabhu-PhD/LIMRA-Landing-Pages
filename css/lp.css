@@ -994,10 +994,21 @@ a { color: inherit; }
 }
 .lp-veil.is-on { opacity: 1; pointer-events: auto; }
 
-.lp-form.is-focused { position: relative; z-index: 95; }
-/* The hero form is inside a sticky wrapper, so the wrapper has to rise too. */
-.lp-hero-form:has(.lp-form.is-focused) { z-index: 95; }
-.lp-close-form:has(.lp-form.is-focused) { position: relative; z-index: 95; }
+/* Focused card is lifted out and centred on screen. The "translate" property
+   does the centring, which leaves "transform" free for the FLIP animation
+   in lp.js. */
+.lp-form.is-focused {
+  position: fixed; z-index: 95;
+  top: 50%; left: 50%;
+  translate: -50% -50%;
+  width: min(452px, 92vw);
+  max-height: 88vh; overflow-y: auto;
+  transform-origin: top left;
+  transition: transform .42s cubic-bezier(.22, .7, .28, 1);
+  box-shadow: 0 40px 90px rgba(0, 0, 0, .55);
+}
+/* The hero wrapper is sticky; it must stop sticking while the card is out. */
+.lp-hero-form:has(.lp-form.is-focused) { position: static; }
 
 @media (prefers-reduced-motion: reduce) {
   .lp-veil { transition: none; }
