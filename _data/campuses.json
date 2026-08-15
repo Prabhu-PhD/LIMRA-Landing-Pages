@@ -11,9 +11,9 @@
     "badges": ["Clinical Excellence", "NMC Aligned", "Internationally Recognized", "Strong FMGE Results", "Modern Campus"],
 
     "accreditation": [
-      { "img": "nmc-india.png", "name": "NMC India", "label": "Curriculum aligned" },
-      { "img": "ched-philippines.png", "name": "CHED Philippines", "label": "Recognised" },
-      { "img": "faimer.png", "name": "FAIMER", "label": "World Directory listed" }
+      { "img": "nmc-india.webp", "name": "NMC India", "label": "Curriculum aligned" },
+      { "img": "ched-philippines.webp", "name": "CHED Philippines", "label": "Recognised" },
+      { "img": "faimer.webp", "name": "FAIMER", "label": "World Directory listed" }
     ],
 
     "stats": [
@@ -69,11 +69,11 @@
     "badges": ["No Donation Fees", "NMC Aligned", "Strong FMGE &amp; PLE", "Internationally Recognized", "Premium Accommodation"],
 
     "accreditation": [
-      { "img": "nmc-india.png", "name": "NMC India", "label": "Curriculum aligned" },
-      { "img": "ched-philippines.png", "name": "CHED Philippines", "label": "Recognised" },
-      { "img": "faimer.png", "name": "FAIMER", "label": "World Directory listed" },
-      { "img": "bureau-of-immigration.png", "name": "Bureau of Immigration", "label": "Accredited" },
-      { "img": "apmc-student-network.png", "name": "APMC", "label": "Student network" }
+      { "img": "nmc-india.webp", "name": "NMC India", "label": "Curriculum aligned" },
+      { "img": "ched-philippines.webp", "name": "CHED Philippines", "label": "Recognised" },
+      { "img": "faimer.webp", "name": "FAIMER", "label": "World Directory listed" },
+      { "img": "bureau-of-immigration.webp", "name": "Bureau of Immigration", "label": "Accredited" },
+      { "img": "apmc-student-network.webp", "name": "APMC", "label": "Student network" }
     ],
 
     "stats": [
@@ -132,8 +132,8 @@
     "badges": ["NMC Aligned", "Own Teaching Hospital", "Experienced Faculty", "Modern Facilities", "English Medium"],
 
     "accreditation": [
-      { "img": "nmc-india.png", "name": "NMC India", "label": "Curriculum aligned" },
-      { "img": "faimer.png", "name": "FAIMER", "label": "World Directory listed" }
+      { "img": "nmc-india.webp", "name": "NMC India", "label": "Curriculum aligned" },
+      { "img": "faimer.webp", "name": "FAIMER", "label": "World Directory listed" }
     ],
 
     "stats": [
@@ -189,8 +189,8 @@
     "badges": ["NMC Aligned", "English Medium", "WHO Recognized", "Affordable Tuition", "Real Clinical Exposure"],
 
     "accreditation": [
-      { "img": "nmc-india.png", "name": "NMC India", "label": "Curriculum aligned" },
-      { "img": "faimer.png", "name": "FAIMER", "label": "World Directory listed" }
+      { "img": "nmc-india.webp", "name": "NMC India", "label": "Curriculum aligned" },
+      { "img": "faimer.webp", "name": "FAIMER", "label": "World Directory listed" }
     ],
 
     "stats": [
@@ -244,8 +244,8 @@
     "badges": ["International Education", "Affordable Fees", "Small Class Sizes", "Clinical Training", "Full LIMRA Support"],
 
     "accreditation": [
-      { "img": "nmc-india.png", "name": "NMC India", "label": "Curriculum aligned" },
-      { "img": "faimer.png", "name": "FAIMER", "label": "World Directory listed" }
+      { "img": "nmc-india.webp", "name": "NMC India", "label": "Curriculum aligned" },
+      { "img": "faimer.webp", "name": "FAIMER", "label": "World Directory listed" }
     ],
 
     "stats": [
@@ -300,8 +300,8 @@
     "badges": ["SE Asia Location", "Affordable &amp; Quality", "Clinical Training", "Multicultural Campus", "Full LIMRA Support"],
 
     "accreditation": [
-      { "img": "nmc-india.png", "name": "NMC India", "label": "Curriculum aligned" },
-      { "img": "faimer.png", "name": "FAIMER", "label": "World Directory listed" }
+      { "img": "nmc-india.webp", "name": "NMC India", "label": "Curriculum aligned" },
+      { "img": "faimer.webp", "name": "FAIMER", "label": "World Directory listed" }
     ],
 
     "stats": [

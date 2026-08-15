@@ -91,8 +91,8 @@ eleventyComputed:
   <div class="lp-hero-inner">
 
     <div class="lp-hero-copy">
-      {#- Transparent PNG, so it sits straight on the hero with no white plate. -#}
-      <img src="/assets/campus/{{ campus.id }}-logo.png" alt="{{ campus.name | striptags }} logo" class="lp-hero-logo" />
+      {#- Transparent WebP, so it sits straight on the hero with no white plate. -#}
+      <img src="/assets/campus/{{ campus.id }}-logo.webp" alt="{{ campus.name | striptags }} logo" class="lp-hero-logo" />
       <p class="lp-eyebrow">MBBS in {{ campus.country }} &middot; Est. {{ campus.est }}</p>
       <h1>{{ campus.name }}</h1>
       <p class="lp-hero-tag">{{ campus.tagline | safe }}</p>
