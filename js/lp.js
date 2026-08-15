@@ -8,7 +8,8 @@
         _data/site.json. With blank IDs nothing loads and no cookies are set.
      3. Submits the enquiry to Web3Forms (email) and, if configured, to a
         Google Sheet endpoint as well.
-     4. Fires the conversion events, then sends the visitor to /thank-you/.
+     4. Fires the conversion events and confirms success inside the form,
+        without navigating the visitor away.
 
    Config comes from window.LP, injected by _includes/base.njk.
    ============================================================ */
@@ -86,22 +87,21 @@
     window.gtag("event", event, params || {});
   }
 
-  /* The conversion fires on the thank-you page, not before the redirect —
-     a tag dispatched mid-navigation is routinely lost. We set a one-shot
-     flag on submit and consume it on arrival, so a visitor who simply
-     types /thank-you/ into the address bar never counts as a conversion. */
   var PENDING_KEY = "limra_lp_pending_conversion";
 
-  function markConversionPending(campus) {
-    try { sessionStorage.setItem(PENDING_KEY, campus || "unknown"); } catch (e) {}
-  }
-
+  /* Success is now confirmed inside the form, so there is no navigation to
+     lose a tag to and the conversion can fire immediately. The pending-flag
+     path is kept only for /thank-you/, which still exists as a fallback for
+     anyone whose JavaScript failed and who got a normal form POST. */
   function firePendingConversion() {
     var campus;
     try { campus = sessionStorage.getItem(PENDING_KEY); } catch (e) { return; }
     if (!campus) return;
     try { sessionStorage.removeItem(PENDING_KEY); } catch (e) {}
+    fireConversion(campus);
+  }
 
+  function fireConversion(campus) {
     track("generate_lead", {
       event_category: "form",
       event_label: campus,
@@ -260,8 +260,10 @@
         .then(function (r) { return r.json(); })
         .then(function (res) {
           if (res && res.success) {
-            markConversionPending(campus);
-            window.location.href = "/thank-you/?campus=" + encodeURIComponent(campus);
+            /* No navigation, so the old mid-navigation tag loss cannot
+               happen and the conversion fires straight away. */
+            fireConversion(campus);
+            showDone(form);
           } else {
             say("Sorry, something went wrong. Please try again, or call us directly.", true);
             restore();
@@ -347,6 +349,116 @@
       if (window.innerWidth > 768) return;
       if (dy > 90 && y < 900) open();
     }, { passive: true });
+  }
+
+  /* ---------- inline success ----------
+     Swaps the form's contents for the thank-you panel already in the
+     markup, keeping the visitor exactly where they are. */
+
+  function showDone(form) {
+    var done = form.querySelector("[data-form-done]");
+    if (!done) return;
+
+    form.querySelectorAll(
+      "[data-step], [data-step-count], [data-form-msg], [data-form-fine]"
+    ).forEach(function (el) { el.hidden = true; });
+
+    done.hidden = false;
+    form.classList.add("is-done");
+
+    // Release the focus overlay if this form triggered it.
+    exitFocusMode();
+
+    // Keep the confirmation in view without yanking the page around.
+    var box = done.getBoundingClientRect();
+    if (box.top < 0 || box.bottom > window.innerHeight) {
+      done.scrollIntoView({ block: "center", behavior: "smooth" });
+    }
+    done.setAttribute("tabindex", "-1");
+    done.focus({ preventScroll: true });
+  }
+
+  /* ---------- focus mode ----------
+     Dims and blurs the page while someone is filling the form, so the only
+     lit thing on screen is the thing we want them to finish.
+
+     Deliberately desktop-only: on a phone the keyboard already covers most
+     of the screen and the browser scrolls the field into view itself, so
+     adding our own movement fights the browser and tends to feel broken.
+     Skipped for the exit-intent form too, which sits in its own modal and
+     already has a backdrop. */
+
+  var veil = null;
+  var focusedForm = null;
+  var blurTimer = null;
+
+  function isDesktop() {
+    return window.matchMedia("(min-width: 1001px)").matches;
+  }
+
+  function enterFocusMode(form) {
+    if (!isDesktop() || focusedForm === form) return;
+    if (form.closest("#lp-exit")) return;
+    if (form.classList.contains("is-done")) return;
+
+    if (!veil) {
+      veil = document.createElement("div");
+      veil.className = "lp-veil";
+      veil.addEventListener("click", exitFocusMode);
+      document.body.appendChild(veil);
+    }
+
+    focusedForm = form;
+    form.classList.add("is-focused");
+    // Force a frame so the transition runs rather than snapping on. Re-check
+    // on the way in: if focus mode was exited in between (a fast submit, for
+    // instance), this frame must not switch the veil back on.
+    requestAnimationFrame(function () {
+      if (focusedForm === form) veil.classList.add("is-on");
+    });
+  }
+
+  function exitFocusMode() {
+    if (!focusedForm) return;
+    focusedForm.classList.remove("is-focused");
+    focusedForm = null;
+    if (veil) veil.classList.remove("is-on");
+  }
+
+  function initFocusMode(form) {
+    form.addEventListener("focusin", function () {
+      clearTimeout(blurTimer);
+      enterFocusMode(form);
+    });
+
+    // Moving between fields fires focusout then focusin, so wait a tick
+    // before deciding that focus has genuinely left the form.
+    form.addEventListener("focusout", function () {
+      clearTimeout(blurTimer);
+      blurTimer = setTimeout(function () {
+        if (!form.contains(document.activeElement)) exitFocusMode();
+      }, 120);
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && focusedForm === form) {
+        exitFocusMode();
+        if (document.activeElement) document.activeElement.blur();
+      }
+    });
+  }
+
+  /* ---------- mobile: tapping Enquire opens the keyboard too ---------- */
+
+  function initMobileEnquire() {
+    var btn = document.querySelector(".lpm-form");
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      var field = document.querySelector('.lp-hero-form .lp-form [name="name"]');
+      if (!field || field.closest("[hidden]")) return;
+      // Let the anchor scroll first, then raise the keyboard.
+      setTimeout(function () { field.focus({ preventScroll: true }); }, 420);
+    });
   }
 
   /* ---------- gallery lightbox ----------
@@ -476,8 +588,10 @@
     document.querySelectorAll(".js-lp-form").forEach(function (f) {
       handleForm(f);
       initSteps(f);
+      initFocusMode(f);
     });
     initLightbox();
+    initMobileEnquire();
     initExitIntent();
 
     var yr = document.getElementById("year");

@@ -118,6 +118,19 @@ will do it.
 all and no tracking cookies are set.** That is deliberate, so the pages stay
 clean and compliant until they are properly configured. It is not a bug.
 
+### ⚠️ Set the Ads conversion up as an *event*, not a page visit
+
+When creating the conversion action in Google Ads, choose the option that
+tracks a **website event using a tag**, not the one that counts visits to a
+particular "thank you" URL.
+
+These pages confirm the enquiry **inside the form**, without sending the
+visitor to another page, because every extra page load is somewhere a person
+can drop out. That is better for conversion rates, but it means there is no
+thank-you URL for Google to count. The page fires the conversion event
+directly instead. A URL-based conversion action would silently record zero
+conversions forever, while the enquiries themselves kept arriving by email.
+
 ---
 
 ## 6. Where the enquiries go
