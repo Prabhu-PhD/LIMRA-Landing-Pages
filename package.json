@@ -4,7 +4,9 @@
   "description": "LIMRA Overseas Education — Google Ads landing pages (one per partner college).",
   "private": true,
   "scripts": {
-    "build": "eleventy",
+    "clean": "node -e \"require('fs').rmSync('_site',{recursive:true,force:true})\"",
+    "build": "npm run clean && eleventy",
+    "package": "npm run build && python tools/package-sites.py",
     "start": "eleventy --serve",
     "serve": "eleventy --serve"
   },
