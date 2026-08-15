@@ -1,0 +1,347 @@
+[
+  {
+    "id": "dmsf",
+    "name": "Davao Medical School Foundation",
+    "shortName": "DMSF",
+    "city": "Davao",
+    "country": "Philippines",
+    "est": "1976",
+    "adTitle": "Study MBBS at DMSF, Philippines",
+    "tagline": "Real hospital exposure that makes you a doctor. One of the most respected medical institutions in the Philippines, built on clinical excellence.",
+    "badges": ["Clinical Excellence", "NMC Aligned", "Internationally Recognized", "Strong FMGE Results", "Modern Campus"],
+
+    "accreditation": [
+      { "img": "nmc-india.png", "name": "NMC India", "label": "Curriculum aligned" },
+      { "img": "ched-philippines.png", "name": "CHED Philippines", "label": "Recognised" },
+      { "img": "faimer.png", "name": "FAIMER", "label": "World Directory listed" }
+    ],
+
+    "stats": [
+      { "num": "4.5", "label": "Year MD Program" },
+      { "num": "4500+", "label": "Hospital Beds" },
+      { "num": "1976", "label": "Established" }
+    ],
+
+    "why": [
+      { "title": "Exceptional Clinical Training", "text": "High-volume hospital exposure from the early years, building real diagnostic and clinical skills through genuine patient care." },
+      { "title": "Internationally Recognized Degree", "text": "NMC aligned and WHO recognized. Your DMSF degree opens doors to practice in India and across the globe." },
+      { "title": "Strong FMGE and PLE Pass Rates", "text": "A proven track record of Indian students clearing the FMGE, supported by free LIMRA coaching worth &#8377;1 lakh." },
+      { "title": "Modern Campus in Davao City", "text": "Advanced medical facilities and a vibrant international student community in one of the safest cities in the Philippines." },
+      { "title": "Diverse International Community", "text": "Study alongside students from across Asia and the world in a multicultural environment that builds global perspective." }
+    ],
+
+    "clinical": {
+      "intro": "DMSF students train across five affiliated hospitals with a combined 4,500+ beds, gaining early patient interaction and advanced medical-technology training from the first years.",
+      "highlights": [
+        { "num": "4500+", "label": "Bed-capacity exposure" },
+        { "num": "5", "label": "Affiliated hospitals" },
+        { "num": "Early", "label": "Patient interaction" }
+      ],
+      "hospitals": [
+        "DMS Foundation Hospital",
+        "Davao Medical Center",
+        "Brokenshire Hospital",
+        "Southern Philippines Medical Center",
+        "San Pedro Hospital"
+      ]
+    },
+
+    "gallery": [
+      { "src": "dmsf-1.webp", "alt": "DMSF Hospital building in Davao", "caption": "Teaching hospital" },
+      { "src": "dmsf-2.webp", "alt": "Students using microscopes in a DMSF laboratory", "caption": "Microscopy lab" },
+      { "src": "dmsf-3.webp", "alt": "Students seated in the DMSF auditorium", "caption": "Auditorium" },
+      { "src": "dmsf-4.webp", "alt": "Students reading in the DMSF library", "caption": "Library" },
+      { "src": "dmsf-5.webp", "alt": "High-fidelity patient simulation training at DMSF", "caption": "Simulation lab" },
+      { "src": "dmsf-6.webp", "alt": "Air-conditioned hostel room with bunk beds arranged by LIMRA", "caption": "Student hostel" }
+    ],
+    "heroAlt": "Davao Medical School Foundation campus building"
+  },
+
+  {
+    "id": "gcm",
+    "name": "Gullas College of Medicine",
+    "shortName": "GCM",
+    "city": "Cebu",
+    "country": "Philippines",
+    "est": "1975",
+    "adTitle": "Study MBBS at Gullas College of Medicine, Cebu",
+    "tagline": "Affordable fees, global standards, life-changing learning. Set in the heart of Cebu, one of the most vibrant cities in the Philippines.",
+    "badges": ["No Donation Fees", "NMC Aligned", "Strong FMGE &amp; PLE", "Internationally Recognized", "Premium Accommodation"],
+
+    "accreditation": [
+      { "img": "nmc-india.png", "name": "NMC India", "label": "Curriculum aligned" },
+      { "img": "ched-philippines.png", "name": "CHED Philippines", "label": "Recognised" },
+      { "img": "faimer.png", "name": "FAIMER", "label": "World Directory listed" },
+      { "img": "bureau-of-immigration.png", "name": "Bureau of Immigration", "label": "Accredited" },
+      { "img": "apmc-student-network.png", "name": "APMC", "label": "Student network" }
+    ],
+
+    "stats": [
+      { "num": "4.5", "label": "Year MD Program" },
+      { "num": "&#8377;0", "label": "Donation Fees" },
+      { "num": "1975", "label": "Established" }
+    ],
+
+    "why": [
+      { "title": "Zero Donation or Capitation Fees", "text": "What you see is what you pay. Transparent, honest pricing with no hidden charges at any stage of the program." },
+      { "title": "Strong FMGE and PLE Results", "text": "A consistent track record of Indian students clearing the FMGE. With free LIMRA coaching, your chances are stronger still." },
+      { "title": "Internationally Recognized Degree", "text": "NMC aligned and WHO recognized. A GCM degree opens doors to practice in India and abroad." },
+      { "title": "Extensive Clinical Training", "text": "Hospital rotations in government and private facilities across Cebu give you diverse, high-volume exposure that builds real clinical confidence." },
+      { "title": "Cebu City, Vibrant and Safe", "text": "One of the most developed cities in the Philippines, with excellent infrastructure, international connectivity, and a large Indian student community." }
+    ],
+
+    "clinical": {
+      "intro": "GCM offers strong clinical exposure through eight reputed hospitals across Cebu, with hands-on training and real-time patient care that build skills and confidence for a medical career.",
+      "highlights": [
+        { "num": "8", "label": "Affiliated hospitals" },
+        { "num": "Real-time", "label": "Patient care" },
+        { "num": "Hands-on", "label": "Clinical training" }
+      ],
+      "hospitals": [
+        "Vicente Sotto Memorial Medical Center",
+        "The Hospital at Maayo (GCGMH)",
+        "Mandaue Medical Center",
+        "Cebu City Medical Center",
+        "Chong Hua Hospital",
+        "Perpetual Succour Hospital",
+        "Eversley Childs Sanitarium &amp; General Hospital",
+        "Northern Cebu Provincial Hospital"
+      ]
+    },
+
+    "gallery": [
+      { "src": "gcm-1.webp", "alt": "Library at Gullas College of Medicine", "caption": "Library" },
+      { "src": "gcm-2.webp", "alt": "Digital classroom at Gullas College of Medicine", "caption": "Digital classrooms" },
+      { "src": "gcm-3.webp", "alt": "Anatomage virtual dissection table at GCM", "caption": "Anatomage table" },
+      { "src": "gcm-4.webp", "alt": "Smart-TV enabled lecture room at GCM", "caption": "Smart lecture rooms" },
+      { "src": "gcm-5.webp", "alt": "Lecture in progress in a GCM lecture hall", "caption": "Lecture hall" },
+      { "src": "gcm-6.webp", "alt": "Hostel accommodation arranged by LIMRA", "caption": "Student hostel" }
+    ],
+    "heroAlt": "Entrance monument at Gullas College of Medicine, Cebu"
+  },
+
+  {
+    "id": "brokenshire",
+    "name": "Brokenshire College of Medicine",
+    "shortName": "Brokenshire",
+    "city": "Davao",
+    "country": "Philippines",
+    "est": "1992",
+    "adTitle": "Study MBBS at Brokenshire College, Philippines",
+    "tagline": "A compassion-centred medical education with its own teaching hospital, shaping doctors who are clinically skilled and deeply human.",
+    "badges": ["NMC Aligned", "Own Teaching Hospital", "Experienced Faculty", "Modern Facilities", "English Medium"],
+
+    "accreditation": [
+      { "img": "nmc-india.png", "name": "NMC India", "label": "Curriculum aligned" },
+      { "img": "faimer.png", "name": "FAIMER", "label": "World Directory listed" }
+    ],
+
+    "stats": [
+      { "num": "4.5", "label": "Year MD Program" },
+      { "num": "Own", "label": "Teaching Hospital" },
+      { "num": "1992", "label": "Established" }
+    ],
+
+    "why": [
+      { "title": "Its Own Teaching Hospital", "text": "Brokenshire runs a fully equipped hospital of its own, giving students seamless, consistent clinical training under direct faculty supervision." },
+      { "title": "NMC Aligned Curriculum", "text": "Every course and clinical module is structured in line with National Medical Commission requirements for Indian students." },
+      { "title": "Experienced, Dedicated Faculty", "text": "Professors who are practising clinicians, bringing real-world medical insight into the classroom and the wards every day." },
+      { "title": "Supportive International Environment", "text": "A welcoming campus community in Davao that is safe, diverse, and structured to help international students settle in quickly." },
+      { "title": "Affordable Fees, No Hidden Costs", "text": "A transparent pricing structure with no donation fees and no surprise charges. Quality medical education that will not break the family." }
+    ],
+
+    "clinical": {
+      "intro": "Brokenshire students train across five accredited hospitals with a combined 4,500+ beds, backed by a clinical heritage going back to 1954.",
+      "highlights": [
+        { "num": "4500+", "label": "Combined bed strength" },
+        { "num": "5", "label": "Multispecialty hospitals" },
+        { "num": "1954", "label": "Clinical heritage since" }
+      ],
+      "hospitals": [
+        "Brokenshire Hospital, its own teaching hospital",
+        "Davao Doctors Hospital",
+        "DMS Foundation Hospital",
+        "Southern Philippines Medical Centre",
+        "San Pedro Hospital"
+      ]
+    },
+
+    "gallery": [
+      { "src": "brokenshire-1.webp", "alt": "Main entrance gate of Brokenshire College in Davao", "caption": "Campus entrance" },
+      { "src": "brokenshire-2.webp", "alt": "Hands-on use of the Anatomage table at Brokenshire College", "caption": "Anatomage table" },
+      { "src": "brokenshire-3.webp", "alt": "Simulation training facility at Brokenshire College", "caption": "Simulation lab" },
+      { "src": "brokenshire-4.webp", "alt": "Plastinated anatomical models at Brokenshire College", "caption": "Plastinated models" },
+      { "src": "brokenshire-5.webp", "alt": "Students studying in the Brokenshire medical library", "caption": "Medical library" },
+      { "src": "brokenshire-6.webp", "alt": "Hostel accommodation arranged by LIMRA", "caption": "Student hostel" }
+    ],
+    "heroAlt": "Brokenshire College campus in Davao"
+  },
+
+  {
+    "id": "lyceum",
+    "name": "Lyceum Northwestern University",
+    "shortName": "Lyceum",
+    "city": "Dagupan",
+    "country": "Philippines",
+    "est": "1964",
+    "adTitle": "Study MBBS at Lyceum Northwestern University",
+    "tagline": "Premium medical education at an affordable cost, built for ambitious Indian students who refuse to compromise on quality.",
+    "badges": ["NMC Aligned", "English Medium", "WHO Recognized", "Affordable Tuition", "Real Clinical Exposure"],
+
+    "accreditation": [
+      { "img": "nmc-india.png", "name": "NMC India", "label": "Curriculum aligned" },
+      { "img": "faimer.png", "name": "FAIMER", "label": "World Directory listed" }
+    ],
+
+    "stats": [
+      { "num": "4.5", "label": "Year MD Program" },
+      { "num": "92%", "label": "FMGE Pass Rate" },
+      { "num": "1964", "label": "Established" }
+    ],
+
+    "why": [
+      { "title": "Affordable Without Compromise", "text": "Quality medical education with no hidden costs, no donation fees, and transparent pricing from day one." },
+      { "title": "100% English Medium", "text": "Lectures, exams, and patient interaction all happen in English. Study confidently without a language barrier." },
+      { "title": "Real Clinical Exposure from Year One", "text": "Hospital rotations, patient rounds, and hands-on clinical decision-making are built in from the very beginning." },
+      { "title": "Globally Recognized Degree", "text": "NMC aligned and WHO recognized, opening doors to practising medicine in India and internationally." },
+      { "title": "Modern Medical Campus", "text": "Advanced simulation labs, digital classrooms, e-learning, and a safe, student-friendly campus environment." }
+    ],
+
+    "clinical": {
+      "intro": "Early hospital exposure and hands-on clinical training from the very start of the journey, building real-world medical understanding and decision-making confidence.",
+      "highlights": [
+        { "num": "Early", "label": "Hospital exposure" },
+        { "num": "Hands-on", "label": "Patient interaction" },
+        { "num": "Community", "label": "and specialty rotations" }
+      ],
+      "hospitals": [
+        "Dagupan Doctors Villaflor Memorial Hospital",
+        "Pangasinan Medical Center",
+        "Rural health units and barangay clinics"
+      ]
+    },
+
+    "gallery": [
+      { "src": "lyceum-1.webp", "alt": "Aerial view of the Lyceum Northwestern University campus", "caption": "Campus from above" },
+      { "src": "lyceum-2.webp", "alt": "Teaching hospital affiliated with Lyceum Northwestern University", "caption": "Teaching hospital" },
+      { "src": "lyceum-3.webp", "alt": "Students attending a session in the Lyceum lecture theatre", "caption": "Lecture theatre" },
+      { "src": "lyceum-4.webp", "alt": "Computer laboratory at Lyceum Northwestern University", "caption": "Computer lab" },
+      { "src": "lyceum-5.webp", "alt": "Hostel room arranged by LIMRA", "caption": "Student hostel" },
+      { "src": "lyceum-6.webp", "alt": "Hostel common area arranged by LIMRA", "caption": "Hostel common area" }
+    ],
+    "heroAlt": "Lyceum Northwestern University campus in Dagupan"
+  },
+
+  {
+    "id": "ucts",
+    "name": "Universidade Católica Timorense",
+    "shortName": "UCTS",
+    "city": "Dili",
+    "country": "Timor-Leste",
+    "est": "2003",
+    "adTitle": "Study MBBS at UCTS, Timor-Leste",
+    "tagline": "A unique international medical education in the heart of Southeast Asia. Affordable, personalised, and fully supported by LIMRA from day one.",
+    "badges": ["International Education", "Affordable Fees", "Small Class Sizes", "Clinical Training", "Full LIMRA Support"],
+
+    "accreditation": [
+      { "img": "nmc-india.png", "name": "NMC India", "label": "Curriculum aligned" },
+      { "img": "faimer.png", "name": "FAIMER", "label": "World Directory listed" }
+    ],
+
+    "stats": [
+      { "num": "SE", "label": "Asia Location" },
+      { "num": "Small", "label": "Class Sizes" },
+      { "num": "Low", "label": "Cost of Living" }
+    ],
+
+    "why": [
+      { "title": "Small Class Sizes, More Attention", "text": "Smaller student batches mean personalised academic support, closer faculty relationships, and a learning environment where nobody falls behind." },
+      { "title": "Truly Affordable Medical Education", "text": "Significantly lower tuition and living costs than colleges in the Philippines, making MBBS accessible without compromising on quality." },
+      { "title": "Unique International Learning Experience", "text": "Study in the youngest nation in Southeast Asia, in a multicultural environment that builds global perspective and cross-cultural medical competence." },
+      { "title": "Clinical Training in Real Hospitals", "text": "Hospital rotations at the national hospital of Timor-Leste and affiliated regional centres give you practical, patient-centred exposure from the early years." },
+      { "title": "Full LIMRA Support Throughout", "text": "From admission and visa through to graduation and FMGE prep, 24 years of LIMRA experience means expert guidance at every stage." }
+    ],
+
+    "clinical": {
+      "intro": "Real-time clinical exposure through hospital partnerships, with early patient interaction, simulation-based skills training, and supportive Indian faculty throughout.",
+      "highlights": [
+        { "num": "Real-time", "label": "Hospital exposure" },
+        { "num": "English", "label": "Medium instruction" },
+        { "num": "Indian", "label": "Faculty and mentors" }
+      ],
+      "hospitals": [
+        "National Hospital Guido Valadares",
+        "Affiliated regional hospitals",
+        "Simulation and clinical skills centres",
+        "Mentored clinical rotations"
+      ]
+    },
+
+    "gallery": [
+      { "src": "ucts-1.webp", "alt": "Students practising clinical skills on training manikins at UCTS", "caption": "Clinical skills lab" },
+      { "src": "ucts-2.webp", "alt": "Students on a hospital ward teaching round in Dili", "caption": "Hospital training" },
+      { "src": "ucts-3.webp", "alt": "UCTS students at the white coat ceremony", "caption": "White coat ceremony" },
+      { "src": "ucts-4.webp", "alt": "Student receiving an award on stage at UCTS", "caption": "Student awards" },
+      { "src": "ucts-5.webp", "alt": "UCTS students taking the Hippocratic oath", "caption": "Taking the oath" },
+      { "src": "ucts-6.webp", "alt": "Hostel accommodation arranged by LIMRA", "caption": "Student hostel" }
+    ],
+    "heroAlt": "Universidade Católica Timorense campus in Dili"
+  },
+
+  {
+    "id": "university-of-peace",
+    "name": "University of PEACE",
+    "shortName": "University of PEACE",
+    "city": "Dili",
+    "country": "Timor-Leste",
+    "est": "2000",
+    "adTitle": "Study MBBS at University of PEACE, Timor-Leste",
+    "tagline": "Building doctors for a peaceful tomorrow. Affordable, quality medical education in Timor-Leste with full LIMRA support from day one to FMGE success.",
+    "badges": ["SE Asia Location", "Affordable &amp; Quality", "Clinical Training", "Multicultural Campus", "Full LIMRA Support"],
+
+    "accreditation": [
+      { "img": "nmc-india.png", "name": "NMC India", "label": "Curriculum aligned" },
+      { "img": "faimer.png", "name": "FAIMER", "label": "World Directory listed" }
+    ],
+
+    "stats": [
+      { "num": "12", "label": "Month Internship" },
+      { "num": "Low", "label": "Cost of Living" },
+      { "num": "2000", "label": "Established" }
+    ],
+
+    "why": [
+      { "title": "Genuinely Affordable Education", "text": "Lower tuition and living costs than the Philippines, making quality medical education accessible for more Indian families." },
+      { "title": "Internationally Oriented MD Program", "text": "A medical degree aligned to international standards, preparing students to clear the FMGE and practise medicine in India and globally." },
+      { "title": "Practical Clinical Training", "text": "Hospital rotations in the major healthcare facilities of Dili give hands-on experience that builds clinical thinking from the early years." },
+      { "title": "Multicultural Learning Environment", "text": "Study alongside students from across Asia on a campus that celebrates diversity and builds cross-cultural medical competence." },
+      { "title": "Full LIMRA Support, Start to Finish", "text": "Admission, visa, travel, settlement, and FMGE prep. A 24-year track record means no student navigates this journey alone." }
+    ],
+
+    "clinical": {
+      "intro": "A 12-month rotational internship at the affiliated Guido Valadares National Hospital, with hands-on rotations across emergency, critical care, wards, theatres and rural health.",
+      "highlights": [
+        { "num": "12-month", "label": "Rotational internship" },
+        { "num": "Hands-on", "label": "Patient care" },
+        { "num": "All depts", "label": "Clinical rotations" }
+      ],
+      "hospitals": [
+        "Guido Valadares National Hospital",
+        "Emergency and critical care",
+        "Wards and operation theatres",
+        "HDU and ICU settings",
+        "Rural health centres"
+      ]
+    },
+
+    "gallery": [
+      { "src": "university-of-peace-1.webp", "alt": "Frontage of the University of PEACE campus in Dili", "caption": "Campus frontage" },
+      { "src": "university-of-peace-2.webp", "alt": "Guido Valadares National Hospital, the affiliated teaching hospital", "caption": "Teaching hospital" },
+      { "src": "university-of-peace-3.webp", "alt": "Students around a virtual anatomy table at University of PEACE", "caption": "Virtual anatomy table" },
+      { "src": "university-of-peace-4.webp", "alt": "Main academic building at University of PEACE", "caption": "Main building" },
+      { "src": "university-of-peace-5.webp", "alt": "Hostel accommodation arranged by LIMRA", "caption": "Student hostel" },
+      { "src": "university-of-peace-6.webp", "alt": "Hostel common area arranged by LIMRA", "caption": "Hostel common area" }
+    ],
+    "heroAlt": "University of PEACE campus in Dili"
+  }
+]

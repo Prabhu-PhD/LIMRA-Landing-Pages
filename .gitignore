@@ -1,0 +1,14 @@
+# Dependencies
+node_modules/
+
+# Eleventy build output (regenerated on every deploy)
+_site/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Claude Code machine-local settings
+.claude/settings.local.json

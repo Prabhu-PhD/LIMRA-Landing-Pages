@@ -1,0 +1,17 @@
+# These are paid-traffic landing pages. They are deliberately kept out of
+# organic search: they are near-duplicates of the main site's /colleges/
+# pages and would otherwise compete with them for rankings.
+#
+# AdsBot-Google is listed separately on purpose — it does NOT obey the
+# wildcard "User-agent: *" block, and Google Ads needs to crawl these pages
+# to check landing-page quality and policy compliance. Blocking it would
+# damage Quality Score.
+
+User-agent: *
+Disallow: /
+
+User-agent: AdsBot-Google
+Allow: /
+
+User-agent: AdsBot-Google-Mobile
+Allow: /

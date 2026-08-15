@@ -1,0 +1,41 @@
+# LIMRA landing pages — Netlify config
+# Eleventy generates one page per campus into _site/.
+
+[build]
+  publish = "_site"
+  command = "npm run build"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Content-Security-Policy = "frame-ancestors 'none';"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+
+# Long-cache the fingerprint-free static assets; HTML stays fresh.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Short, memorable ad URLs -> the real campus pages.
+# Lets you run ads on limraedu-lp.com/dmsf without touching the build.
+[[redirects]]
+  from = "/davao"
+  to = "/dmsf/"
+  status = 301
+
+[[redirects]]
+  from = "/cebu"
+  to = "/gcm/"
+  status = 301
+
+[[redirects]]
+  from = "/peace"
+  to = "/university-of-peace/"
+  status = 301

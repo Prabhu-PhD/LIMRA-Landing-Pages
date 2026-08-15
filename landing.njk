@@ -1,0 +1,405 @@
+---
+pagination:
+  data: campuses
+  size: 1
+  alias: campus
+permalink: "/{{ campus.id }}/index.html"
+layout: base.njk
+eleventyComputed:
+  pageTitle: "{{ campus.adTitle }} | LIMRA Overseas Education"
+  pageDescription: "{{ campus.shortName }}, MBBS in {{ campus.country }} with LIMRA Overseas Education. NMC-aligned, English medium, free FMGE coaching. Talk to a counsellor today."
+  lockupLabel: "LIMRA Overseas Education and {{ campus.name }}"
+---
+
+{#- ============================================================
+    ONE form macro, rendered three times (hero, closing CTA, exit
+    intent). `slot` keeps input ids unique; `source` records which
+    form produced the lead so conversion rates can be compared.
+============================================================ -#}
+{% macro enquiryForm(campus, site, slot, heading, sub, source, compact) %}
+<form class="lp-form js-lp-form{% if compact %} lp-form--compact{% endif %}" novalidate>
+  <div class="lp-form-head">
+    <h2>{{ heading }}</h2>
+    <p>{{ sub }}</p>
+  </div>
+
+  <input type="hidden" name="college" value="{{ campus.name | striptags }}" />
+  <input type="hidden" name="college_id" value="{{ campus.id }}" />
+  <input type="hidden" name="subject" value="New {{ campus.shortName | striptags }} enquiry (Google Ads landing page)" />
+  <input type="hidden" name="from_name" value="LIMRA Landing Pages" />
+  <input type="hidden" name="lead_source" value="{{ source }}" />
+  <input type="hidden" name="page_url" value="" data-fill="page_url" />
+  <input type="hidden" name="gclid" value="" data-fill="gclid" />
+  <input type="hidden" name="utm_source" value="" data-fill="utm_source" />
+  <input type="hidden" name="utm_medium" value="" data-fill="utm_medium" />
+  <input type="hidden" name="utm_campaign" value="" data-fill="utm_campaign" />
+  <input type="hidden" name="utm_term" value="" data-fill="utm_term" />
+  <input type="hidden" name="utm_content" value="" data-fill="utm_content" />
+  <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none !important" aria-hidden="true" />
+
+  <div class="lp-field">
+    <label for="{{ slot }}-name">Student's full name <span aria-hidden="true">*</span></label>
+    <input type="text" id="{{ slot }}-name" name="name" autocomplete="name" placeholder="e.g. Ananya Sharma" required />
+  </div>
+
+  <div class="lp-field">
+    <label for="{{ slot }}-phone">Mobile number <span aria-hidden="true">*</span></label>
+    <input type="tel" id="{{ slot }}-phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="10-digit mobile number" required />
+  </div>
+
+  {% if not compact %}
+  <div class="lp-field">
+    <label for="{{ slot }}-email">Email address <span aria-hidden="true">*</span></label>
+    <input type="email" id="{{ slot }}-email" name="email" autocomplete="email" placeholder="you@example.com" required />
+  </div>
+
+  <div class="lp-field-row">
+    <div class="lp-field">
+      <label for="{{ slot }}-city">City</label>
+      <input type="text" id="{{ slot }}-city" name="city" autocomplete="address-level2" placeholder="e.g. Chennai" />
+    </div>
+    <div class="lp-field">
+      <label for="{{ slot }}-intake">Planning to join</label>
+      <select id="{{ slot }}-intake" name="intake">
+        <option value="2026 intake" selected>2026 intake</option>
+        <option value="2027 intake">2027 intake</option>
+        <option value="Still deciding">Still deciding</option>
+      </select>
+    </div>
+  </div>
+  {% endif %}
+
+  <label class="lp-consent">
+    <input type="checkbox" name="consent" value="yes" required />
+    <span>I'd like a LIMRA counsellor to contact me by phone, WhatsApp or email about {{ campus.shortName | safe }}.</span>
+  </label>
+
+  <button type="submit" class="lp-submit">{% if compact %}Send me the details{% else %}Get free counselling{% endif %} &rarr;</button>
+
+  <p class="lp-form-msg" data-form-msg role="status" aria-live="polite"></p>
+  <p class="lp-form-fine">
+    No spam, ever. We usually call back within 2 hours (Mon to Sat, 9&nbsp;AM to 6&nbsp;PM IST).
+    <a href="/privacy/">Privacy Policy</a>
+  </p>
+</form>
+{% endmacro %}
+
+
+<!-- ============ HERO + PRIMARY FORM ============ -->
+<section class="lp-hero" id="enquire">
+  <img src="/assets/campus/{{ campus.id }}-hero.webp" alt="{{ campus.heroAlt }}" class="lp-hero-bg" fetchpriority="high" />
+  <div class="lp-hero-inner">
+
+    <div class="lp-hero-copy">
+      <p class="lp-eyebrow">MBBS in {{ campus.country }} &middot; Est. {{ campus.est }}</p>
+      <h1>{{ campus.name }}</h1>
+      <p class="lp-hero-tag">{{ campus.tagline | safe }}</p>
+
+      <ul class="lp-badges">
+        {%- for b in campus.badges %}
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>{{ b | safe }}</li>
+        {%- endfor %}
+      </ul>
+
+      {#- The university's own recognitions sit in the hero. A first-time
+          visitor needs to trust the INSTITUTION before they care who LIMRA
+          is; the LIMRA numbers come later, in the LIMRA section. -#}
+      <div class="lp-hero-accred">
+        <p class="lp-hero-accred-label">{{ campus.shortName | safe }} is recognised by</p>
+        <div class="lp-hero-accred-row">
+          {%- for a in campus.accreditation %}
+          <div class="lp-accred-chip">
+            <img src="/assets/accreditation/{{ a.img }}" alt="{{ a.name }}" loading="lazy" />
+            <span><strong>{{ a.name }}</strong><em>{{ a.label }}</em></span>
+          </div>
+          {%- endfor %}
+        </div>
+      </div>
+    </div>
+
+    <div class="lp-hero-form">
+      {{ enquiryForm(campus, site, "top", "Talk to a counsellor, free", "Tell us where to reach you. A LIMRA counsellor will call you back with fees, eligibility and the next intake dates.", "hero-form", false) }}
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============ UNIVERSITY STATS ============ -->
+<section class="lp-stats">
+  <div class="lp-wrap">
+    {%- for s in campus.stats %}
+    <div class="lp-stat"><div class="lp-stat-n">{{ s.num | safe }}</div><div class="lp-stat-l">{{ s.label | safe }}</div></div>
+    {%- endfor %}
+  </div>
+</section>
+
+
+<!-- ============ WHY THIS COLLEGE ============ -->
+<section class="lp-section">
+  <div class="lp-wrap">
+    <div class="lp-head">
+      <p class="lp-eyebrow lp-eyebrow--dark">Why {{ campus.shortName | safe }}</p>
+      <h2>What makes {{ campus.shortName | safe }} worth choosing</h2>
+    </div>
+
+    <div class="lp-why">
+      {%- for w in campus.why %}
+      <article class="lp-why-card{% if loop.first %} lp-why-card--feature{% endif %}">
+        <span class="lp-why-num">{{ loop.index | pad2 }}</span>
+        <h3>{{ w.title | safe }}</h3>
+        <p>{{ w.text | safe }}</p>
+      </article>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ CAMPUS MOSAIC ============ -->
+<section class="lp-section lp-section--tint">
+  <div class="lp-wrap">
+    <div class="lp-head">
+      <p class="lp-eyebrow lp-eyebrow--dark">The campus</p>
+      <h2>Where you will actually study</h2>
+      <p class="lp-sub">Real photographs from {{ campus.shortName | safe }} and the student accommodation we arrange. No stock images.</p>
+    </div>
+
+    <div class="lp-mosaic">
+      {%- for g in campus.gallery %}
+      <figure class="lp-tile lp-tile--{{ loop.index }}">
+        <img src="/assets/campus/{{ g.src }}" alt="{{ g.alt }}" loading="lazy" />
+        <figcaption>{{ g.caption }}</figcaption>
+      </figure>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ CLINICAL TRAINING ============
+     Parents ask about clinical exposure before anything else, so this
+     section carries the hospital names, the numbers, and the structure. -->
+<section class="lp-clinical">
+  <div class="lp-wrap">
+
+    <div class="lp-head lp-head--centre">
+      <p class="lp-eyebrow lp-eyebrow--dark">Clinical training</p>
+      <h2>You learn medicine in real hospitals, not just lecture halls</h2>
+      <p class="lp-sub">{{ campus.clinical.intro | safe }}</p>
+    </div>
+
+    <div class="lp-clin-highlights">
+      {%- for h in campus.clinical.highlights %}
+      <div class="lp-clin-hl">
+        <div class="lp-clin-hl-n">{{ h.num | safe }}</div>
+        <div class="lp-clin-hl-l">{{ h.label | safe }}</div>
+      </div>
+      {%- endfor %}
+    </div>
+
+    <div class="lp-clin-body">
+
+      <div class="lp-clin-hospitals">
+        <h3>Where {{ campus.shortName | safe }} students train</h3>
+        <ul>
+          {%- for h in campus.clinical.hospitals %}
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M12 9v6"/><path d="M9 12h6"/></svg>
+            <span>{{ h | safe }}</span>
+          </li>
+          {%- endfor %}
+        </ul>
+      </div>
+
+      <div class="lp-program">
+        <h3>How the programme is structured</h3>
+        <div class="lp-phase">
+          <span class="lp-phase-dur">1 yr</span>
+          <div><strong>Pre-medicine</strong><p>Foundation sciences, medical terminology, clinical orientation and English communication.</p></div>
+        </div>
+        <div class="lp-phase">
+          <span class="lp-phase-dur">4.5 yrs</span>
+          <div><strong>MD medical studies</strong><p>Anatomy through pharmacology, then clinical rotations across major departments, hospital internship, and FMGE preparation integrated throughout.</p></div>
+        </div>
+        <p class="lp-program-note">100% English medium &middot; NMC-aligned curriculum</p>
+      </div>
+
+    </div>
+
+    <div class="lp-clin-foot">
+      <div>
+        <strong>What clinical rotations actually look like</strong>
+        <p>Students move through medicine, surgery, paediatrics, obstetrics and gynaecology, and community health. You take histories, examine patients, present cases on ward rounds, and assist in procedures under supervision. This is the experience the FMGE tests, and it is the reason clinical exposure matters more than any brochure claim.</p>
+      </div>
+      <a href="#enquire" class="lp-clin-cta">Ask a counsellor about rotations &rarr;</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============ LIMRA ADVANTAGE ============ -->
+<section class="lp-advantage">
+  <div class="lp-wrap">
+    <div class="lp-head lp-head--centre">
+      <p class="lp-eyebrow">Why apply through LIMRA</p>
+      <h2>Getting admitted is the easy part.<br />We handle everything after it.</h2>
+      <p class="lp-sub">You have seen the university. This is what changes when you go through LIMRA.</p>
+    </div>
+
+    {#- The LIMRA numbers live here, not in the hero. -#}
+    <div class="lp-limra-kpis">
+      <div><strong>{{ site.yearsExperience }}+</strong><span>Years guiding students</span></div>
+      <div><strong>{{ site.studentsPlaced }}</strong><span>Students placed abroad</span></div>
+      <div><strong>&#8377;1&nbsp;lakh</strong><span>FMGE coaching, free</span></div>
+    </div>
+
+    <div class="lp-adv-grid">
+
+      <div class="lp-adv lp-adv--hero">
+        <div class="lp-adv-tag">Worth &#8377;1 lakh</div>
+        <div class="lp-adv-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        </div>
+        <h3>Free FMGE coaching</h3>
+        <p>Every LIMRA student gets our full FMGE programme at no cost. Your degree only matters if you clear the licensing exam, so we make certain you are ready for it.</p>
+      </div>
+
+      <div class="lp-adv">
+        <div class="lp-adv-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <h3>End-to-end admission support</h3>
+        <p>Eligibility check, application, admission letter, visa, travel and airport pickup. One team and one point of contact from start to finish.</p>
+      </div>
+
+      <div class="lp-adv">
+        <div class="lp-adv-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M10 21v-6h4v6"/></svg>
+        </div>
+        <h3>Settled in, not dropped off</h3>
+        <p>Verified hostel accommodation, Indian food arrangements, and a local support contact for the entire duration of the course.</p>
+      </div>
+
+      <div class="lp-adv">
+        <div class="lp-adv-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Honest, transparent counselling</h3>
+        <p>Real fees, real timelines, real pass rates. If a college is not right for your profile we will tell you so, instead of selling it to you.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ FAQ ============ -->
+<section class="lp-section lp-section--tint">
+  <div class="lp-wrap lp-wrap--narrow">
+    <div class="lp-head lp-head--centre">
+      <p class="lp-eyebrow lp-eyebrow--dark">Common questions</p>
+      <h2>What parents and students ask us first</h2>
+    </div>
+    <div class="lp-faq">
+      <details>
+        <summary>Is the {{ campus.shortName | safe }} degree valid for practising in India?</summary>
+        <p>Yes. The MD programme is aligned with National Medical Commission guidelines. Like every foreign medical graduate, you will clear the FMGE or NExT screening exam to register in India, and free LIMRA FMGE coaching is built in from day one.</p>
+      </details>
+      <details>
+        <summary>Do I need NEET to apply?</summary>
+        <p>Yes. A qualifying NEET score is mandatory for Indian students seeking an NMC-recognised medical degree abroad. Our counsellors will confirm your eligibility on the call.</p>
+      </details>
+      <details>
+        <summary>What does it actually cost?</summary>
+        <p>Fees vary by campus and intake, and we do not publish figures that go stale. A counsellor will walk you through the current tuition, hostel and living costs for {{ campus.shortName | safe }}, with no donation or capitation charges.</p>
+      </details>
+      <details>
+        <summary>How long is the course?</summary>
+        <p>The pathway runs about five and a half years in total: roughly one year of pre-medicine followed by four and a half years of MD medical studies, including clinical rotations and hospital internship.</p>
+      </details>
+      <details>
+        <summary>Is the course taught in English?</summary>
+        <p>Yes. Lectures, examinations, clinical teaching and patient interaction are all conducted in English, so there is no language barrier and no local-language exam to clear before you begin.</p>
+      </details>
+      <details>
+        <summary>Is it safe for students, especially girls?</summary>
+        <p>{{ campus.city }} hosts a large, established Indian student community. LIMRA arranges verified hostel accommodation, Indian food, and a local support contact you can reach at any time throughout the course.</p>
+      </details>
+      <details>
+        <summary>What about food? Will Indian food be available?</summary>
+        <p>Yes. Indian food arrangements are part of the accommodation we set up, including vegetarian options. This is one of the practical things we handle for you rather than leaving you to work out after you land.</p>
+      </details>
+      <details>
+        <summary>What clinical exposure will I actually get?</summary>
+        <p>{{ campus.clinical.intro | safe }} Rotations cover medicine, surgery, paediatrics, obstetrics and gynaecology, and community health, with supervised patient contact rather than observation alone.</p>
+      </details>
+      <details>
+        <summary>What support do I get for the FMGE?</summary>
+        <p>Every LIMRA student receives our FMGE coaching programme, worth about &#8377;1 lakh, at no additional cost. Preparation is integrated alongside your studies rather than left until after graduation.</p>
+      </details>
+      <details>
+        <summary>Who handles the visa and travel?</summary>
+        <p>We do. LIMRA manages the application, admission letter, visa process, travel arrangements and airport pickup, and stays your point of contact after you arrive. You are not handed off to a third party.</p>
+      </details>
+      <details>
+        <summary>What happens after I submit this form?</summary>
+        <p>A LIMRA counsellor calls you back, usually within 2 hours during business hours. It is a free, no-obligation conversation about your NEET score, your budget, and which campus genuinely fits.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ CLOSING CTA + SECOND FORM ============ -->
+<section class="lp-close">
+  <div class="lp-wrap lp-close-inner">
+    <div class="lp-close-copy">
+      <p class="lp-eyebrow">Next step</p>
+      <h2>Ready to talk about {{ campus.shortName | safe }}?</h2>
+      <p class="lp-close-body">Get a free counselling call covering fees, eligibility, intake dates, and an honest read on whether this campus fits your profile.</p>
+
+      <ul class="lp-close-points">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Callback within 2 hours on working days</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>No obligation and no pushy sales calls</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Straight answers on fees and eligibility</li>
+      </ul>
+
+      <a href="tel:{{ site.phonePrimaryDial }}" class="lp-close-call" data-track="call">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span>Prefer to call? {{ site.phonePrimary }}</span>
+      </a>
+    </div>
+
+    <div class="lp-close-form">
+      {{ enquiryForm(campus, site, "bottom", "Request your free call", "One counsellor, one honest conversation, no obligation.", "closing-form", false) }}
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ EXIT INTENT ============
+     Shown at most once per session, never after a successful submit,
+     and never on the first few seconds of the visit. -->
+<div class="lp-exit" id="lp-exit" hidden>
+  <div class="lp-exit-backdrop" data-exit-close></div>
+  <div class="lp-exit-card" role="dialog" aria-modal="true" aria-labelledby="lp-exit-title">
+    <button type="button" class="lp-exit-x" data-exit-close aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+
+    <div class="lp-exit-body">
+      <p class="lp-eyebrow lp-eyebrow--dark">Before you go</p>
+      <h2 id="lp-exit-title">Want the {{ campus.shortName | safe }} fee structure and an eligibility check?</h2>
+      <p class="lp-exit-sub">Leave a number and a counsellor will send the current {{ site.currentIntake }} intake details and check your NEET eligibility. No cost, no obligation.</p>
+
+      {{ enquiryForm(campus, site, "exit", "Send me the details", "Just your name and number is enough.", "exit-intent", true) }}
+
+      <a href="https://wa.me/{{ site.whatsappDial }}?text={{ ('Hi LIMRA, I would like details about ' + (campus.name | striptags)) | urlencode }}" target="_blank" rel="noopener" class="lp-exit-wa" data-track="whatsapp">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Or message us on WhatsApp instead
+      </a>
+    </div>
+  </div>
+</div>
