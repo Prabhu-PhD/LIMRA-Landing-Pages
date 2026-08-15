@@ -15,11 +15,11 @@ pageDescription: "Index of the six LIMRA campus landing pages, for review before
 
     <p class="lp-eyebrow lp-eyebrow--dark">For review</p>
     <h1>The six campus landing pages</h1>
-    <p class="lp-ty-lead">One page per partner university, each built to turn an advertising click into an enquiry. Open any of them below.</p>
+    <p class="lp-ty-lead">One page per partner university, each built to turn an advertising click into an enquiry. Every link on this page opens in a new tab, so this index stays put while you look through them.</p>
 
     <div class="lp-404-grid">
       {%- for c in campuses %}
-      <a href="/{{ c.id }}/" class="lp-404-card">
+      <a href="/{{ c.id }}/" class="lp-404-card" target="_blank" rel="noopener">
         <img src="/assets/campus/{{ c.id }}-logo.webp" alt="" loading="lazy" />
         <span>
           <strong>{{ c.shortName | safe }}</strong>
@@ -46,9 +46,9 @@ pageDescription: "Index of the six LIMRA campus landing pages, for review before
 
       <h2>Supporting pages</h2>
       <ul class="lp-review-links">
-        <li><a href="/privacy/">Privacy policy</a>, required by Google Ads and linked from every form</li>
-        <li><a href="/404.html">Not-found page</a>, shown if anyone mistypes an address</li>
-        <li><a href="/">Holding page</a>, what the bare domain shows</li>
+        <li><a href="/privacy/" target="_blank" rel="noopener">Privacy policy</a>, required by Google Ads and linked from every form</li>
+        <li><a href="/404.html" target="_blank" rel="noopener">Not-found page</a>, shown if anyone mistypes an address</li>
+        <li><a href="/" target="_blank" rel="noopener">Holding page</a>, what the bare domain shows</li>
       </ul>
 
       <p class="lp-review-fine">
