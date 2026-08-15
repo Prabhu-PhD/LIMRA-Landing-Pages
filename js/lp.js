@@ -119,11 +119,15 @@
 
   /* ---------- 3 + 4. form handling ---------- */
 
-  function validate(form) {
+  /* Validates the whole form by default, or just one step when `scope` is
+     given. At final submit we still check every field, including step 1,
+     so a value cleared after going back cannot slip through. */
+  function validate(form, scope) {
     var ok = true;
     var firstBad = null;
+    var root = scope || form;
 
-    form.querySelectorAll("[required]").forEach(function (field) {
+    root.querySelectorAll("[required]").forEach(function (field) {
       var valid = field.type === "checkbox" ? field.checked : !!field.value.trim();
 
       if (valid && field.type === "email") {
@@ -138,10 +142,53 @@
     });
 
     if (firstBad) {
+      // If the offending field is on a hidden step, reveal that step first.
+      var owner = firstBad.closest("[data-step]");
+      if (owner && owner.hidden) showStep(form, owner.getAttribute("data-step"));
       firstBad.focus();
       firstBad.scrollIntoView({ block: "center", behavior: "smooth" });
     }
     return ok;
+  }
+
+  /* ---------- two-step form ----------
+     Both steps live in the same card. Nothing navigates, nothing reloads,
+     and the values entered in step 1 stay in the DOM, so going back and
+     forth never loses what someone has typed. */
+
+  function showStep(form, n) {
+    form.querySelectorAll("[data-step]").forEach(function (step) {
+      step.hidden = step.getAttribute("data-step") !== String(n);
+    });
+    var counter = form.querySelector("[data-step-count]");
+    if (counter) counter.textContent = "Step " + n + " of 2";
+  }
+
+  function initSteps(form) {
+    var steps = form.querySelectorAll("[data-step]");
+    if (steps.length < 2) return; // compact form stays single-step
+
+    var next = form.querySelector("[data-step-next]");
+    var back = form.querySelector("[data-step-back]");
+
+    if (next) {
+      next.addEventListener("click", function () {
+        var one = form.querySelector('[data-step="1"]');
+        if (!validate(form, one)) return;
+        showStep(form, 2);
+        track("form_step_2", { event_category: "form" });
+        var first = form.querySelector('[data-step="2"] input');
+        if (first) first.focus({ preventScroll: true });
+      });
+    }
+
+    if (back) {
+      back.addEventListener("click", function () {
+        showStep(form, 1);
+        var first = form.querySelector('[data-step="1"] input');
+        if (first) first.focus({ preventScroll: true });
+      });
+    }
   }
 
   /* Google Sheet delivery. Fire-and-forget with no-cors: the Apps Script
@@ -302,6 +349,110 @@
     }, { passive: true });
   }
 
+  /* ---------- gallery lightbox ----------
+     Casual saving is discouraged: right-click, drag and long-press are all
+     blocked on the image. This is a deterrent, not protection. Anything a
+     browser can display can be retrieved from developer tools or the
+     network tab, and no web page can prevent that. */
+
+  function initLightbox() {
+    var gallery = document.querySelector("[data-gallery]");
+    if (!gallery) return;
+
+    var triggers = [].slice.call(gallery.querySelectorAll("[data-lightbox]"));
+    if (!triggers.length) return;
+
+    var slides = triggers.map(function (t) {
+      var img = t.querySelector("img");
+      var cap = t.querySelector("figcaption");
+      return { src: img.getAttribute("src"), alt: img.getAttribute("alt"), caption: cap ? cap.textContent : "" };
+    });
+
+    var index = 0;
+    var lastFocus = null;
+
+    var box = document.createElement("div");
+    box.className = "lp-lb";
+    box.hidden = true;
+    box.innerHTML =
+      '<div class="lp-lb-backdrop" data-lb-close></div>' +
+      '<div class="lp-lb-stage" role="dialog" aria-modal="true" aria-label="Campus photo">' +
+        '<button type="button" class="lp-lb-x" data-lb-close aria-label="Close">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>' +
+        '<button type="button" class="lp-lb-nav lp-lb-prev" data-lb-prev aria-label="Previous photo">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button>' +
+        '<figure class="lp-lb-figure">' +
+          '<img alt="" draggable="false" oncontextmenu="return false" />' +
+          '<span class="lp-lb-shield" aria-hidden="true"></span>' +
+          '<figcaption></figcaption>' +
+        '</figure>' +
+        '<button type="button" class="lp-lb-nav lp-lb-next" data-lb-next aria-label="Next photo">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg></button>' +
+        '<p class="lp-lb-count"></p>' +
+      "</div>";
+    document.body.appendChild(box);
+
+    var imgEl = box.querySelector("img");
+    var capEl = box.querySelector("figcaption");
+    var countEl = box.querySelector(".lp-lb-count");
+
+    function render() {
+      var s = slides[index];
+      imgEl.setAttribute("src", s.src);
+      imgEl.setAttribute("alt", s.alt);
+      capEl.textContent = s.caption;
+      countEl.textContent = index + 1 + " / " + slides.length;
+    }
+
+    function open(i) {
+      index = i;
+      lastFocus = document.activeElement;
+      render();
+      box.hidden = false;
+      document.body.style.overflow = "hidden";
+      box.querySelector(".lp-lb-x").focus({ preventScroll: true });
+      track("gallery_open", { event_category: "engagement" });
+    }
+
+    function close() {
+      box.hidden = true;
+      document.body.style.overflow = "";
+      if (lastFocus) lastFocus.focus({ preventScroll: true });
+    }
+
+    function step(delta) {
+      index = (index + delta + slides.length) % slides.length;
+      render();
+    }
+
+    triggers.forEach(function (t, i) {
+      t.addEventListener("click", function () { open(i); });
+    });
+
+    box.addEventListener("click", function (e) {
+      if (e.target.closest("[data-lb-close]")) close();
+      else if (e.target.closest("[data-lb-prev]")) step(-1);
+      else if (e.target.closest("[data-lb-next]")) step(1);
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (box.hidden) return;
+      if (e.key === "Escape") close();
+      else if (e.key === "ArrowLeft") step(-1);
+      else if (e.key === "ArrowRight") step(1);
+    });
+
+    // Block the casual save routes on gallery and lightbox images alike.
+    document.addEventListener("contextmenu", function (e) {
+      if (e.target.tagName === "IMG" && e.target.closest("[data-gallery], .lp-lb")) {
+        e.preventDefault();
+      }
+    });
+    document.addEventListener("dragstart", function (e) {
+      if (e.target.tagName === "IMG") e.preventDefault();
+    });
+  }
+
   /* ---------- click tracking on call / whatsapp ---------- */
 
   function trackOutboundClicks() {
@@ -322,7 +473,11 @@
     firePendingConversion();
     fillHiddenFields();
     trackOutboundClicks();
-    document.querySelectorAll(".js-lp-form").forEach(handleForm);
+    document.querySelectorAll(".js-lp-form").forEach(function (f) {
+      handleForm(f);
+      initSteps(f);
+    });
+    initLightbox();
     initExitIntent();
 
     var yr = document.getElementById("year");

@@ -816,3 +816,139 @@ a { color: inherit; }
 
   .lp-clin-cta { display: block; text-align: center; }
 }
+
+/* ============================================================
+   Third design pass: intake pill, director, two-step form, lightbox
+   ============================================================ */
+
+/* ---------- intake pill in the hero ---------- */
+.lp-eyebrow-row { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; }
+.lp-eyebrow-row .lp-eyebrow { margin-bottom: 0; }
+.lp-intake-pill {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: var(--font-display); font-size: .71rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--bg-dark); background: var(--orange);
+  padding: 5px 12px; border-radius: 100px; white-space: nowrap;
+}
+.lp-intake-pill::before {
+  content: ""; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--bg-dark); opacity: .55;
+}
+
+/* ---------- two-step form ---------- */
+.lp-step-count {
+  font-family: var(--font-mono); font-size: .68rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(255, 255, 255, .45); margin-bottom: 14px;
+}
+.lp-step[hidden] { display: none; }
+.lp-step-back {
+  display: block; width: 100%; margin-top: 10px; padding: 9px;
+  background: none; border: none; cursor: pointer;
+  font-family: inherit; font-size: .82rem; font-weight: 600;
+  color: rgba(255, 255, 255, .55);
+}
+.lp-step-back:hover { color: #fff; }
+
+/* the closing form sits on a light card, so its step chrome inverts */
+.lp-close-form .lp-step-count { color: var(--ink-mute); }
+.lp-close-form .lp-step-back { color: var(--ink-mute); }
+.lp-close-form .lp-step-back:hover { color: var(--ink); }
+
+/* ---------- director ---------- */
+.lp-director {
+  display: flex; align-items: center; gap: 14px; margin: 16px 0 0;
+  padding: 14px 16px; border-radius: var(--r-md);
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .12);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+}
+.lp-director img {
+  width: 54px; height: 54px; border-radius: 50%; object-fit: cover;
+  flex-shrink: 0; border: 2px solid rgba(255, 255, 255, .22);
+}
+.lp-director figcaption { display: flex; flex-direction: column; line-height: 1.35; }
+.lp-director strong { font-family: var(--font-display); font-size: .92rem; color: #fff; }
+.lp-director span { font-size: .76rem; color: var(--orange); font-weight: 600; }
+.lp-director em { font-style: normal; font-size: .76rem; color: rgba(255, 255, 255, .55); margin-top: 3px; }
+
+/* ---------- gallery tiles become buttons ---------- */
+.lp-tile-btn {
+  display: block; width: 100%; height: 100%; padding: 0; border: none;
+  background: none; cursor: zoom-in; position: relative; color: inherit;
+  font: inherit; text-align: left;
+}
+.lp-tile-btn img { -webkit-user-select: none; user-select: none; -webkit-user-drag: none; }
+.lp-tile-zoom {
+  position: absolute; top: 12px; right: 12px;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: rgba(8, 7, 26, .62); color: #fff;
+  display: grid; place-items: center;
+  opacity: 0; transform: scale(.85);
+  transition: opacity .22s, transform .22s;
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+}
+.lp-tile-zoom svg { width: 16px; height: 16px; }
+.lp-tile:hover .lp-tile-zoom,
+.lp-tile-btn:focus-visible .lp-tile-zoom { opacity: 1; transform: none; }
+
+/* ---------- lightbox ---------- */
+.lp-lb { position: fixed; inset: 0; z-index: 300; display: grid; place-items: center; }
+.lp-lb[hidden] { display: none; }
+.lp-lb-backdrop {
+  position: absolute; inset: 0; background: rgba(6, 5, 20, .90);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  animation: lpFade .2s ease-out;
+}
+.lp-lb-stage {
+  position: relative; z-index: 1;
+  width: min(1100px, 94vw); display: grid; place-items: center;
+  animation: lpRise .26s cubic-bezier(.2, .7, .3, 1);
+}
+.lp-lb-figure { margin: 0; position: relative; max-width: 100%; }
+.lp-lb-figure img {
+  max-width: 100%; max-height: 76vh; width: auto; border-radius: var(--r-md);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, .6);
+  -webkit-user-select: none; user-select: none; -webkit-user-drag: none;
+  pointer-events: none;   /* long-press and right-click land on the shield */
+}
+/* Transparent layer over the photo so a long-press cannot reach the image. */
+.lp-lb-shield { position: absolute; inset: 0; border-radius: var(--r-md); }
+.lp-lb-figure figcaption {
+  margin-top: 14px; text-align: center;
+  font-family: var(--font-display); font-weight: 700; font-size: .95rem; color: #fff;
+}
+.lp-lb-x {
+  position: absolute; top: -46px; right: 0;
+  width: 38px; height: 38px; border-radius: 50%; border: none; cursor: pointer;
+  background: rgba(255, 255, 255, .12); color: #fff; display: grid; place-items: center;
+}
+.lp-lb-x:hover { background: rgba(255, 255, 255, .22); }
+.lp-lb-x svg { width: 18px; height: 18px; }
+.lp-lb-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 44px; height: 44px; border-radius: 50%; border: none; cursor: pointer;
+  background: rgba(255, 255, 255, .12); color: #fff; display: grid; place-items: center;
+}
+.lp-lb-nav:hover { background: rgba(255, 255, 255, .22); }
+.lp-lb-nav svg { width: 20px; height: 20px; }
+.lp-lb-prev { left: -60px; }
+.lp-lb-next { right: -60px; }
+.lp-lb-count {
+  position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%);
+  font-family: var(--font-mono); font-size: .74rem; color: rgba(255, 255, 255, .55);
+}
+
+@media (max-width: 860px) {
+  .lp-lb-prev { left: 4px; }
+  .lp-lb-next { right: 4px; }
+  .lp-lb-x { top: -44px; right: 4px; }
+  .lp-lb-figure img { max-height: 66vh; }
+}
+
+@media (max-width: 768px) {
+  .lp-director { margin-top: 14px; padding: 12px 14px; }
+  .lp-director img { width: 46px; height: 46px; }
+  .lp-intake-pill { font-size: .66rem; padding: 4px 10px; }
+}

@@ -37,44 +37,59 @@ eleventyComputed:
   <input type="hidden" name="utm_content" value="" data-fill="utm_content" />
   <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none !important" aria-hidden="true" />
 
-  <div class="lp-field">
-    <label for="{{ slot }}-name">Student's full name <span aria-hidden="true">*</span></label>
-    <input type="text" id="{{ slot }}-name" name="name" autocomplete="name" placeholder="e.g. Ananya Sharma" required />
-  </div>
-
-  <div class="lp-field">
-    <label for="{{ slot }}-phone">Mobile number <span aria-hidden="true">*</span></label>
-    <input type="tel" id="{{ slot }}-phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="10-digit mobile number" required />
-  </div>
-
   {% if not compact %}
-  <div class="lp-field">
-    <label for="{{ slot }}-email">Email address <span aria-hidden="true">*</span></label>
-    <input type="email" id="{{ slot }}-email" name="email" autocomplete="email" placeholder="you@example.com" required />
-  </div>
-
-  <div class="lp-field-row">
-    <div class="lp-field">
-      <label for="{{ slot }}-city">City</label>
-      <input type="text" id="{{ slot }}-city" name="city" autocomplete="address-level2" placeholder="e.g. Chennai" />
-    </div>
-    <div class="lp-field">
-      <label for="{{ slot }}-intake">Planning to join</label>
-      <select id="{{ slot }}-intake" name="intake">
-        <option value="2026 intake" selected>2026 intake</option>
-        <option value="2027 intake">2027 intake</option>
-        <option value="Still deciding">Still deciding</option>
-      </select>
-    </div>
-  </div>
+  <p class="lp-step-count" data-step-count aria-live="polite">Step 1 of 2</p>
   {% endif %}
 
-  <label class="lp-consent">
-    <input type="checkbox" name="consent" value="yes" required />
-    <span>I'd like a LIMRA counsellor to contact me by phone, WhatsApp or email about {{ campus.shortName | safe }}.</span>
-  </label>
+  <div class="lp-step" data-step="1">
+    <div class="lp-field">
+      <label for="{{ slot }}-name">Student's full name <span aria-hidden="true">*</span></label>
+      <input type="text" id="{{ slot }}-name" name="name" autocomplete="name" placeholder="e.g. Ananya Sharma" required />
+    </div>
 
-  <button type="submit" class="lp-submit">{% if compact %}Send me the details{% else %}Get free counselling{% endif %} &rarr;</button>
+    <div class="lp-field">
+      <label for="{{ slot }}-phone">Mobile number <span aria-hidden="true">*</span></label>
+      <input type="tel" id="{{ slot }}-phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="10-digit mobile number" required />
+    </div>
+
+    {#- Step 1 ends here on the full form. Everything below is step 2, which
+        is revealed in place by js/lp.js. Nothing navigates away. -#}
+    {% if not compact %}
+    <button type="button" class="lp-submit" data-step-next>Continue &rarr;</button>
+  </div>
+
+  <div class="lp-step" data-step="2" hidden>
+    <div class="lp-field">
+      <label for="{{ slot }}-email">Email address <span aria-hidden="true">*</span></label>
+      <input type="email" id="{{ slot }}-email" name="email" autocomplete="email" placeholder="you@example.com" required />
+    </div>
+
+    <div class="lp-field-row">
+      <div class="lp-field">
+        <label for="{{ slot }}-city">City</label>
+        <input type="text" id="{{ slot }}-city" name="city" autocomplete="address-level2" placeholder="e.g. Chennai" />
+      </div>
+      <div class="lp-field">
+        <label for="{{ slot }}-intake">Planning to join</label>
+        <select id="{{ slot }}-intake" name="intake">
+          <option value="2026 intake" selected>2026 intake</option>
+          <option value="2027 intake">2027 intake</option>
+          <option value="Still deciding">Still deciding</option>
+        </select>
+      </div>
+    </div>
+    {% endif %}
+
+    <label class="lp-consent">
+      <input type="checkbox" name="consent" value="yes" required />
+      <span>I'd like a LIMRA counsellor to contact me by phone, WhatsApp or email about {{ campus.shortName | safe }}.</span>
+    </label>
+
+    <button type="submit" class="lp-submit">{% if compact %}Send me the details{% else %}Get free counselling{% endif %} &rarr;</button>
+    {% if not compact %}
+    <button type="button" class="lp-step-back" data-step-back>&larr; Back</button>
+    {% endif %}
+  </div>
 
   <p class="lp-form-msg" data-form-msg role="status" aria-live="polite"></p>
   <p class="lp-form-fine">
@@ -93,7 +108,10 @@ eleventyComputed:
     <div class="lp-hero-copy">
       {#- Transparent WebP, so it sits straight on the hero with no white plate. -#}
       <img src="/assets/campus/{{ campus.id }}-logo.webp" alt="{{ campus.name | striptags }} logo" class="lp-hero-logo" />
-      <p class="lp-eyebrow">MBBS in {{ campus.country }} &middot; Est. {{ campus.est }}</p>
+      <div class="lp-eyebrow-row">
+        <p class="lp-eyebrow">MBBS in {{ campus.country }} &middot; Est. {{ campus.est }}</p>
+        <span class="lp-intake-pill">{{ site.currentIntake }} intake</span>
+      </div>
       <h1>{{ campus.name }}</h1>
       <p class="lp-hero-tag">{{ campus.tagline | safe }}</p>
 
@@ -121,6 +139,17 @@ eleventyComputed:
 
     <div class="lp-hero-form">
       {{ enquiryForm(campus, site, "top", "Talk to a counsellor, free", "Tell us where to reach you. A LIMRA counsellor will call you back with fees, eligibility and the next intake dates.", "hero-form", false) }}
+
+      {#- A face under the form: "a counsellor will call" is abstract until
+          there is a person behind it. -#}
+      <figure class="lp-director">
+        <img src="/assets/director.webp" alt="Mohammed Ghani, Director of LIMRA Overseas Education" width="360" height="360" loading="lazy" />
+        <figcaption>
+          <strong>Mohammed Ghani</strong>
+          <span>Director, LIMRA Overseas Education</span>
+          <em>Guiding students to medical careers abroad for over {{ site.yearsExperience }} years.</em>
+        </figcaption>
+      </figure>
     </div>
 
   </div>
@@ -167,11 +196,17 @@ eleventyComputed:
       <p class="lp-sub">Real photographs from {{ campus.shortName | safe }} and the student accommodation we arrange. No stock images.</p>
     </div>
 
-    <div class="lp-mosaic">
+    <div class="lp-mosaic" data-gallery>
       {%- for g in campus.gallery %}
       <figure class="lp-tile lp-tile--{{ loop.index }}">
-        <img src="/assets/campus/{{ g.src }}" alt="{{ g.alt }}" loading="lazy" />
-        <figcaption>{{ g.caption }}</figcaption>
+        <button type="button" class="lp-tile-btn" data-lightbox="{{ loop.index0 }}"
+                aria-label="View larger: {{ g.caption }}">
+          <img src="/assets/campus/{{ g.src }}" alt="{{ g.alt }}" loading="lazy" draggable="false" />
+          <figcaption>{{ g.caption }}</figcaption>
+          <span class="lp-tile-zoom" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>
+          </span>
+        </button>
       </figure>
       {%- endfor %}
     </div>
