@@ -162,6 +162,11 @@
     });
     var counter = form.querySelector("[data-step-count]");
     if (counter) counter.textContent = "Step " + n + " of 2";
+
+    // The intro explains step 1. On step 2 the visitor has already given
+    // those details, so it is describing something they have done.
+    var intro = form.querySelector("[data-step1-only]");
+    if (intro) intro.hidden = String(n) !== "1";
   }
 
   function initSteps(form) {

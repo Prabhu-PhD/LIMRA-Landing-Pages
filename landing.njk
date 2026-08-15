@@ -25,7 +25,7 @@ eleventyComputed:
   {% if not compact %}
   <div class="lp-form-head">
     <h2>{{ heading }}</h2>
-    <p>{{ sub }}</p>
+    <p data-step1-only>{{ sub }}</p>
   </div>
   {% endif %}
 
@@ -96,7 +96,6 @@ eleventyComputed:
         intro line already carries the same promise. -#}
     {% if not compact %}
     <ul class="lp-assure">
-      <li>Free</li>
       <li>No obligation</li>
       <li>Callback in 2 hours</li>
     </ul>
@@ -110,7 +109,7 @@ eleventyComputed:
 
   <p class="lp-form-msg" data-form-msg role="status" aria-live="polite"></p>
   <p class="lp-form-fine" data-form-fine>
-    {% if compact %}No spam, ever.{% else %}No spam, ever. Mon to Sat, 9&nbsp;AM to 6&nbsp;PM IST.{% endif %}
+    No spam, ever.
     <a href="/privacy/" target="_blank" rel="noopener">Privacy Policy</a>
   </p>
 
