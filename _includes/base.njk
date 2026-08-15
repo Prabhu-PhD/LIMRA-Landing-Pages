@@ -40,9 +40,8 @@
         <img src="/assets/logo-white.svg" alt="" class="lp-lockup-limra" />
         {%- if campus %}
         <span class="lp-lockup-rule" aria-hidden="true"></span>
-        {#- The university logos are transparent PNGs, so they sit directly on
-            the bar with no white plate behind them. -#}
-        <img src="/assets/campus/{{ campus.id }}-logo.png" alt="" class="lp-lockup-uni" />
+        {#- Name only here. The university's logo appears in the hero, where it
+            has room to be seen properly. -#}
         <span class="lp-lockup-name">{{ campus.shortName | safe }}</span>
         {%- endif %}
       </div>
