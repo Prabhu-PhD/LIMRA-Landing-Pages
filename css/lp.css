@@ -999,13 +999,24 @@ a { color: inherit; }
    in lp.js. */
 .lp-form.is-focused {
   position: fixed; z-index: 95;
-  top: 50%; left: 50%;
+  left: 50%;
+  /* Set from JS against the visual viewport, so the card stays clear of the
+     on-screen keyboard. Falls back to the middle of the layout viewport. */
+  top: var(--lp-centre-y, 50%);
   translate: -50% -50%;
   width: min(452px, 92vw);
-  max-height: 88vh; overflow-y: auto;
+  max-height: var(--lp-avail-h, 88vh);
+  overflow-y: auto;
   transform-origin: top left;
   transition: transform .42s cubic-bezier(.22, .7, .28, 1);
   box-shadow: 0 40px 90px rgba(0, 0, 0, .55);
+  /* Solid while centred: the card is the focus, so it should not show the
+     dimmed page through itself. */
+  backdrop-filter: none; -webkit-backdrop-filter: none;
+}
+.lp-form--top.is-focused {
+  background: linear-gradient(160deg, #2B2963 0%, #16152F 100%);
+  border-color: rgba(255, 255, 255, .20);
 }
 
 @media (prefers-reduced-motion: reduce) {

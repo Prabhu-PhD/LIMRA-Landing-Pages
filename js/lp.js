@@ -379,25 +379,41 @@
   }
 
   /* ---------- focus mode ----------
-     Dims and blurs the page while someone is filling the form, so the only
-     lit thing on screen is the thing we want them to finish.
+     Dims and blurs the page while someone is filling the form, and lifts the
+     card to the middle of the screen, so the only lit thing is the thing we
+     want them to finish. Runs on every screen size.
 
-     Deliberately desktop-only: on a phone the keyboard already covers most
-     of the screen and the browser scrolls the field into view itself, so
-     adding our own movement fights the browser and tends to feel broken.
-     Skipped for the exit-intent form too, which sits in its own modal and
-     already has a backdrop. */
+     Skipped for the exit-intent form, which sits in its own modal and
+     already has a backdrop of its own. */
 
   var veil = null;
   var focusedForm = null;
   var blurTimer = null;
 
-  function isDesktop() {
-    return window.matchMedia("(min-width: 1001px)").matches;
+  /* Centres against the VISUAL viewport, not the layout viewport.
+     On a phone the layout viewport does not shrink when the keyboard opens,
+     so a card centred with a plain top:50% ends up sitting behind the
+     keyboard. visualViewport reports the area actually visible, and on
+     desktop it matches the layout viewport, so one path serves both. */
+  function syncViewport() {
+    if (!focusedForm) return;
+    var vv = window.visualViewport;
+    var centre = vv ? vv.offsetTop + vv.height / 2 : window.innerHeight / 2;
+    var avail = (vv ? vv.height : window.innerHeight) * 0.92;
+    focusedForm.style.setProperty("--lp-centre-y", Math.round(centre) + "px");
+    focusedForm.style.setProperty("--lp-avail-h", Math.round(avail) + "px");
+  }
+
+  function watchViewport(on) {
+    var vv = window.visualViewport;
+    if (!vv) return;
+    var method = on ? "addEventListener" : "removeEventListener";
+    vv[method]("resize", syncViewport);
+    vv[method]("scroll", syncViewport);
   }
 
   function enterFocusMode(form) {
-    if (!isDesktop() || focusedForm === form) return;
+    if (focusedForm === form) return;
     if (form.closest("#lp-exit")) return;
     if (form.classList.contains("is-done")) return;
 
@@ -410,6 +426,8 @@
 
     focusedForm = form;
     centreForm(form);
+    syncViewport();
+    watchViewport(true);
     // Force a frame so the transition runs rather than snapping on. Re-check
     // on the way in: if focus mode was exited in between (a fast submit, for
     // instance), this frame must not switch the veil back on.
@@ -420,6 +438,9 @@
 
   function exitFocusMode() {
     if (!focusedForm) return;
+    watchViewport(false);
+    focusedForm.style.removeProperty("--lp-centre-y");
+    focusedForm.style.removeProperty("--lp-avail-h");
     uncentreForm(focusedForm);
     focusedForm = null;
     if (veil) veil.classList.remove("is-on");
@@ -503,11 +524,7 @@
     if (active && form.contains(active)) active.focus({ preventScroll: true });
   }
 
-  // Dropping below the desktop breakpoint while a card is centred would
-  // leave it pinned with no way back, so release it on resize.
-  window.addEventListener("resize", function () {
-    if (focusedForm && !isDesktop()) exitFocusMode();
-  });
+  window.addEventListener("resize", syncViewport);
 
   function initFocusMode(form) {
     form.addEventListener("focusin", function () {
