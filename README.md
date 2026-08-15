@@ -28,7 +28,7 @@ numbers for each campus live in [`_data/campuses.json`](_data/campuses.json).
 
 ```
 _data/campuses.json   ← the content of all six pages (edit this most often)
-_data/site.json       ← phone numbers, form key, tracking IDs (edit once)
+_data/site.js       ← phone numbers, form key, tracking IDs (edit once)
 landing.njk           ← the page layout, shared by all six
 _includes/base.njk    ← header, footer, sticky mobile bar
 css/lp.css            ← all styling
@@ -79,13 +79,13 @@ Connect this repo to Netlify (or Vercel / Cloudflare Pages) with:
 - **Publish directory:** `_site`
 
 `netlify.toml` already sets this up. Point a domain or subdomain at it. `lp.limraedu.com` is the suggested choice; whatever you pick, put it in
-`_data/site.json` as `url`.
+`_data/site.js` as `url`.
 
 ---
 
 ## ⚠️ Before spending a single rupee on ads
 
-Three IDs must be filled into [`_data/site.json`](_data/site.json). Until then
+Three IDs must be filled into [`_data/site.js`](_data/site.js). Until then
 the pages work and collect leads, but **you will have no idea which ads are
 working.**
 
@@ -108,7 +108,7 @@ campus, e.g. *"New DMSF enquiry (Google Ads landing page)"*.
 
 **2. Google Sheet (optional, ~5 minutes to set up).** Follow the instructions
 at the top of [`tools/google-apps-script.gs`](tools/google-apps-script.gs),
-then paste the resulting URL into `sheetEndpoint` in `_data/site.json`.
+then paste the resulting URL into `sheetEndpoint` in `_data/site.js`.
 
 Every lead carries its ad context: `gclid`, `utm_source`, `utm_medium`,
 `utm_campaign`, `utm_term`, `utm_content`, referrer and landing URL, so you
@@ -158,7 +158,7 @@ lookup, a TLS handshake and a render-blocking stylesheet before any text can
 paint, which is expensive on the mobile connections most ad traffic arrives
 on. It also fires before a visitor has consented to anything. Serving the
 files ourselves means the page makes **zero third-party requests** until the
-tracking IDs in `site.json` are filled in. Re-run `tools/fetch-fonts.py` only
+tracking IDs in `site.js` are filled in. Re-run `tools/fetch-fonts.py` only
 if the font stack changes.
 
 **There is a 404 page** that offers the six campuses and a phone number,

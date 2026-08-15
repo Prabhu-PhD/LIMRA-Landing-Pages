@@ -103,7 +103,7 @@ The pages will collect enquiries the moment they are live. But **without
 these three values you will have no idea which ads are working**, which
 campaign produced which lead, or what a lead costs you.
 
-Open `source-files/_data/site.json` and fill in:
+Open `source-files/_data/site.js` and fill in:
 
 | Setting | Where it comes from |
 |---|---|
@@ -113,6 +113,22 @@ Open `source-files/_data/site.json` and fill in:
 
 Then rebuild and redeploy (Section 7), or send the values to Prabhu and he
 will do it.
+
+### Or set them in Netlify instead of in the code
+
+The five integration values can be set as environment variables in the
+Netlify dashboard, under **Site configuration, then Environment variables**.
+An environment variable overrides whatever is written in `_data/site.js`,
+so the values can be changed without a code change or a developer. Add the
+variable, then trigger a redeploy.
+
+| Variable | Holds |
+|---|---|
+| `GA4_ID` | the `G-XXXXXXX` from Google Analytics |
+| `ADS_CONVERSION_ID` | the `AW-XXXXXXX` from Google Ads |
+| `ADS_CONVERSION_LABEL` | the label beside that conversion action |
+| `SHEET_ENDPOINT` | the Apps Script Web App URL |
+| `WEB3FORMS_KEY` | a separate key, to keep ad enquiries out of the main inbox |
 
 **Until `ga4Id` has a real value, no analytics or advertising scripts load at
 all and no tracking cookies are set.** That is deliberate, so the pages stay
@@ -167,7 +183,7 @@ easier for a team to work from than an inbox.
 5. Click **Deploy**, then **Authorize access** and accept the prompt.
 6. Copy the Web app URL it gives you (it looks like
    `https://script.google.com/macros/s/AKfyc.../exec`).
-7. Send that URL to Prabhu, or paste it into `site.json` as `sheetEndpoint`
+7. Send that URL to Prabhu, or paste it into `site.js` as `sheetEndpoint`
    and redeploy.
 
 Email delivery is the reliable path and keeps working regardless; the sheet is
@@ -181,7 +197,7 @@ lost.
 All six pages are generated from **one** template. You never edit six files.
 
 - **Words and numbers** for each university: `source-files/_data/campuses.json`
-- **Phone numbers, email, settings:** `source-files/_data/site.json`
+- **Phone numbers, email, settings:** `source-files/_data/site.js`
 - **Page layout:** `source-files/landing.njk`
 - **Design and colours:** `source-files/css/lp.css`
 

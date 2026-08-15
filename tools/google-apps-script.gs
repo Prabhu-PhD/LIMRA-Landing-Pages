@@ -20,7 +20,7 @@
  *  5. Click Deploy, then Authorize access and accept the permission prompt.
  *  6. Copy the Web app URL. It looks like:
  *       https://script.google.com/macros/s/AKfyc.../exec
- *  7. Paste it into _data/site.json as "sheetEndpoint", then rebuild and
+ *  7. Paste it into _data/site.js as "sheetEndpoint", then rebuild and
  *     redeploy the landing pages.
  *
  * To verify: submit a test enquiry on any landing page. A new row should
