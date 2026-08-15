@@ -89,10 +89,10 @@
 
   var PENDING_KEY = "limra_lp_pending_conversion";
 
-  /* Success is now confirmed inside the form, so there is no navigation to
-     lose a tag to and the conversion can fire immediately. The pending-flag
-     path is kept only for /thank-you/, which still exists as a fallback for
-     anyone whose JavaScript failed and who got a normal form POST. */
+  /* Success is confirmed inside the form, so there is no navigation to lose a
+     tag to and the conversion fires immediately. The pending-flag path below
+     is only reached from /thank-you/, which is where a visitor lands if the
+     form was submitted without JavaScript. */
   function firePendingConversion() {
     var campus;
     try { campus = sessionStorage.getItem(PENDING_KEY); } catch (e) { return; }
@@ -244,7 +244,6 @@
       if (btn) { btn.disabled = true; btn.textContent = "Sending…"; }
 
       var data = new FormData(form);
-      data.append("access_key", CFG.web3formsKey);
       data.append("referrer", attribution.referrer || "direct");
       data.append("landed_at", attribution.landed_at || "");
 

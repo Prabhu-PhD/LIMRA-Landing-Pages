@@ -19,7 +19,13 @@ eleventyComputed:
 {% macro enquiryForm(campus, site, slot, heading, sub, source, compact) %}
 {#- The variant is on the form itself, not inferred from its parent, because
     focus mode lifts the card out of the page to centre it above the veil. -#}
-<form class="lp-form js-lp-form lp-form--{{ slot }}{% if compact %} lp-form--compact{% endif %}" novalidate>
+{#- action and method are set so the form still works with JavaScript
+    disabled or broken: the browser posts natively to Web3Forms and the lead
+    is captured. With JavaScript the submit is intercepted and handled inline,
+    so these are never used in the normal case. -#}
+<form class="lp-form js-lp-form lp-form--{{ slot }}{% if compact %} lp-form--compact{% endif %}"
+      action="https://api.web3forms.com/submit" method="POST" novalidate>
+  <input type="hidden" name="access_key" value="{{ site.web3formsKey }}" />
   {#- The compact form sits inside the exit modal, which supplies its own
       heading and intro. A second one here just repeats them. -#}
   {% if not compact %}
