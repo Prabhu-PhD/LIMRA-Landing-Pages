@@ -50,7 +50,7 @@ module.exports = {
 
   // Until ga4Id holds a real G-XXXXXXX value, no analytics or advertising
   // script loads at all and no cookies are set. That is deliberate.
-  ga4Id: env.GA4_ID || "",
+  ga4Id: env.GA4_ID || "G-KCMZYD7HFW",
   adsConversionId: env.ADS_CONVERSION_ID || "",
   adsConversionLabel: env.ADS_CONVERSION_LABEL || ""
 };
