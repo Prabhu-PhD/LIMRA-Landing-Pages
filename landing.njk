@@ -25,7 +25,7 @@ eleventyComputed:
   {% if not compact %}
   <div class="lp-form-head">
     <h2>{{ heading }}</h2>
-    <p data-step1-only>{{ sub }}</p>
+    {% if sub %}<p data-step1-only>{{ sub }}</p>{% endif %}
   </div>
   {% endif %}
 
@@ -463,12 +463,6 @@ eleventyComputed:
       <h2>Ready to talk about {{ campus.shortName | safe }}?</h2>
       <p class="lp-close-body">Get a free counselling call covering fees, eligibility, intake dates, and an honest read on whether this campus fits your profile.</p>
 
-      <ul class="lp-close-points">
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Callback within 2 hours on working days</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>No obligation and no pushy sales calls</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Straight answers on fees and eligibility</li>
-      </ul>
-
       <a href="tel:{{ site.phonePrimaryDial }}" class="lp-close-call" data-track="call">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         <span>Prefer to call? {{ site.phonePrimary }}</span>
@@ -476,7 +470,7 @@ eleventyComputed:
     </div>
 
     <div class="lp-close-form">
-      {{ enquiryForm(campus, site, "bottom", "Request your free call", "One counsellor, one honest conversation, no obligation.", "closing-form", false) }}
+      {{ enquiryForm(campus, site, "bottom", "Request a callback", "", "closing-form", false) }}
     </div>
   </div>
 </section>
