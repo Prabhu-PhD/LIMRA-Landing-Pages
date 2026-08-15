@@ -17,7 +17,9 @@ eleventyComputed:
     form produced the lead so conversion rates can be compared.
 ============================================================ -#}
 {% macro enquiryForm(campus, site, slot, heading, sub, source, compact) %}
-<form class="lp-form js-lp-form{% if compact %} lp-form--compact{% endif %}" novalidate>
+{#- The variant is on the form itself, not inferred from its parent, because
+    focus mode lifts the card out of the page to centre it above the veil. -#}
+<form class="lp-form js-lp-form lp-form--{{ slot }}{% if compact %} lp-form--compact{% endif %}" novalidate>
   <div class="lp-form-head">
     <h2>{{ heading }}</h2>
     <p>{{ sub }}</p>

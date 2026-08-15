@@ -218,7 +218,7 @@ a { color: inherit; }
 /* ---------- form variant: frosted glass, sits inside the dark hero ----------
    Softer than a solid white slab, but the submit button keeps the full accent
    gradient so the call to action loses none of its prominence. */
-.lp-hero-form .lp-form {
+.lp-form--top {
   background: linear-gradient(160deg, rgba(46, 44, 96, .78) 0%, rgba(18, 17, 44, .82) 100%);
   backdrop-filter: blur(18px) saturate(130%);
   -webkit-backdrop-filter: blur(18px) saturate(130%);
@@ -237,7 +237,7 @@ a { color: inherit; }
   initial-value: 0deg;
 }
 
-.lp-hero-form .lp-form::before {
+.lp-form--top::before {
   content: ""; position: absolute; inset: 0; z-index: 2;
   border-radius: inherit; padding: 1.6px;
   background: conic-gradient(
@@ -257,30 +257,30 @@ a { color: inherit; }
 }
 
 @keyframes lpBeam { to { --lp-beam-angle: 360deg; } }
-.lp-hero-form .lp-form-head h2 { color: #fff; }
-.lp-hero-form .lp-form-head p { color: rgba(255, 255, 255, .66); }
-.lp-hero-form .lp-field label { color: rgba(255, 255, 255, .78); }
-.lp-hero-form .lp-field label span { color: var(--orange); }
-.lp-hero-form .lp-field input,
-.lp-hero-form .lp-field select {
+.lp-form--top .lp-form-head h2 { color: #fff; }
+.lp-form--top .lp-form-head p { color: rgba(255, 255, 255, .66); }
+.lp-form--top .lp-field label { color: rgba(255, 255, 255, .78); }
+.lp-form--top .lp-field label span { color: var(--orange); }
+.lp-form--top .lp-field input,
+.lp-form--top .lp-field select {
   background: rgba(255, 255, 255, .07);
   border-color: rgba(255, 255, 255, .18);
   color: #fff;
 }
-.lp-hero-form .lp-field input::placeholder { color: rgba(255, 255, 255, .40); }
-.lp-hero-form .lp-field select option { color: var(--ink); background: #fff; }
-.lp-hero-form .lp-field input:focus,
-.lp-hero-form .lp-field select:focus {
+.lp-form--top .lp-field input::placeholder { color: rgba(255, 255, 255, .40); }
+.lp-form--top .lp-field select option { color: var(--ink); background: #fff; }
+.lp-form--top .lp-field input:focus,
+.lp-form--top .lp-field select:focus {
   background: rgba(255, 255, 255, .12);
   border-color: var(--sky);
   box-shadow: 0 0 0 3px rgba(41, 194, 245, .20);
 }
-.lp-hero-form .lp-field input.invalid {
+.lp-form--top .lp-field input.invalid {
   border-color: var(--red); box-shadow: 0 0 0 3px rgba(238, 64, 56, .22);
 }
-.lp-hero-form .lp-consent { color: rgba(255, 255, 255, .70); }
-.lp-hero-form .lp-form-fine { color: rgba(255, 255, 255, .48); }
-.lp-hero-form .lp-form-fine a { color: var(--sky); }
+.lp-form--top .lp-consent { color: rgba(255, 255, 255, .70); }
+.lp-form--top .lp-form-fine { color: rgba(255, 255, 255, .48); }
+.lp-form--top .lp-form-fine a { color: var(--sky); }
 
 /* ---------- stats ---------- */
 .lp-stats { background: var(--navy); padding: 26px 0; }
@@ -852,9 +852,9 @@ a { color: inherit; }
 .lp-step-back:hover { color: #fff; }
 
 /* the closing form sits on a light card, so its step chrome inverts */
-.lp-close-form .lp-step-count { color: var(--ink-mute); }
-.lp-close-form .lp-step-back { color: var(--ink-mute); }
-.lp-close-form .lp-step-back:hover { color: var(--ink); }
+.lp-form--bottom .lp-step-count { color: var(--ink-mute); }
+.lp-form--bottom .lp-step-back { color: var(--ink-mute); }
+.lp-form--bottom .lp-step-back:hover { color: var(--ink); }
 
 /* ---------- director ---------- */
 .lp-director {
@@ -975,12 +975,12 @@ a { color: inherit; }
   content: ""; width: 5px; height: 5px; border-radius: 50%;
   background: var(--sky); flex-shrink: 0;
 }
-.lp-close-form .lp-assure li,
-.lp-exit .lp-assure li {
+.lp-form--bottom .lp-assure li,
+.lp-form--exit .lp-assure li {
   color: var(--ink-soft); background: var(--tint); border-color: var(--line);
 }
-.lp-close-form .lp-assure li::before,
-.lp-exit .lp-assure li::before { background: var(--red); }
+.lp-form--bottom .lp-assure li::before,
+.lp-form--exit .lp-assure li::before { background: var(--red); }
 
 /* ---------- focus mode ----------
    The veil dims and blurs the page behind it; the active form is lifted
@@ -1007,8 +1007,6 @@ a { color: inherit; }
   transition: transform .42s cubic-bezier(.22, .7, .28, 1);
   box-shadow: 0 40px 90px rgba(0, 0, 0, .55);
 }
-/* The hero wrapper is sticky; it must stop sticking while the card is out. */
-.lp-hero-form:has(.lp-form.is-focused) { position: static; }
 
 @media (prefers-reduced-motion: reduce) {
   .lp-veil { transition: none; }
@@ -1039,12 +1037,12 @@ a { color: inherit; }
 }
 
 /* light-card variants: closing form and exit modal */
-.lp-close-form .lp-done h3, .lp-exit .lp-done h3 { color: var(--ink); }
-.lp-close-form .lp-done p, .lp-exit .lp-done p { color: var(--ink-soft); }
-.lp-close-form .lp-done-wa, .lp-exit .lp-done-wa {
+.lp-form--bottom .lp-done h3, .lp-form--exit .lp-done h3 { color: var(--ink); }
+.lp-form--bottom .lp-done p, .lp-form--exit .lp-done p { color: var(--ink-soft); }
+.lp-form--bottom .lp-done-wa, .lp-form--exit .lp-done-wa {
   color: var(--ink); background: rgba(37, 211, 102, .10); border-color: rgba(37, 211, 102, .45);
 }
-.lp-close-form .lp-done-fine, .lp-exit .lp-done-fine { color: var(--ink-mute); }
+.lp-form--bottom .lp-done-fine, .lp-form--exit .lp-done-fine { color: var(--ink-mute); }
 
 /* ---------- what happens next ---------- */
 .lp-next { padding: clamp(52px, 7vw, 88px) 0; background: #fff; }

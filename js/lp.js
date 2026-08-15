@@ -457,21 +457,57 @@
     form.style.transform = "";
   }
 
+  /* The card is moved to the end of <body> while centred.
+
+     z-index alone is not enough: the hero sets `isolation: isolate`, which
+     creates a stacking context, so the card's z-index only competes with its
+     siblings inside the hero. The veil, a child of <body>, paints over the
+     whole hero regardless, which blurred the very card it was meant to
+     highlight. Moving the card out puts it in the same stacking context as
+     the veil, where a higher z-index does what it looks like it should.
+
+     Moving a node blurs whatever was focused inside it, so focus is taken
+     and restored around the move. */
+  var homes = new WeakMap();
+
   function centreForm(form) {
     var wrap = form.parentElement;
+    var active = document.activeElement;
+
+    homes.set(form, { wrap: wrap, next: form.nextElementSibling });
+
     flip(form, function () {
       wrap.style.height = wrap.offsetHeight + "px";
+      document.body.appendChild(form);
       form.classList.add("is-focused");
     });
+
+    if (active && form.contains(active)) active.focus({ preventScroll: true });
   }
 
   function uncentreForm(form) {
-    var wrap = form.parentElement;
+    var home = homes.get(form);
+    if (!home) return;
+    var active = document.activeElement;
+
     flip(form, function () {
       form.classList.remove("is-focused");
-      wrap.style.height = "";
+      if (home.next && home.next.parentElement === home.wrap) {
+        home.wrap.insertBefore(form, home.next);
+      } else {
+        home.wrap.appendChild(form);
+      }
+      home.wrap.style.height = "";
     });
+
+    if (active && form.contains(active)) active.focus({ preventScroll: true });
   }
+
+  // Dropping below the desktop breakpoint while a card is centred would
+  // leave it pinned with no way back, so release it on resize.
+  window.addEventListener("resize", function () {
+    if (focusedForm && !isDesktop()) exitFocusMode();
+  });
 
   function initFocusMode(form) {
     form.addEventListener("focusin", function () {
