@@ -54,7 +54,7 @@ NETLIFY = """# Standalone landing page for {name}.
   status = 404
 """
 
-README = """{name} — landing page
+README = """{name} - landing page
 {rule}
 
 This folder is a COMPLETE website for {name} on its own.

@@ -1,4 +1,4 @@
-# LIMRA Landing Pages — Handover
+# LIMRA Landing Pages Handover
 
 Six advertising landing pages, one per partner university. Built for paid
 traffic (Google Ads, Meta, or any other source). Their single job is to turn
@@ -72,18 +72,18 @@ different build, not a different upload.
 The site must also be served over **HTTPS**. Google Ads requires it, and the
 enquiry form will not submit reliably without it.
 
-### Option A — Netlify, Vercel or Cloudflare Pages (recommended, free)
+### Option A: Netlify, Vercel or Cloudflare Pages (recommended, free)
 
 Drag the **contents** of `website-files/` onto the host's upload area, then
 point your domain at it. Nothing to configure, no build step needed.
 
-### Option B — Regular web hosting (cPanel, shared hosting, FTP)
+### Option B: regular web hosting (cPanel, shared hosting, FTP)
 
 Upload everything **inside** `website-files/` into the web root, usually
 `public_html/`. Do not upload the `website-files` folder itself; upload what
 is inside it, so that `index.html` lands directly in the web root.
 
-### Option C — Amazon S3, Google Cloud Storage, or similar
+### Option C: Amazon S3, Google Cloud Storage, or similar
 
 Upload the contents of `website-files/` and enable static website hosting with
 `index.html` as the index document.
@@ -135,7 +135,7 @@ conversions forever, while the enquiries themselves kept arriving by email.
 
 ## 6. Where the enquiries go
 
-### Email — already working
+### Email (already working)
 
 Every submitted form is delivered by email through **Web3Forms**. The subject
 line names the university, for example *"New DMSF enquiry (Google Ads landing
@@ -151,7 +151,7 @@ LIMRA website, so landing page enquiries arrive in the same inbox. If you
 would rather keep them separate, create a second free key at
 <https://web3forms.com> and send it to Prabhu.
 
-### Google Sheet — optional, about 5 minutes to set up
+### Google Sheet (optional, about 5 minutes to set up)
 
 Enquiries can also drop into a Google Sheet automatically, which is usually
 easier for a team to work from than an inbox.

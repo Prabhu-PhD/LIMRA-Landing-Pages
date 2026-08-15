@@ -1,4 +1,4 @@
-# LIMRA — Google Ads Landing Pages
+# LIMRA Google Ads Landing Pages
 
 Six conversion-focused landing pages, one per partner college. Google Ads
 traffic lands here; the only job of these pages is to collect a qualified
@@ -78,8 +78,7 @@ Connect this repo to Netlify (or Vercel / Cloudflare Pages) with:
 - **Build command:** `npm run build`
 - **Publish directory:** `_site`
 
-`netlify.toml` already sets this up. Point a domain or subdomain at it —
-`lp.limraedu.com` is the suggested choice; whatever you pick, put it in
+`netlify.toml` already sets this up. Point a domain or subdomain at it. `lp.limraedu.com` is the suggested choice; whatever you pick, put it in
 `_data/site.json` as `url`.
 
 ---
@@ -96,7 +95,7 @@ working.**
 | `adsConversionId` | Google Ads → Goals → Conversions | Google Ads can't count leads |
 | `adsConversionLabel` | Same conversion action, "Tag setup" | Same as above |
 
-With `ga4Id` blank, **no tracking scripts load and no cookies are set** — that
+With `ga4Id` blank, **no tracking scripts load and no cookies are set**. That
 is deliberate, so the pages stay clean until they're properly configured.
 
 ---
@@ -111,8 +110,8 @@ campus, e.g. *"New DMSF enquiry (Google Ads landing page)"*.
 at the top of [`tools/google-apps-script.gs`](tools/google-apps-script.gs),
 then paste the resulting URL into `sheetEndpoint` in `_data/site.json`.
 
-Every lead carries its ad context — `gclid`, `utm_source`, `utm_medium`,
-`utm_campaign`, `utm_term`, `utm_content`, referrer and landing URL — so you
+Every lead carries its ad context: `gclid`, `utm_source`, `utm_medium`,
+`utm_campaign`, `utm_term`, `utm_content`, referrer and landing URL, so you
 can trace any enquiry back to the exact ad that produced it. The Google Sheet
 is the easier place to read this.
 
@@ -130,7 +129,7 @@ a link at all. Add a link back only once the redesigned site is live.
 
 **The header shows LIMRA and the university together.** The college logos are
 transparent PNGs so they sit straight on the bar. The accreditation logos are
-not — they are fully opaque with white baked in — which is why those sit on a
+not: they are fully opaque with white baked in, which is why those sit on a
 small rounded white plate rather than floating.
 
 **The hero carries the university's recognitions, not LIMRA's numbers.** A
@@ -177,7 +176,7 @@ should be aimed at.
 **These pages are hidden from Google search.** Every page carries
 `noindex, nofollow` and `robots.txt` blocks general crawlers. This is
 intentional: the pages are near-duplicates of the main site's `/colleges/`
-pages, and if Google indexed them they would compete with — and weaken — the
+pages, and if Google indexed them they would compete with, and weaken, the
 organic rankings the main site has built up. `AdsBot-Google` is explicitly
 allowed through, because Google Ads must be able to crawl a landing page to
 assess Quality Score.
@@ -187,7 +186,7 @@ route off these pages leads to a phone call, a WhatsApp chat, or the form.
 This is the single biggest difference between a landing page and a normal web
 page, and the main reason to keep them separate from limraedu.com.
 
-**The form appears twice** — once beside the hero, once at the bottom — because
+**The form appears twice**, once beside the hero, once at the bottom, because
 some visitors decide immediately and others read first.
 
 **No cookie consent banner.** These pages are built for India-targeted traffic,
@@ -196,7 +195,7 @@ targeting the EU or UK, you must add a consent banner before doing so.**
 
 **No fee figures are published.** Fees change per intake and stale numbers on
 an ad page are both a trust problem and an ad-policy risk. The FAQ tells the
-visitor a counsellor will walk them through current costs — which is also a
+visitor a counsellor will walk them through current costs, which is also a
 reason for them to submit the form.
 
 ---

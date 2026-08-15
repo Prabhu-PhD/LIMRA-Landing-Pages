@@ -1,7 +1,7 @@
 {
   "name": "limra-landing-pages",
   "version": "1.0.0",
-  "description": "LIMRA Overseas Education — Google Ads landing pages (one per partner college).",
+  "description": "LIMRA Overseas Education: Google Ads landing pages, one per partner college.",
   "private": true,
   "scripts": {
     "clean": "node -e \"require('fs').rmSync('_site',{recursive:true,force:true})\"",
@@ -10,7 +10,7 @@
     "start": "eleventy --serve",
     "serve": "eleventy --serve"
   },
-  "devDependencies": {
+  "dependencies": {
     "@11ty/eleventy": "^3.0.0"
   }
 }

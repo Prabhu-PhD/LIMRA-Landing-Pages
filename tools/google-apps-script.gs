@@ -1,10 +1,10 @@
 /**
- * LIMRA landing pages — Google Sheet lead collector
+ * LIMRA landing pages - Google Sheet lead collector
  * ==================================================
  *
  * Appends every landing-page enquiry as a row in a Google Sheet, so the
  * counselling team can assign and track follow-up. Email delivery via
- * Web3Forms continues independently — this is an addition, not a replacement.
+ * Web3Forms continues independently - this is an addition, not a replacement.
  *
  * ONE-TIME SETUP (about 5 minutes, done from the LIMRA Google account):
  *
@@ -73,7 +73,7 @@ function doPost(e) {
       .setMimeType(ContentService.MimeType.JSON);
 
   } catch (err) {
-    // Never surface an error to the visitor — the email path already
+    // Never surface an error to the visitor - the email path already
     // delivered the lead. Log it for debugging instead.
     console.error('LIMRA lead collector failed: ' + err);
     return ContentService

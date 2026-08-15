@@ -1,10 +1,10 @@
 /* ============================================================
-   lp.js — LIMRA Google Ads landing pages
+   lp.js - LIMRA Google Ads landing pages
 
    Does four things:
      1. Captures the ad-click context (gclid + UTM params) and keeps it
         for the whole session, so it survives scrolling and page anchors.
-     2. Loads GA4 + Google Ads tags — but ONLY if real IDs are set in
+     2. Loads GA4 + Google Ads tags - but ONLY if real IDs are set in
         _data/site.json. With blank IDs nothing loads and no cookies are set.
      3. Submits the enquiry to Web3Forms (email) and, if configured, to a
         Google Sheet endpoint as well.
@@ -30,7 +30,7 @@
       stored = JSON.parse(sessionStorage.getItem(STORE_KEY) || "{}");
     } catch (e) { stored = {}; }
 
-    // URL params always win — a fresh ad click overwrites an older session.
+    // URL params always win - a fresh ad click overwrites an older session.
     TRACK_KEYS.forEach(function (k) {
       var v = params.get(k);
       if (v) stored[k] = v;
@@ -67,7 +67,7 @@
     var ids = [];
     if (CFG.ga4Id) ids.push(CFG.ga4Id);
     if (CFG.adsConversionId) ids.push(CFG.adsConversionId);
-    if (!ids.length) return; // nothing configured — load nothing, set no cookies
+    if (!ids.length) return; // nothing configured - load nothing, set no cookies
 
     window.dataLayer = window.dataLayer || [];
     window.gtag = function () { window.dataLayer.push(arguments); };
@@ -192,7 +192,7 @@
   }
 
   /* Google Sheet delivery. Fire-and-forget with no-cors: the Apps Script
-     endpoint records the row, but we never block the visitor on it — the
+     endpoint records the row, but we never block the visitor on it - the
      email via Web3Forms is the authoritative delivery path. */
   function sendToSheet(payload) {
     if (!CFG.sheetEndpoint) return Promise.resolve();
@@ -230,7 +230,7 @@
       }
 
       if (!CFG.web3formsKey) {
-        say("Form not configured yet — please call us on " + (document.querySelector(".lp-bar-call span") || {}).textContent + ".", true);
+        say("Form not configured yet - please call us on " + (document.querySelector(".lp-bar-call span") || {}).textContent + ".", true);
         return;
       }
 

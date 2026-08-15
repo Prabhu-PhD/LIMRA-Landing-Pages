@@ -1,4 +1,4 @@
-// Eleventy config — LIMRA Google Ads landing pages
+// Eleventy config - LIMRA Google Ads landing pages
 //
 // One template (landing.njk) + one data file (_data/campuses.json) generate
 // every campus page. To add a seventh college, add one entry to the JSON and

@@ -1,4 +1,4 @@
-# LIMRA landing pages — Netlify config
+# LIMRA landing pages - Netlify config
 # Eleventy generates one page per campus into _site/.
 
 [build]

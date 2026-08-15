@@ -17,7 +17,7 @@
   "studentsPlaced": "2,000+",
   "currentIntake": "2026",
 
-  "_formsComment": "web3formsKey is live and shared with the main site. sheetEndpoint is the Google Apps Script Web App URL — see tools/google-apps-script.gs. Leave sheetEndpoint empty to send leads by email only.",
+  "_formsComment": "web3formsKey is live and shared with the main site. sheetEndpoint is the Google Apps Script Web App URL. See tools/google-apps-script.gs. Leave sheetEndpoint empty to send leads by email only.",
   "web3formsKey": "e2ada0b6-6b85-4459-a825-800d4c1762cb",
   "sheetEndpoint": "",
 
