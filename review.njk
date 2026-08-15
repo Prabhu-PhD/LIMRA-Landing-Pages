@@ -1,0 +1,63 @@
+---
+permalink: "/review/index.html"
+layout: base.njk
+pageTitle: "Landing pages for review | LIMRA Overseas Education"
+pageDescription: "Index of the six LIMRA campus landing pages, for review before the advertising campaign goes live."
+---
+
+{#- An unlisted index, for sending to the client so they can click through all
+    six in one sitting. Nothing links here, so the bare domain stays a plain
+    holding page and the campus pages keep their no-navigation design, which is
+    the reason they convert. Carries the same noindex as every other page. -#}
+
+<section class="lp-review">
+  <div class="lp-review-inner">
+
+    <p class="lp-eyebrow lp-eyebrow--dark">For review</p>
+    <h1>The six campus landing pages</h1>
+    <p class="lp-ty-lead">One page per partner university, each built to turn an advertising click into an enquiry. Open any of them below.</p>
+
+    <div class="lp-404-grid">
+      {%- for c in campuses %}
+      <a href="/{{ c.id }}/" class="lp-404-card">
+        <img src="/assets/campus/{{ c.id }}-logo.webp" alt="" loading="lazy" />
+        <span>
+          <strong>{{ c.shortName | safe }}</strong>
+          <em>{{ c.city }}, {{ c.country }}</em>
+        </span>
+      </a>
+      {%- endfor %}
+    </div>
+
+    <div class="lp-review-note">
+      <h2>What to look at</h2>
+      <ul>
+        <li>Try it on a phone as well as a computer. Most advertising traffic arrives on mobile.</li>
+        <li>Start filling the enquiry form and watch the page dim around it.</li>
+        <li>Tap a campus photograph to open it larger.</li>
+        <li>Move your cursor towards the top of the browser window as though leaving.</li>
+      </ul>
+
+      <p class="lp-review-warn">
+        <strong>Please do not submit a real test enquiry without telling the team.</strong>
+        The form is live, so a test arrives in the same inbox as genuine student
+        enquiries. If you do want to test it, use a name like "TEST, please ignore".
+      </p>
+
+      <h2>Supporting pages</h2>
+      <ul class="lp-review-links">
+        <li><a href="/privacy/">Privacy policy</a>, required by Google Ads and linked from every form</li>
+        <li><a href="/404.html">Not-found page</a>, shown if anyone mistypes an address</li>
+        <li><a href="/">Holding page</a>, what the bare domain shows</li>
+      </ul>
+
+      <p class="lp-review-fine">
+        This index is not linked from anywhere and is hidden from search engines,
+        along with the campus pages themselves. The campus pages carry no
+        navigation on purpose: the only ways onward are the form, a phone call,
+        or WhatsApp.
+      </p>
+    </div>
+
+  </div>
+</section>
