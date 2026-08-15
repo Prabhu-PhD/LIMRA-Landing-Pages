@@ -25,6 +25,9 @@
 
 # Short, memorable ad URLs -> the real campus pages.
 # Lets you run ads on limraedu-lp.com/dmsf without touching the build.
+#
+# ORDER MATTERS: Netlify takes the first rule that matches, so these have to
+# come before the catch-all below or it would swallow them.
 [[redirects]]
   from = "/davao"
   to = "/dmsf/"
@@ -39,3 +42,11 @@
   from = "/peace"
   to = "/university-of-peace/"
   status = 301
+
+# Anything still unmatched gets the branded 404 rather than the host's generic
+# error page. Traffic that reaches here has already been paid for. Must stay
+# last.
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404

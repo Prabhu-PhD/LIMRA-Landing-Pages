@@ -154,6 +154,25 @@ upward scroll is the trigger instead.
 and JS URLs so a returning visitor cannot get a stale stylesheet from the
 previous deploy.
 
+**Fonts are self-hosted, not loaded from Google.** Google Fonts costs a DNS
+lookup, a TLS handshake and a render-blocking stylesheet before any text can
+paint, which is expensive on the mobile connections most ad traffic arrives
+on. It also fires before a visitor has consented to anything. Serving the
+files ourselves means the page makes **zero third-party requests** until the
+tracking IDs in `site.json` are filled in. Re-run `tools/fetch-fonts.py` only
+if the font stack changes.
+
+**There is a 404 page** that offers the six campuses and a phone number,
+wired up in `netlify.toml`. Traffic that lands there has already been paid
+for, so it should not hit a dead end. The catch-all redirect must stay **last**
+in that file, or it will swallow the short ad aliases above it.
+
+**Engagement is tracked, not just conversions.** Scroll depth, which sections
+were actually seen, time on page, gallery opens and reaching step 2 of the
+form all report to GA4. Conversions tell you whether the page worked;
+these tell you where people stopped, which is what the next round of changes
+should be aimed at.
+
 
 **These pages are hidden from Google search.** Every page carries
 `noindex, nofollow` and `robots.txt` blocks general crawlers. This is

@@ -666,6 +666,74 @@
     });
   }
 
+  /* ---------- engagement tracking ----------
+     Conversions alone say whether the page worked, not why. These events say
+     how far people actually get, so the next round of changes can be aimed at
+     the section where they stop rather than guessed at. Fires only once per
+     milestone, and only when analytics is configured. */
+
+  function initEngagementTracking() {
+    var hit = {};
+
+    // Scroll depth, measured against the scrollable distance.
+    var marks = [25, 50, 75, 90];
+    window.addEventListener("scroll", function () {
+      var doc = document.documentElement;
+      var max = doc.scrollHeight - window.innerHeight;
+      if (max <= 0) return;
+      var pct = (window.scrollY / max) * 100;
+      marks.forEach(function (m) {
+        if (pct >= m && !hit["s" + m]) {
+          hit["s" + m] = true;
+          track("scroll_depth", { event_category: "engagement", event_label: m + "%", value: m });
+        }
+      });
+    }, { passive: true });
+
+    // Which sections were actually seen, and how long the visitor stayed.
+    if (!("IntersectionObserver" in window)) return;
+
+    var sections = [
+      [".lp-hero", "hero"],
+      [".lp-why", "why_college"],
+      [".lp-mosaic", "campus_photos"],
+      [".lp-clinical", "clinical_training"],
+      [".lp-advantage", "why_limra"],
+      [".lp-faq", "faq"],
+      [".lp-close", "closing_cta"]
+    ];
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var name = e.target.getAttribute("data-section");
+        if (hit[name]) return;
+        hit[name] = true;
+        track("section_view", { event_category: "engagement", event_label: name });
+      });
+    }, { threshold: 0.4 });
+
+    sections.forEach(function (pair) {
+      var el = document.querySelector(pair[0]);
+      if (!el) return;
+      el.setAttribute("data-section", pair[1]);
+      io.observe(el);
+    });
+
+    // Time on page, sent when the visitor leaves. `visibilitychange` is the
+    // only event that reliably fires on mobile, where tabs are frozen rather
+    // than unloaded.
+    var start = performance.now();
+    document.addEventListener("visibilitychange", function () {
+      if (document.visibilityState !== "hidden" || hit.time) return;
+      hit.time = true;
+      track("time_on_page", {
+        event_category: "engagement",
+        value: Math.round((performance.now() - start) / 1000)
+      });
+    });
+  }
+
   /* ---------- click tracking on call / whatsapp ---------- */
 
   function trackOutboundClicks() {
@@ -693,6 +761,7 @@
     });
     initLightbox();
     initMobileEnquire();
+    initEngagementTracking();
     initExitIntent();
 
     var yr = document.getElementById("year");
