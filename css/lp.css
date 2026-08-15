@@ -136,9 +136,9 @@ a { color: inherit; }
 /* The university mark leads the hero. Transparent PNG on the dark ground,
    no white plate, matching how the lockup handles the LIMRA logo. */
 .lp-hero-logo {
-  height: clamp(64px, 7vw, 88px); width: auto; max-width: 210px;
+  height: clamp(88px, 9.5vw, 124px); width: auto; max-width: 290px;
   object-fit: contain; object-position: left center;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 .lp-eyebrow {
   font-family: var(--font-display);
@@ -530,7 +530,7 @@ a { color: inherit; }
   .lp-bar-call svg { width: 18px; height: 18px; }
   .lp-lockup-limra { height: 22px; }
   .lp-lockup-name { font-size: .78rem; }
-  .lp-hero-logo { height: 58px; margin-bottom: 16px; }
+  .lp-hero-logo { height: 78px; margin-bottom: 18px; }
   .lp-lockup { gap: 9px; }
   .lp-lockup-rule { height: 20px; }
 
