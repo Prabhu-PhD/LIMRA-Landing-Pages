@@ -95,6 +95,27 @@ var HEADERS = [
 
 
 /**
+ * Google Sheets evaluates a cell that begins with = + - or @ as a formula.
+ * That is a problem twice over.
+ *
+ * First, it corrupts real data: a student who types their number as
+ * "+91 98765 43210", which many do, lands in the sheet as #ERROR! and the
+ * lead becomes uncallable.
+ *
+ * Second, it is a security hole. Anyone can type anything into a public
+ * enquiry form, so a name of "=IMPORTXML(...)" would execute inside the
+ * client's spreadsheet. This is the well known CSV injection problem.
+ *
+ * A leading apostrophe tells Sheets to treat the value as text. It is not
+ * displayed and it is not part of the stored string.
+ */
+function safeCell(value) {
+  var s = (value === null || value === undefined) ? '' : String(value);
+  return /^[=+\-@\t\r]/.test(s) ? "'" + s : s;
+}
+
+
+/**
  * Run this from the editor before deploying. It writes a clearly marked test
  * row, so a failure shows up as a readable error rather than as silence.
  */
@@ -149,7 +170,7 @@ function doPost(e) {
     var sheet = getSheet();
 
     sheet.appendRow(HEADERS.map(function (key) {
-      return payload[key] !== undefined ? payload[key] : '';
+      return safeCell(payload[key]);
     }));
 
     return ContentService

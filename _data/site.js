@@ -57,7 +57,15 @@ module.exports = {
 
   // Google Apps Script Web App URL. See tools/google-apps-script.gs.
   // Leave empty to deliver leads by email only.
-  sheetEndpoint: env.SHEET_ENDPOINT || "",
+  //
+  // Points at the "LIMRA lead collector" script owned by limraeduads@gmail.com,
+  // which appends to the "LIMRA Ad Leads" sheet. This URL is not a secret: it
+  // ships inside the page's JavaScript, so anyone viewing source can read it
+  // whether or not it sits in this repository. It accepts writes only and
+  // exposes nothing back, but it does mean the sheet can be posted junk. If
+  // that ever happens, redeploy the script under a new URL and update this.
+  sheetEndpoint: env.SHEET_ENDPOINT ||
+    "https://script.google.com/macros/s/AKfycbyLPRhSBDqKEXtwW5w0zyE6yaBLCkp_fJWTygKHVEye4eZh2c1gfqR-yPF2Bkb5lz1WCQ/exec",
 
   // Until ga4Id holds a real G-XXXXXXX value, no analytics or advertising
   // script loads at all and no cookies are set. That is deliberate.
