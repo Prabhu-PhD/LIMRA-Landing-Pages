@@ -27,8 +27,9 @@ Short ad-friendly aliases also work: `/davao`, `/cebu`, `/peace`.
 numbers for each campus live in [`_data/campuses.json`](_data/campuses.json).
 
 ```
-_data/campuses.json   ← the content of all six pages (edit this most often)
-_data/site.js       ← phone numbers, form key, tracking IDs (edit once)
+_data/campuses.json   ← the content of all six pages, and each campus's
+                        counsellor phone number (edit this most often)
+_data/site.js       ← WhatsApp number, form key, tracking IDs (edit once)
 landing.njk           ← the page layout, shared by all six
 _includes/base.njk    ← header, footer, sticky mobile bar
 css/lp.css            ← all styling
@@ -138,6 +139,24 @@ who LIMRA is. The LIMRA figures (24+ years, 2,000+ students, free FMGE
 coaching) appear further down, in the LIMRA section. Accreditation is
 per-campus: CHED Philippines, for instance, does not apply to the two
 Timor-Leste universities.
+
+**Each campus shows its own phone number.** The counsellor number lives in
+`campuses.json` as `phone` / `phoneDial` and drives the header, the footer, the
+sticky mobile bar and the "prefer to call" link on that page. Pages with no
+campus behind them, meaning the holding page, 404, thank-you and privacy, fall
+back to `site.phonePrimary`. Two numbers repeat across the six campuses, which
+is intended: one counsellor covers two universities.
+
+**WhatsApp stays on one shared number**, not per campus, because `wa.me`
+silently fails for a number with no WhatsApp account and that would be a dead
+end on a click already paid for. Split it per campus only after each number is
+confirmed to have WhatsApp.
+
+**No email address is published anywhere.** The client asked for every email ID
+to be removed, so the only routes onward are the phone number, WhatsApp and the
+form. Enquiries still arrive by email through Web3Forms; that is the delivery
+mechanism, not a published address. The form still asks the student for their
+own email, which is how a counsellor sends the fee structure.
 
 **No em dashes anywhere.** They now read as AI-written to many people, which
 costs trust on a lead-generation page. Sentences are written to avoid them

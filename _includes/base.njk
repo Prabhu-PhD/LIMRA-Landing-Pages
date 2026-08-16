@@ -38,6 +38,12 @@
 
   {#- The brand lockup is deliberately NOT a link. These pages carry paid
       traffic and must not leak visitors away to another site. -#}
+  {#- Each campus has its own counsellor number. The pages with no campus
+      behind them (holding, 404, thank-you, privacy) fall back to the main
+      LIMRA line. -#}
+  {%- set telText = campus.phone if campus and campus.phone else site.phonePrimary %}
+  {%- set telDial = campus.phoneDial if campus and campus.phoneDial else site.phonePrimaryDial %}
+
   <header class="lp-bar">
     <div class="lp-bar-inner">
       <div class="lp-lockup" role="img" aria-label="{{ lockupLabel | default(site.name) }}">
@@ -51,9 +57,9 @@
       </div>
       <div class="lp-bar-right">
         <span class="lp-bar-note">{{ site.yearsExperience }}+ years &middot; {{ site.studentsPlaced }} students placed</span>
-        <a href="tel:{{ site.phonePrimaryDial }}" class="lp-bar-call" data-track="call">
+        <a href="tel:{{ telDial }}" class="lp-bar-call" data-track="call">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          <span>{{ site.phonePrimary }}</span>
+          <span>{{ telText }}</span>
         </a>
       </div>
     </div>
@@ -82,9 +88,9 @@
         <div class="lp-foot-contact">
           <p class="lp-foot-h">Talk to us</p>
 
-          <a href="tel:{{ site.phonePrimaryDial }}" class="lp-foot-row" data-track="call">
+          <a href="tel:{{ telDial }}" class="lp-foot-row" data-track="call">
             <span class="lp-foot-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
-            <span><strong>{{ site.phonePrimary }}</strong><em>{{ site.phoneSecondary }}</em></span>
+            <span><strong>{{ telText }}</strong><em>{% if campus %}Your {{ campus.shortName | safe }} counsellor{% else %}Speak to a counsellor{% endif %}</em></span>
           </a>
 
           <a href="https://wa.me/{{ site.whatsappDial }}{% if campus %}?text={{ ('Hi LIMRA, I would like details about ' + (campus.name | striptags)) | urlencode }}{% endif %}" target="_blank" rel="noopener" class="lp-foot-row" data-track="whatsapp">
@@ -92,10 +98,9 @@
             <span><strong>WhatsApp us</strong><em>Fastest reply</em></span>
           </a>
 
-          <a href="mailto:{{ site.email }}" class="lp-foot-row">
-            <span class="lp-foot-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
-            <span><strong>{{ site.email }}</strong><em>Email our counsellors</em></span>
-          </a>
+          {#- No email row here. The client asked for every published email ID
+              to be removed, so the only routes onward are the phone number
+              above, WhatsApp, and the enquiry form. -#}
         </div>
 
         <div class="lp-foot-office">
@@ -119,7 +124,7 @@
   </footer>
 
   <nav class="lp-mobile-bar" aria-label="Quick contact">
-    <a href="tel:{{ site.phonePrimaryDial }}" class="lpm-btn lpm-call" data-track="call">
+    <a href="tel:{{ telDial }}" class="lpm-btn lpm-call" data-track="call">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
       <span>Call</span>
     </a>

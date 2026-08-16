@@ -196,8 +196,9 @@ lost.
 
 All six pages are generated from **one** template. You never edit six files.
 
-- **Words and numbers** for each university: `source-files/_data/campuses.json`
-- **Phone numbers, email, settings:** `source-files/_data/site.js`
+- **Words, numbers and the counsellor phone number** for each university:
+  `source-files/_data/campuses.json`
+- **WhatsApp number and settings:** `source-files/_data/site.js`
 - **Page layout:** `source-files/landing.njk`
 - **Design and colours:** `source-files/css/lp.css`
 

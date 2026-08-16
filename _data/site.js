@@ -27,11 +27,22 @@ module.exports = {
   name: "LIMRA Overseas Education",
   url: env.SITE_URL || "https://limra-lp.netlify.app",
 
+  // Each campus has its own counsellor number, set in _data/campuses.json.
+  // These two are the fallback for the pages that have no campus behind them:
+  // the holding page, the 404 page, the thank-you page and the privacy policy.
   phonePrimary: "+91 94443 75000",
   phonePrimaryDial: "+919444375000",
-  phoneSecondary: "+91 94457 83333",
+
+  // One shared WhatsApp line, deliberately not per campus. wa.me silently
+  // fails for a number with no WhatsApp account, which on paid traffic means
+  // a dead end. Split this per campus only once each number is confirmed.
   whatsappDial: "919445783333",
-  email: "info@limraedu.com",
+
+  // No email address is published on these pages. The client asked for every
+  // email ID to be removed, so the routes onward are phone, WhatsApp and the
+  // form only. Enquiries still arrive by email through Web3Forms; that is the
+  // delivery mechanism, not a published address.
+
   address:
     "New No.177, Royapettah High Road, 1st Floor, SMS Centre, Mylapore, Chennai 600 004",
 
