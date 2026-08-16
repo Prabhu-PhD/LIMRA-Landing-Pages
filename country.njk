@@ -186,7 +186,7 @@ eleventyComputed:
       </ul>
 
       <div class="lp-hero-accred">
-        <p class="lp-hero-accred-label">Our {{ country.name }} partners are recognised by</p>
+        <p class="lp-hero-accred-label">Our {{ country.adjective }} partners are recognised by</p>
         <div class="lp-hero-accred-row">
           {%- for a in country.accreditation %}
           <div class="lp-accred-chip">
@@ -322,7 +322,7 @@ eleventyComputed:
     <div class="lp-head lp-head--centre">
       <p class="lp-eyebrow lp-eyebrow--dark">The campuses</p>
       <h2>Where you will actually study</h2>
-      <p class="lp-sub">Real photographs from every one of our {{ country.name }} partner campuses, and the student accommodation we arrange. No stock images.</p>
+      <p class="lp-sub">Real photographs from every one of our {{ country.adjective }} partner campuses, and the student accommodation we arrange. No stock images.</p>
     </div>
   </div>
 
@@ -381,7 +381,7 @@ eleventyComputed:
     <div class="lp-clin-body">
 
       <div class="lp-clin-hospitals">
-        <h3>Where our {{ country.name }} students train</h3>
+        <h3>Where our {{ country.adjective }} students train</h3>
         <ul>
           {%- for u in unis %}
           <li>
@@ -549,7 +549,7 @@ eleventyComputed:
       <li>
         <span class="lp-next-n">2</span>
         <strong>A free counselling session</strong>
-        <p>We go through your NEET score, your budget, and which of our {{ country.name }} universities genuinely fits. If none does, we will say so.</p>
+        <p>We go through your NEET score, your budget, and which of our {{ country.adjective }} universities genuinely fits. If none does, we will say so.</p>
       </li>
       <li>
         <span class="lp-next-n">3</span>
@@ -618,7 +618,7 @@ eleventyComputed:
           leaving with. -#}
       <p class="lp-eyebrow lp-eyebrow--dark">Before you go</p>
       <h2 id="lp-exit-title">Not sure which of the {{ country.unisWord }} to pick?</h2>
-      <p class="lp-exit-sub">Leave your name and number. A counsellor will compare our {{ country.name }} universities against your NEET score and your budget, with the {{ site.currentIntake }} intake dates and what each one actually costs. Usually within 2 hours. No cost, no obligation.</p>
+      <p class="lp-exit-sub">Leave your name and number. A counsellor will compare our {{ country.adjective }} universities against your NEET score and your budget, with the {{ site.currentIntake }} intake dates and what each one actually costs. Usually within 2 hours. No cost, no obligation.</p>
 
       {{ enquiryForm(country, unis, site, "exit", "", "", "exit-intent", true) }}
 

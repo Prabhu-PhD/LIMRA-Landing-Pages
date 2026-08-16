@@ -154,7 +154,8 @@
           "caption": "Accommodation we arrange"
         }
       ]
-    }
+    },
+    "adjective": "Philippine"
   },
   {
     "id": "timor-leste",
@@ -287,6 +288,7 @@
           "caption": "Accommodation we arrange"
         }
       ]
-    }
+    },
+    "adjective": "Timor-Leste"
   }
 ]
