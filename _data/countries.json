@@ -87,39 +87,8 @@
         }
       ]
     },
-    "gallery": [
-      {
-        "src": "dmsf-4.webp",
-        "alt": "Students reading in the multi-level library at DMSF",
-        "caption": "Medical library, DMSF"
-      },
-      {
-        "src": "brokenshire-2.webp",
-        "alt": "Virtual anatomy dissection table in use at Brokenshire",
-        "caption": "Virtual anatomy table, Brokenshire"
-      },
-      {
-        "src": "dmsf-2.webp",
-        "alt": "Students working at microscopes in a DMSF laboratory",
-        "caption": "Microscopy lab, DMSF"
-      },
-      {
-        "src": "dmsf-1.webp",
-        "alt": "The DMSF teaching hospital building in Davao",
-        "caption": "Teaching hospital, DMSF"
-      },
-      {
-        "src": "lyceum-3.webp",
-        "alt": "Medical students in white coats during a lecture at Lyceum",
-        "caption": "In class, Lyceum"
-      },
-      {
-        "src": "gcm-6.webp",
-        "alt": "Student accommodation arranged by LIMRA in Cebu",
-        "caption": "Student accommodation we arrange"
-      }
-    ],
-    "unisWord": "four"
+    "unisWord": "four",
+    "cardImage": "dmsf-1.webp"
   },
   {
     "id": "timor-leste",
@@ -133,6 +102,7 @@
     "tagline": "Two NMC-aligned partner universities in Dili, English-medium teaching, and a lower total cost than most routes into medicine abroad.",
     "intro": "Timor-Leste is a younger destination than the Philippines and a smaller one, which is exactly why it suits some students better. Class sizes are small, the cost is lower, and the teaching is in English.",
     "badges": [
+      "Taught by Indian doctors",
       "2 partner universities",
       "100% English medium",
       "NMC-aligned curriculum",
@@ -204,38 +174,7 @@
         }
       ]
     },
-    "gallery": [
-      {
-        "src": "ucts-3.webp",
-        "alt": "UCTS medical students gathered in front of the Hippocratic Oath at their white coat ceremony",
-        "caption": "White coat ceremony, UCTS"
-      },
-      {
-        "src": "university-of-peace-3.webp",
-        "alt": "Virtual anatomy table at the University of PEACE",
-        "caption": "Virtual anatomy table, UNPAZ"
-      },
-      {
-        "src": "ucts-1.webp",
-        "alt": "UCTS students around a clinical skills training table with their instructor",
-        "caption": "Clinical skills lab, UCTS"
-      },
-      {
-        "src": "university-of-peace-4.webp",
-        "alt": "The main building of the University of PEACE in Dili",
-        "caption": "Main building, University of PEACE"
-      },
-      {
-        "src": "ucts-2.webp",
-        "alt": "UCTS students being taught on a hospital ward",
-        "caption": "Hospital training, UCTS"
-      },
-      {
-        "src": "university-of-peace-5.webp",
-        "alt": "Student accommodation arranged by LIMRA in Dili",
-        "caption": "Student accommodation we arrange"
-      }
-    ],
-    "unisWord": "two"
+    "unisWord": "two",
+    "cardImage": "ucts-3.webp"
   }
 ]

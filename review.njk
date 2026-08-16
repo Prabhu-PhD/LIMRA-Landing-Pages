@@ -24,7 +24,7 @@ pageDescription: "Index of the LIMRA landing pages, for review before the advert
     <div class="lp-404-grid">
       {%- for c in countries %}
       <a href="/{{ c.id }}/" class="lp-404-card" target="_blank" rel="noopener">
-        <img src="/assets/campus/{{ c.gallery[0].src }}" alt="" loading="lazy" />
+        <img src="/assets/campus/{{ c.cardImage }}" alt="" loading="lazy" />
         <span>
           <strong>{{ c.shortName }}</strong>
           <em>{% if c.id == "philippines" %}4 universities{% else %}2 universities{% endif %}</em>

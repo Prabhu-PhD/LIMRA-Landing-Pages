@@ -128,7 +128,19 @@
     ],
     "heroAlt": "Davao Medical School Foundation campus building",
     "brochure": "/assets/brochures/dmsf-brochure.pdf",
-    "cardLine": "One of the most respected medical schools in the Philippines, built on high-volume hospital exposure across five affiliated hospitals."
+    "cardLine": "One of the most respected medical schools in the Philippines, built on high-volume hospital exposure across five affiliated hospitals.",
+    "showcase": [
+      {
+        "src": "dmsf-1.webp",
+        "alt": "The DMSF teaching hospital building in Davao",
+        "caption": "Teaching hospital"
+      },
+      {
+        "src": "dmsf-2.webp",
+        "alt": "Students working at microscopes in a DMSF laboratory",
+        "caption": "Microscopy lab"
+      }
+    ]
   },
   {
     "id": "gcm",
@@ -272,7 +284,19 @@
     ],
     "heroAlt": "Entrance monument at Gullas College of Medicine, Cebu",
     "brochure": "/assets/brochures/gcm-brochure.pdf",
-    "cardLine": "A technology-forward campus in Cebu with Anatomage tables, smart lecture rooms and a large, long-established Indian student community."
+    "cardLine": "A technology-forward campus in Cebu with Anatomage tables, smart lecture rooms and a large, long-established Indian student community.",
+    "showcase": [
+      {
+        "src": "gcm-5.webp",
+        "alt": "Lecture hall at Gullas College of Medicine",
+        "caption": "Lecture hall"
+      },
+      {
+        "src": "gcm-6.webp",
+        "alt": "Student accommodation arranged by LIMRA in Cebu",
+        "caption": "Student accommodation"
+      }
+    ]
   },
   {
     "id": "brokenshire",
@@ -398,7 +422,19 @@
     ],
     "heroAlt": "Brokenshire College campus in Davao",
     "brochure": "/assets/brochures/brokenshire-brochure.pdf",
-    "cardLine": "A compact Davao campus with strong simulation and anatomy facilities, and smaller cohorts than the larger Philippine universities."
+    "cardLine": "A compact Davao campus with strong simulation and anatomy facilities, and smaller cohorts than the larger Philippine universities.",
+    "showcase": [
+      {
+        "src": "brokenshire-2.webp",
+        "alt": "Virtual anatomy dissection table in use at Brokenshire",
+        "caption": "Anatomage table"
+      },
+      {
+        "src": "brokenshire-5.webp",
+        "alt": "Students studying in the Brokenshire medical library",
+        "caption": "Medical library"
+      }
+    ]
   },
   {
     "id": "lyceum",
@@ -522,7 +558,19 @@
     ],
     "heroAlt": "Lyceum Northwestern University campus in Dagupan",
     "brochure": "/assets/brochures/lyceum-brochure.pdf",
-    "cardLine": "A large multi-faculty university in Dagupan with its own teaching hospital and a strong record in the Indian screening exam."
+    "cardLine": "A large multi-faculty university in Dagupan with its own teaching hospital and a strong record in the Indian screening exam.",
+    "showcase": [
+      {
+        "src": "lyceum-1.webp",
+        "alt": "Aerial view of the Lyceum Northwestern University campus",
+        "caption": "Campus from above"
+      },
+      {
+        "src": "lyceum-3.webp",
+        "alt": "Medical students in white coats during a lecture at Lyceum",
+        "caption": "Lecture theatre"
+      }
+    ]
   },
   {
     "id": "ucts",
@@ -647,7 +695,24 @@
     ],
     "heroAlt": "Universidade Católica Timorense campus in Dili",
     "brochure": "/assets/brochures/ucts-brochure.pdf",
-    "cardLine": "A Catholic university in Dili with a clinical-skills focus, small cohorts and close contact with teaching staff."
+    "cardLine": "A Catholic university in Dili with a clinical-skills focus, small cohorts and close contact with teaching staff.",
+    "showcase": [
+      {
+        "src": "ucts-3.webp",
+        "alt": "UCTS medical students at their white coat ceremony",
+        "caption": "White coat ceremony"
+      },
+      {
+        "src": "ucts-1.webp",
+        "alt": "UCTS students around a clinical skills training table",
+        "caption": "Clinical skills lab"
+      },
+      {
+        "src": "ucts-2.webp",
+        "alt": "UCTS students being taught on a hospital ward",
+        "caption": "Hospital training"
+      }
+    ]
   },
   {
     "id": "university-of-peace",
@@ -773,6 +838,23 @@
     ],
     "heroAlt": "University of PEACE campus in Dili",
     "brochure": "/assets/brochures/university-of-peace-brochure.pdf",
-    "cardLine": "A Dili campus with a virtual anatomy table and its own teaching hospital, at the lowest total cost of our six partners."
+    "cardLine": "A Dili campus with a virtual anatomy table and its own teaching hospital, at the lowest total cost of our six partners.",
+    "showcase": [
+      {
+        "src": "university-of-peace-4.webp",
+        "alt": "The main building of the University of PEACE in Dili",
+        "caption": "Main building"
+      },
+      {
+        "src": "university-of-peace-3.webp",
+        "alt": "Virtual anatomy table at the University of PEACE",
+        "caption": "Virtual anatomy table"
+      },
+      {
+        "src": "university-of-peace-5.webp",
+        "alt": "Student accommodation arranged by LIMRA in Dili",
+        "caption": "Student accommodation"
+      }
+    ]
   }
 ]

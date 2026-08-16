@@ -314,24 +314,47 @@ eleventyComputed:
 <!-- ============ CAMPUS MOSAIC ============ -->
 <section class="lp-section">
   <div class="lp-wrap">
-    <div class="lp-head">
+    <div class="lp-head lp-head--centre">
       <p class="lp-eyebrow lp-eyebrow--dark">The campuses</p>
       <h2>Where you will actually study</h2>
-      <p class="lp-sub">Real photographs from our {{ country.name }} partner campuses and the student accommodation we arrange. No stock images.</p>
+      <p class="lp-sub">Real photographs from every one of our {{ country.name }} partner campuses, and the student accommodation we arrange. No stock images.</p>
     </div>
 
-    <div class="lp-mosaic" data-gallery>
-      {%- for g in country.gallery %}
-      <figure class="lp-tile lp-tile--{{ loop.index }}">
-        <button type="button" class="lp-tile-btn" data-lightbox="{{ loop.index0 }}"
-                aria-label="View larger: {{ g.caption }}">
-          <img src="/assets/campus/{{ g.src }}" alt="{{ g.alt }}" loading="lazy" draggable="false" />
-          <figcaption>{{ g.caption }}</figcaption>
-          <span class="lp-tile-zoom" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>
-          </span>
-        </button>
-      </figure>
+    {#- Grouped by university rather than a single mosaic. The mosaic gave the
+        biggest tile to whichever campus happened to be first and cropped the
+        rest into thin letterboxes, so a visitor could not see any campus
+        properly and could not tell which photograph belonged to which
+        university. Here each partner gets its own labelled band and the images
+        keep a 4:3 shape instead of being cropped to fit a mosaic cell.
+
+        The lightbox binds by DOM order, so every figure staying inside this
+        one [data-gallery] container is all that is required for it to work. -#}
+    <div class="lp-campuses" data-gallery>
+      {%- for u in unis %}
+      <section class="lp-campus">
+        <header class="lp-campus-head">
+          <img src="/assets/campus/{{ u.id }}-logo.webp" alt="" class="lp-campus-logo" loading="lazy" />
+          <div>
+            <h3>{{ u.name | safe }}</h3>
+            <p>{{ u.city }}, {{ u.country }}</p>
+          </div>
+        </header>
+
+        <div class="lp-campus-shots">
+          {%- for g in u.showcase %}
+          <figure class="lp-shot">
+            <button type="button" class="lp-tile-btn" data-lightbox
+                    aria-label="View larger: {{ g.caption }}, {{ u.shortName | striptags }}">
+              <img src="/assets/campus/{{ g.src }}" alt="{{ g.alt }}" loading="lazy" draggable="false" />
+              <figcaption>{{ g.caption }}</figcaption>
+              <span class="lp-tile-zoom" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>
+              </span>
+            </button>
+          </figure>
+          {%- endfor %}
+        </div>
+      </section>
       {%- endfor %}
     </div>
   </div>
