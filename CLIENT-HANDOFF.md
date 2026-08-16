@@ -172,19 +172,25 @@ would rather keep them separate, create a second free key at
 Enquiries can also drop into a Google Sheet automatically, which is usually
 easier for a team to work from than an inbox.
 
-1. From the LIMRA Google account, create a new Google Sheet, e.g. "LIMRA Ad Leads".
-2. In that sheet: **Extensions → Apps Script**.
-3. Delete whatever is in the editor and paste in the entire contents of
-   `source-files/tools/google-apps-script.gs`.
-4. **Deploy → New deployment**, and set:
-   - Type: **Web app**
-   - Execute as: **Me**
-   - Who has access: **Anyone** ← this matters, the page posts anonymously
-5. Click **Deploy**, then **Authorize access** and accept the prompt.
-6. Copy the Web app URL it gives you (it looks like
-   `https://script.google.com/macros/s/AKfyc.../exec`).
-7. Send that URL to Prabhu, or paste it into `site.js` as `sheetEndpoint`
-   and redeploy.
+Full instructions are in the notes at the top of
+`source-files/tools/google-apps-script.gs`. In short:
+
+1. Sign in as the LIMRA Google account **only**, using an incognito window.
+   A second signed-in Google account is what causes Apps Script to bounce you
+   between account-chooser screens, and it is the most common thing to go
+   wrong here.
+2. Create the sheet, e.g. "LIMRA Ad Leads", and copy its ID out of the address
+   bar: the long middle section of `.../spreadsheets/d/<THIS PART>/edit`.
+3. Go to **script.google.com → New project**. Do **not** use the sheet's
+   Extensions → Apps Script menu; that is what triggers the account loop.
+4. Paste in the contents of `google-apps-script.gs` and set `SHEET_ID`.
+5. Run the `testConnection` function once and accept the permission prompt.
+   Doing this before deploying is what turns a silent failure into a readable
+   error message.
+6. **Deploy → New deployment**, type **Web app**, execute as **Me**, access
+   **Anyone** (not "Anyone with a Google account").
+7. Send the resulting `/exec` URL to Prabhu, or set it as the `SHEET_ENDPOINT`
+   environment variable in Netlify and redeploy.
 
 Email delivery is the reliable path and keeps working regardless; the sheet is
 a convenience layer on top. If the sheet is ever misconfigured, no lead is
