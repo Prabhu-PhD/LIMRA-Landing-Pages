@@ -1305,47 +1305,68 @@ a { color: inherit; }
 .lp-review-h:first-of-type { margin-top: 8px; }
 .lp-review-lead { font-size: .93rem; color: var(--ink-soft); margin-bottom: 16px; }
 
-/* ---------- "why this country", editorial list ----------
-   Different in kind from the campus pages' card grid, and deliberately
-   without a featured first item: on a country page these five points are
-   weighed against each other, so promoting one distorts the comparison. */
+/* ---------- "why this country", icon cards ----------
+   Replaces a numbered list. The numerals were decoration: these five points
+   are not a sequence, so counting them implied an order that is not there,
+   and the outlined figures read as noise rather than emphasis.
+
+   Five cards wrap three-then-two and stay centred, which is why this is flex
+   and not grid: a grid strands the odd card in a left-hand column. */
 .lp-reasons {
-  list-style: none; margin: 34px 0 0; padding: 0;
-  display: grid; grid-template-columns: repeat(2, 1fr);
-  column-gap: clamp(30px, 5vw, 70px);
+  list-style: none; margin: 36px 0 0; padding: 0;
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 18px;
 }
 .lp-reason {
-  display: flex; align-items: flex-start; gap: 20px;
-  padding: 26px 0;
-  border-top: 1px solid var(--line);
+  flex: 1 1 300px; max-width: 380px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 26px 24px 28px;
+  transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
 }
-/* The first item in each column sits under the same rule, so the two
-   columns start level rather than one hanging lower than the other. */
-.lp-reason:first-child, .lp-reason:nth-child(2) { border-top: none; padding-top: 6px; }
-
-.lp-reason-n {
-  flex: 0 0 auto;
-  font-family: var(--font-display);
-  font-size: clamp(1.7rem, 3.2vw, 2.5rem); font-weight: 800; line-height: 1;
-  /* Outlined rather than filled: it should count the points, not shout. */
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--line);
-  letter-spacing: -.03em;
-  transition: -webkit-text-stroke-color .3s ease;
+.lp-reason:hover {
+  transform: translateY(-3px);
+  border-color: transparent;
+  box-shadow: 0 14px 34px rgba(37, 36, 93, .13);
 }
-.lp-reason:hover .lp-reason-n { -webkit-text-stroke-color: var(--orange); }
 
-.lp-reason-body h3 { font-size: 1.06rem; font-weight: 800; margin-bottom: 8px; }
-.lp-reason-body p { font-size: .95rem; color: var(--ink-soft); }
+.lp-reason-ico {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 46px; height: 46px; margin-bottom: 16px;
+  border-radius: 13px;
+  color: var(--accent);
+  /* Plain tint first: color-mix is unsupported on older Android Chrome, which
+     is a real share of the traffic these pages are bought for. */
+  background: var(--tint);
+}
+@supports (background: color-mix(in srgb, red 12%, transparent)) {
+  .lp-reason-ico { background: color-mix(in srgb, var(--accent) 12%, transparent); }
+}
+.lp-reason-ico svg { width: 23px; height: 23px; }
 
-@media (max-width: 860px) {
-  .lp-reasons { grid-template-columns: 1fr; }
-  .lp-reason:nth-child(2) { border-top: 1px solid var(--line); padding-top: 26px; }
-  .lp-reason { padding: 22px 0; gap: 16px; }
+/* Rotating through the brand palette keeps five equal cards from reading as
+   a wall of identical boxes, without making any one of them the feature. */
+.lp-reason:nth-child(4n+1) { --accent: var(--navy); }
+.lp-reason:nth-child(4n+2) { --accent: var(--red); }
+.lp-reason:nth-child(4n+3) { --accent: var(--orange); }
+.lp-reason:nth-child(4n+4) { --accent: var(--sky); }
+
+.lp-reason h3 {
+  font-size: 1.06rem; font-weight: 800; line-height: 1.3;
+  margin-bottom: 9px; text-wrap: balance;
+}
+.lp-reason p { font-size: .93rem; color: var(--ink-soft); }
+
+@media (max-width: 700px) {
+  .lp-reasons { gap: 14px; }
+  .lp-reason { flex-basis: 100%; max-width: none; padding: 22px 20px 24px; }
+  .lp-reason-ico { width: 40px; height: 40px; margin-bottom: 13px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .lp-reason-n { transition: none; }
+  .lp-reason { transition: none; }
+  .lp-reason:hover { transform: none; }
 }
 
 /* ---------- campus marquee ----------

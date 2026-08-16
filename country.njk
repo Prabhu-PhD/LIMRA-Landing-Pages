@@ -22,6 +22,34 @@ eleventyComputed:
 
 
 {#- ============================================================
+    Icons for the "why this country" cards. Keyed from countries.json
+    so the icon is chosen per reason rather than by position, and a
+    reordered list keeps the right picture with the right point.
+============================================================ -#}
+{% macro reasonIcon(name) -%}
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+{%- if name == "speech" -%}
+  <path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.6-.7L3 21l1.9-4.9A8.3 8.3 0 0 1 3.6 11.5 8.4 8.4 0 0 1 12 3.1a8.4 8.4 0 0 1 9 8.4z"/><path d="M8.5 10.5h7M8.5 14h4"/>
+{%- elif name == "curriculum" -%}
+  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15.5l2 2 4-4"/>
+{%- elif name == "hospital" -%}
+  <path d="M3 21h18"/><path d="M5 21V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v15"/><path d="M12 8v5M9.5 10.5h5"/><path d="M10 21v-4h4v4"/>
+{%- elif name == "community" -%}
+  <path d="M16 20v-1.5a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4V20"/><circle cx="9" cy="7.5" r="3.5"/><path d="M22 20v-1.5a4 4 0 0 0-3-3.87"/><path d="M16 4.13a4 4 0 0 1 0 7.75"/>
+{%- elif name == "compass" -%}
+  <circle cx="12" cy="12" r="9"/><path d="M15.6 8.4l-2 5.2-5.2 2 2-5.2z"/>
+{%- elif name == "cost" -%}
+  <path d="M20 8H5a2 2 0 0 1 0-4h13v4"/><path d="M3 6v12a2 2 0 0 0 2 2h15V8H5"/><circle cx="16.5" cy="14" r="1.3"/>
+{%- elif name == "pin" -%}
+  <path d="M20 10.5c0 5.5-8 11.5-8 11.5s-8-6-8-11.5a8 8 0 0 1 16 0z"/><circle cx="12" cy="10.3" r="2.9"/>
+{%- elif name == "balance" -%}
+  <path d="M12 3v18M7 21h10"/><path d="M5 7h14"/><path d="M5 7l-2.6 6a3.2 3.2 0 0 0 5.2 0z"/><path d="M19 7l2.6 6a3.2 3.2 0 0 1-5.2 0z"/>
+{%- endif -%}
+</svg>
+{%- endmacro %}
+
+
+{#- ============================================================
     Same form as the campus pages, with one difference: a country
     page cannot know which university the visitor wants, so it asks.
     That is better data than before, because it records what the
@@ -292,21 +320,23 @@ eleventyComputed:
       <h2>What makes {{ country.name }} worth choosing</h2>
     </div>
 
-    {#- An editorial list rather than the card grid used on the campus pages.
-        Every reason carries the same weight here: on a country page these are
-        five things a parent is weighing against each other, not one headline
-        with four footnotes. -#}
-    <ol class="lp-reasons">
+    {#- Icon cards, not a numbered list. The numbers were decoration: these
+        five points are not a sequence and nothing is step one, so counting
+        them implied an order that does not exist. An icon carries meaning at
+        a glance instead, and every card keeps the same weight.
+
+        Five items wrap as three then two, centred, which is why this is a
+        flex row and not a grid: a grid would leave the odd card stranded in
+        a left-aligned column. -#}
+    <ul class="lp-reasons">
       {%- for w in country.why %}
       <li class="lp-reason">
-        <span class="lp-reason-n" aria-hidden="true">{{ loop.index | pad2 }}</span>
-        <div class="lp-reason-body">
-          <h3>{{ w.title }}</h3>
-          <p>{{ w.text }}</p>
-        </div>
+        <span class="lp-reason-ico" aria-hidden="true">{{ reasonIcon(w.icon) }}</span>
+        <h3>{{ w.title }}</h3>
+        <p>{{ w.text }}</p>
       </li>
       {%- endfor %}
-    </ol>
+    </ul>
   </div>
 </section>
 

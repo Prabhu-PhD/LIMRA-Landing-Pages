@@ -51,23 +51,28 @@
     "why": [
       {
         "title": "English from day one, everywhere",
-        "text": "Lectures, examinations, ward rounds and patient conversations all happen in English. There is no local-language exam to clear before you can begin, and no translation between you and a patient."
+        "text": "Lectures, examinations, ward rounds and patient conversations all happen in English. There is no local-language exam to clear before you can begin, and no translation between you and a patient.",
+        "icon": "speech"
       },
       {
         "title": "A curriculum built for the FMGE",
-        "text": "The Philippine MD follows the American model, which maps closely onto what the FMGE and NExT actually test. This is why Philippine graduates have historically performed well in the Indian screening exam."
+        "text": "The Philippine MD follows the American model, which maps closely onto what the FMGE and NExT actually test. This is why Philippine graduates have historically performed well in the Indian screening exam.",
+        "icon": "curriculum"
       },
       {
         "title": "Hospitals with real patient volume",
-        "text": "Our partner universities train students across affiliated hospitals running into thousands of beds. You take histories and present cases rather than watching from the back of the room."
+        "text": "Our partner universities train students across affiliated hospitals running into thousands of beds. You take histories and present cases rather than watching from the back of the room.",
+        "icon": "hospital"
       },
       {
         "title": "An established Indian community",
-        "text": "Thousands of Indian students already study across these campuses. Indian food, familiar festivals and seniors who have been through the same process are all already in place."
+        "text": "Thousands of Indian students already study across these campuses. Indian food, familiar festivals and seniors who have been through the same process are all already in place.",
+        "icon": "community"
       },
       {
         "title": "Four campuses, one honest recommendation",
-        "text": "Davao, Cebu and Dagupan each suit a different student, budget and NEET profile. A LIMRA counsellor will tell you which of the four fits you, including when the answer is none of them."
+        "text": "Davao, Cebu and Dagupan each suit a different student, budget and NEET profile. A LIMRA counsellor will tell you which of the four fits you, including when the answer is none of them.",
+        "icon": "compass"
       }
     ],
     "clinical": {
@@ -205,23 +210,28 @@
     "why": [
       {
         "title": "Lower cost, without cutting the degree short",
-        "text": "Tuition and living costs in Dili sit below most study-abroad medical routes, while the programme length, structure and NMC alignment stay the same. For many families this is the difference between possible and not."
+        "text": "Tuition and living costs in Dili sit below most study-abroad medical routes, while the programme length, structure and NMC alignment stay the same. For many families this is the difference between possible and not.",
+        "icon": "cost"
       },
       {
         "title": "Small cohorts, more contact",
-        "text": "These are smaller universities than the Philippine campuses. That means less competition for time with teaching staff and for hands-on opportunities during rotations."
+        "text": "These are smaller universities than the Philippine campuses. That means less competition for time with teaching staff and for hands-on opportunities during rotations.",
+        "icon": "community"
       },
       {
         "title": "Taught in English",
-        "text": "Teaching, assessment and clinical instruction are conducted in English, so there is no additional language qualification standing between you and the start of the course."
+        "text": "Teaching, assessment and clinical instruction are conducted in English, so there is no additional language qualification standing between you and the start of the course.",
+        "icon": "speech"
       },
       {
         "title": "Both campuses in the capital",
-        "text": "Both partner universities are in Dili, so accommodation, hospitals and the LIMRA support contact are all within the same city rather than spread across the country."
+        "text": "Both partner universities are in Dili, so accommodation, hospitals and the LIMRA support contact are all within the same city rather than spread across the country.",
+        "icon": "pin"
       },
       {
         "title": "The honest version of the trade-off",
-        "text": "Timor-Leste has a smaller Indian student community than the Philippines and fewer alumni to lean on. We would rather you hear that from us on the call than discover it after you land."
+        "text": "Timor-Leste has a smaller Indian student community than the Philippines and fewer alumni to lean on. We would rather you hear that from us on the call than discover it after you land.",
+        "icon": "balance"
       }
     ],
     "clinical": {
