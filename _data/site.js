@@ -33,10 +33,10 @@ module.exports = {
   phonePrimary: "+91 94443 75000",
   phonePrimaryDial: "+919444375000",
 
-  // One shared WhatsApp line, deliberately not per campus. wa.me silently
-  // fails for a number with no WhatsApp account, which on paid traffic means
-  // a dead end. Split this per campus only once each number is confirmed.
-  whatsappDial: "919445783333",
+  // Each campus's WhatsApp is the same line as its phone number, so the campus
+  // pages derive it from campus.phoneDial rather than storing it twice. This
+  // value is only the fallback for the pages with no campus behind them.
+  whatsappDial: "919444375000",
 
   // No email address is published on these pages. The client asked for every
   // email ID to be removed, so the routes onward are phone, WhatsApp and the

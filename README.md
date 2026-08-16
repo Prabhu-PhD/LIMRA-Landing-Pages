@@ -147,10 +147,10 @@ campus behind them, meaning the holding page, 404, thank-you and privacy, fall
 back to `site.phonePrimary`. Two numbers repeat across the six campuses, which
 is intended: one counsellor covers two universities.
 
-**WhatsApp stays on one shared number**, not per campus, because `wa.me`
-silently fails for a number with no WhatsApp account and that would be a dead
-end on a click already paid for. Split it per campus only after each number is
-confirmed to have WhatsApp.
+**WhatsApp is the same line as the phone number**, so it is derived from
+`phoneDial` in the templates rather than stored a second time. Change the
+number in one place and the call button and the WhatsApp button both follow.
+`site.whatsappDial` is only the fallback for the pages with no campus.
 
 **No email address is published anywhere.** The client asked for every email ID
 to be removed, so the only routes onward are the phone number, WhatsApp and the
