@@ -128,8 +128,7 @@
     ],
     "heroAlt": "Davao Medical School Foundation campus building",
     "brochure": "/assets/brochures/dmsf-brochure.pdf",
-    "cardLine": "One of the most respected medical schools in the Philippines, built on high-volume hospital exposure across five affiliated hospitals.",
-    "brochureSize": "2.4 MB"
+    "cardLine": "One of the most respected medical schools in the Philippines, built on high-volume hospital exposure across five affiliated hospitals."
   },
   {
     "id": "gcm",
@@ -273,8 +272,7 @@
     ],
     "heroAlt": "Entrance monument at Gullas College of Medicine, Cebu",
     "brochure": "/assets/brochures/gcm-brochure.pdf",
-    "cardLine": "A technology-forward campus in Cebu with Anatomage tables, smart lecture rooms and a large, long-established Indian student community.",
-    "brochureSize": "1.7 MB"
+    "cardLine": "A technology-forward campus in Cebu with Anatomage tables, smart lecture rooms and a large, long-established Indian student community."
   },
   {
     "id": "brokenshire",
@@ -400,8 +398,7 @@
     ],
     "heroAlt": "Brokenshire College campus in Davao",
     "brochure": "/assets/brochures/brokenshire-brochure.pdf",
-    "cardLine": "A compact Davao campus with strong simulation and anatomy facilities, and smaller cohorts than the larger Philippine universities.",
-    "brochureSize": "2.2 MB"
+    "cardLine": "A compact Davao campus with strong simulation and anatomy facilities, and smaller cohorts than the larger Philippine universities."
   },
   {
     "id": "lyceum",
@@ -525,8 +522,7 @@
     ],
     "heroAlt": "Lyceum Northwestern University campus in Dagupan",
     "brochure": "/assets/brochures/lyceum-brochure.pdf",
-    "cardLine": "A large multi-faculty university in Dagupan with its own teaching hospital and a strong record in the Indian screening exam.",
-    "brochureSize": "427 KB"
+    "cardLine": "A large multi-faculty university in Dagupan with its own teaching hospital and a strong record in the Indian screening exam."
   },
   {
     "id": "ucts",
@@ -651,8 +647,7 @@
     ],
     "heroAlt": "Universidade Católica Timorense campus in Dili",
     "brochure": "/assets/brochures/ucts-brochure.pdf",
-    "cardLine": "A Catholic university in Dili with a clinical-skills focus, small cohorts and close contact with teaching staff.",
-    "brochureSize": "4.5 MB"
+    "cardLine": "A Catholic university in Dili with a clinical-skills focus, small cohorts and close contact with teaching staff."
   },
   {
     "id": "university-of-peace",
@@ -778,7 +773,6 @@
     ],
     "heroAlt": "University of PEACE campus in Dili",
     "brochure": "/assets/brochures/university-of-peace-brochure.pdf",
-    "cardLine": "A Dili campus with a virtual anatomy table and its own teaching hospital, at the lowest total cost of our six partners.",
-    "brochureSize": "1.2 MB"
+    "cardLine": "A Dili campus with a virtual anatomy table and its own teaching hospital, at the lowest total cost of our six partners."
   }
 ]

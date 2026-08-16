@@ -18,14 +18,35 @@
       "Large Indian student community"
     ],
     "accreditation": [
-      { "img": "nmc-india.webp", "name": "NMC India", "label": "Curriculum aligned" },
-      { "img": "ched-philippines.webp", "name": "CHED Philippines", "label": "Recognised" },
-      { "img": "faimer.webp", "name": "FAIMER", "label": "World Directory listed" }
+      {
+        "img": "nmc-india.webp",
+        "name": "NMC India",
+        "label": "Curriculum aligned"
+      },
+      {
+        "img": "ched-philippines.webp",
+        "name": "CHED Philippines",
+        "label": "Recognised"
+      },
+      {
+        "img": "faimer.webp",
+        "name": "FAIMER",
+        "label": "World Directory listed"
+      }
     ],
     "stats": [
-      { "num": "4", "label": "Partner universities" },
-      { "num": "5.5", "label": "Years, pre-med to MD" },
-      { "num": "1964", "label": "Oldest partner, est." }
+      {
+        "num": "4",
+        "label": "Partner universities"
+      },
+      {
+        "num": "5.5",
+        "label": "Years, pre-med to MD"
+      },
+      {
+        "num": "1964",
+        "label": "Oldest partner, est."
+      }
     ],
     "why": [
       {
@@ -52,21 +73,54 @@
     "clinical": {
       "intro": "Across our four Philippine partners, students rotate through affiliated hospitals with several thousand beds between them, beginning patient contact in the early years rather than in the final ones.",
       "highlights": [
-        { "num": "4", "label": "Partner universities" },
-        { "num": "Early", "label": "Patient interaction" },
-        { "num": "English", "label": "Medium throughout" }
+        {
+          "num": "4",
+          "label": "Partner universities"
+        },
+        {
+          "num": "Early",
+          "label": "Patient interaction"
+        },
+        {
+          "num": "English",
+          "label": "Medium throughout"
+        }
       ]
     },
     "gallery": [
-      { "src": "lyceum-1.webp", "alt": "Aerial view of the Lyceum Northwestern University campus", "caption": "Campus from above, Lyceum" },
-      { "src": "dmsf-1.webp", "alt": "Teaching hospital used by DMSF students", "caption": "Teaching hospital, DMSF" },
-      { "src": "gcm-3.webp", "alt": "Students using an Anatomage virtual dissection table at Gullas", "caption": "Anatomage table, Gullas" },
-      { "src": "brokenshire-5.webp", "alt": "Medical library at Brokenshire College of Medicine", "caption": "Medical library, Brokenshire" },
-      { "src": "dmsf-5.webp", "alt": "Simulation laboratory at DMSF", "caption": "Simulation lab, DMSF" },
-      { "src": "gcm-6.webp", "alt": "Student hostel accommodation arranged by LIMRA in Cebu", "caption": "Student hostel we arrange" }
-    ]
+      {
+        "src": "dmsf-4.webp",
+        "alt": "Students reading in the multi-level library at DMSF",
+        "caption": "Medical library, DMSF"
+      },
+      {
+        "src": "brokenshire-2.webp",
+        "alt": "Virtual anatomy dissection table in use at Brokenshire",
+        "caption": "Virtual anatomy table, Brokenshire"
+      },
+      {
+        "src": "dmsf-2.webp",
+        "alt": "Students working at microscopes in a DMSF laboratory",
+        "caption": "Microscopy lab, DMSF"
+      },
+      {
+        "src": "dmsf-1.webp",
+        "alt": "The DMSF teaching hospital building in Davao",
+        "caption": "Teaching hospital, DMSF"
+      },
+      {
+        "src": "lyceum-3.webp",
+        "alt": "Medical students in white coats during a lecture at Lyceum",
+        "caption": "In class, Lyceum"
+      },
+      {
+        "src": "gcm-6.webp",
+        "alt": "Student accommodation arranged by LIMRA in Cebu",
+        "caption": "Student accommodation we arrange"
+      }
+    ],
+    "unisWord": "four"
   },
-
   {
     "id": "timor-leste",
     "country": "Timor-Leste",
@@ -86,13 +140,30 @@
       "Lower total cost"
     ],
     "accreditation": [
-      { "img": "nmc-india.webp", "name": "NMC India", "label": "Curriculum aligned" },
-      { "img": "faimer.webp", "name": "FAIMER", "label": "World Directory listed" }
+      {
+        "img": "nmc-india.webp",
+        "name": "NMC India",
+        "label": "Curriculum aligned"
+      },
+      {
+        "img": "faimer.webp",
+        "name": "FAIMER",
+        "label": "World Directory listed"
+      }
     ],
     "stats": [
-      { "num": "2", "label": "Partner universities" },
-      { "num": "5.5", "label": "Years, pre-med to MD" },
-      { "num": "Dili", "label": "Capital city campuses" }
+      {
+        "num": "2",
+        "label": "Partner universities"
+      },
+      {
+        "num": "5.5",
+        "label": "Years, pre-med to MD"
+      },
+      {
+        "num": "Dili",
+        "label": "Capital city campuses"
+      }
     ],
     "why": [
       {
@@ -119,18 +190,52 @@
     "clinical": {
       "intro": "Students at both Dili universities train in the country's main referral and regional hospitals, with supervised patient contact through the clinical years and an internship before graduation.",
       "highlights": [
-        { "num": "2", "label": "Partner universities" },
-        { "num": "Dili", "label": "Both campuses" },
-        { "num": "English", "label": "Medium throughout" }
+        {
+          "num": "2",
+          "label": "Partner universities"
+        },
+        {
+          "num": "Dili",
+          "label": "Both campuses"
+        },
+        {
+          "num": "English",
+          "label": "Medium throughout"
+        }
       ]
     },
     "gallery": [
-      { "src": "university-of-peace-1.webp", "alt": "Frontage of the University of PEACE campus in Dili", "caption": "Campus frontage, University of PEACE" },
-      { "src": "ucts-2.webp", "alt": "UCTS students training in a hospital", "caption": "Hospital training, UCTS" },
-      { "src": "university-of-peace-3.webp", "alt": "Virtual anatomy table at the University of PEACE", "caption": "Virtual anatomy table, UNPAZ" },
-      { "src": "ucts-1.webp", "alt": "Clinical skills laboratory at Universidade Catolica Timorense", "caption": "Clinical skills lab, UCTS" },
-      { "src": "ucts-3.webp", "alt": "White coat ceremony for UCTS medical students", "caption": "White coat ceremony, UCTS" },
-      { "src": "university-of-peace-5.webp", "alt": "Student hostel accommodation arranged by LIMRA in Dili", "caption": "Student hostel we arrange" }
-    ]
+      {
+        "src": "ucts-3.webp",
+        "alt": "UCTS medical students gathered in front of the Hippocratic Oath at their white coat ceremony",
+        "caption": "White coat ceremony, UCTS"
+      },
+      {
+        "src": "university-of-peace-3.webp",
+        "alt": "Virtual anatomy table at the University of PEACE",
+        "caption": "Virtual anatomy table, UNPAZ"
+      },
+      {
+        "src": "ucts-1.webp",
+        "alt": "UCTS students around a clinical skills training table with their instructor",
+        "caption": "Clinical skills lab, UCTS"
+      },
+      {
+        "src": "university-of-peace-4.webp",
+        "alt": "The main building of the University of PEACE in Dili",
+        "caption": "Main building, University of PEACE"
+      },
+      {
+        "src": "ucts-2.webp",
+        "alt": "UCTS students being taught on a hospital ward",
+        "caption": "Hospital training, UCTS"
+      },
+      {
+        "src": "university-of-peace-5.webp",
+        "alt": "Student accommodation arranged by LIMRA in Dili",
+        "caption": "Student accommodation we arrange"
+      }
+    ],
+    "unisWord": "two"
   }
 ]

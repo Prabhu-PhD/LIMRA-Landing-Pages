@@ -160,12 +160,17 @@ eleventyComputed:
 
     <div class="lp-hero-copy">
       {#- A country page has no single university logo, so the partner logos
-          stand in for one. They are the proof the headline is claiming. -#}
-      <div class="lp-hero-logos" aria-label="Our partner universities in {{ country.name }}">
+          stand in for one. They are the proof the headline is claiming, which
+          is why the name sits under each mark: several of these logos are not
+          recognisable to an Indian parent on their own. -#}
+      <ul class="lp-hero-unis" aria-label="Our partner universities in {{ country.name }}">
         {%- for u in unis %}
-        <img src="/assets/campus/{{ u.id }}-logo.webp" alt="{{ u.name | striptags }} logo" loading="eager" />
+        <li>
+          <img src="/assets/campus/{{ u.id }}-logo.webp" alt="{{ u.name | striptags }} logo" loading="eager" />
+          <span>{{ u.shortName | safe }}</span>
+        </li>
         {%- endfor %}
-      </div>
+      </ul>
 
       <div class="lp-eyebrow-row">
         <p class="lp-eyebrow">{{ country.eyebrow }} &middot; {{ unis.length }} partner universities</p>
@@ -257,7 +262,7 @@ eleventyComputed:
           <a href="{{ u.brochure }}" download class="lp-uni-dl"
              data-brochure="{{ u.name | striptags }}" data-track="brochure">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            <span>Download brochure<em>PDF, {{ u.brochureSize }}</em></span>
+            <span>Download {{ u.shortName | safe }} brochure</span>
           </a>
 
           <a href="tel:{{ u.phoneDial }}" class="lp-uni-call" data-track="call">
@@ -282,20 +287,26 @@ eleventyComputed:
 <!-- ============ WHY THIS COUNTRY ============ -->
 <section class="lp-section lp-section--tint">
   <div class="lp-wrap">
-    <div class="lp-head">
+    <div class="lp-head lp-head--centre">
       <p class="lp-eyebrow lp-eyebrow--dark">Why {{ country.name }}</p>
       <h2>What makes {{ country.name }} worth choosing</h2>
     </div>
 
-    <div class="lp-why">
+    {#- An editorial list rather than the card grid used on the campus pages.
+        Every reason carries the same weight here: on a country page these are
+        five things a parent is weighing against each other, not one headline
+        with four footnotes. -#}
+    <ol class="lp-reasons">
       {%- for w in country.why %}
-      <article class="lp-why-card{% if loop.first %} lp-why-card--feature{% endif %}">
-        <span class="lp-why-num">{{ loop.index | pad2 }}</span>
-        <h3>{{ w.title }}</h3>
-        <p>{{ w.text }}</p>
-      </article>
+      <li class="lp-reason">
+        <span class="lp-reason-n" aria-hidden="true">{{ loop.index | pad2 }}</span>
+        <div class="lp-reason-body">
+          <h3>{{ w.title }}</h3>
+          <p>{{ w.text }}</p>
+        </div>
+      </li>
       {%- endfor %}
-    </div>
+    </ol>
   </div>
 </section>
 
@@ -393,7 +404,7 @@ eleventyComputed:
     <div class="lp-head lp-head--centre">
       <p class="lp-eyebrow">Why apply through LIMRA</p>
       <h2>Getting admitted is the easy part.<br />We handle everything after it.</h2>
-      <p class="lp-sub">You have seen the universities. This is what changes when you go through LIMRA.</p>
+      <p class="lp-sub">You have seen the {{ unis.length }} universities. This is what changes when you apply to {{ country.name }} through LIMRA rather than on your own.</p>
     </div>
 
     <div class="lp-limra-kpis">
@@ -580,9 +591,13 @@ eleventyComputed:
     </button>
 
     <div class="lp-exit-body">
+      {#- A country has no single fee structure, so this cannot promise one the
+          way a campus page does. What it can honestly offer is the comparison
+          across the universities, which is the question a visitor is actually
+          leaving with. -#}
       <p class="lp-eyebrow lp-eyebrow--dark">Before you go</p>
-      <h2 id="lp-exit-title">Want the fee structure for {{ country.name }}?</h2>
-      <p class="lp-exit-sub">Leave your name and number. A counsellor will send the {{ site.currentIntake }} intake details and check your NEET eligibility, usually within 2 hours. No cost, no obligation.</p>
+      <h2 id="lp-exit-title">Not sure which of the {{ country.unisWord }} to pick?</h2>
+      <p class="lp-exit-sub">Leave your name and number. A counsellor will compare our {{ country.name }} universities against your NEET score and your budget, with the {{ site.currentIntake }} intake dates and what each one actually costs. Usually within 2 hours. No cost, no obligation.</p>
 
       {{ enquiryForm(country, unis, site, "exit", "", "", "exit-intent", true) }}
 
