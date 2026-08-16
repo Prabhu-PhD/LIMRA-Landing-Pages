@@ -2,20 +2,39 @@
 permalink: "/review/index.html"
 layout: base.njk
 pageTitle: "Landing pages for review | LIMRA Overseas Education"
-pageDescription: "Index of the six LIMRA campus landing pages, for review before the advertising campaign goes live."
+pageDescription: "Index of the LIMRA landing pages, for review before the advertising campaign goes live."
 ---
 
-{#- An unlisted index, for sending to the client so they can click through all
-    six in one sitting. Nothing links here, so the bare domain stays a plain
-    holding page and the campus pages keep their no-navigation design, which is
-    the reason they convert. Carries the same noindex as every other page. -#}
+{#- An unlisted index, for sending to the client so they can click through
+    everything in one sitting. Nothing links here, so the bare domain stays a
+    plain holding page and the landing pages keep their no-navigation design,
+    which is the reason they convert. Carries the same noindex as every other
+    page. -#}
 
 <section class="lp-review">
   <div class="lp-review-inner">
 
     <p class="lp-eyebrow lp-eyebrow--dark">For review</p>
-    <h1>The six campus landing pages</h1>
-    <p class="lp-ty-lead">One page per partner university, each built to turn an advertising click into an enquiry. Every link on this page opens in a new tab, so this index stays put while you look through them.</p>
+    <h1>The landing pages</h1>
+    <p class="lp-ty-lead">Two country pages for the advertising campaigns, plus the six original campus pages. Every link on this page opens in a new tab, so this index stays put while you look through them.</p>
+
+    <h2 class="lp-review-h">Country pages, for the campaigns</h2>
+    <p class="lp-review-lead">These are the two you advertise to. Each carries every partner university in that country, with its own brochure download and its own counsellor number.</p>
+
+    <div class="lp-404-grid">
+      {%- for c in countries %}
+      <a href="/{{ c.id }}/" class="lp-404-card" target="_blank" rel="noopener">
+        <img src="/assets/campus/{{ c.gallery[0].src }}" alt="" loading="lazy" />
+        <span>
+          <strong>{{ c.shortName }}</strong>
+          <em>{% if c.id == "philippines" %}4 universities{% else %}2 universities{% endif %}</em>
+        </span>
+      </a>
+      {%- endfor %}
+    </div>
+
+    <h2 class="lp-review-h">The six campus pages</h2>
+    <p class="lp-review-lead">Still live and unchanged, in case you want a single-university page for a specific domain later. No advertising points at these.</p>
 
     <div class="lp-404-grid">
       {%- for c in campuses %}
@@ -33,6 +52,7 @@ pageDescription: "Index of the six LIMRA campus landing pages, for review before
       <h2>What to look at</h2>
       <ul>
         <li>Try it on a phone as well as a computer. Most advertising traffic arrives on mobile.</li>
+        <li>On a country page, download a brochure. The file starts straight away, and a callback offer follows a moment later.</li>
         <li>Start filling the enquiry form and watch the page dim around it.</li>
         <li>Tap a campus photograph to open it larger.</li>
         <li>Move your cursor towards the top of the browser window as though leaving.</li>

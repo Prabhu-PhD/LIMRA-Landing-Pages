@@ -1,0 +1,136 @@
+[
+  {
+    "id": "philippines",
+    "country": "Philippines",
+    "name": "the Philippines",
+    "shortName": "Philippines",
+    "adTitle": "Study MBBS in the Philippines",
+    "heroImage": "gcm-hero.webp",
+    "heroAlt": "Campus of a partner medical university in the Philippines",
+    "eyebrow": "MBBS in the Philippines",
+    "tagline": "Four NMC-aligned partner universities, an American-model MD curriculum taught entirely in English, and the hospital exposure that actually gets you through the FMGE.",
+    "intro": "The Philippines has taught medicine in English for over seventy years, on a curriculum built to the American model. For an Indian student that means no language barrier, a degree recognised at home, and clinical training in genuinely busy hospitals.",
+    "badges": [
+      "4 partner universities",
+      "100% English medium",
+      "NMC-aligned curriculum",
+      "Free FMGE coaching",
+      "Large Indian student community"
+    ],
+    "accreditation": [
+      { "img": "nmc-india.webp", "name": "NMC India", "label": "Curriculum aligned" },
+      { "img": "ched-philippines.webp", "name": "CHED Philippines", "label": "Recognised" },
+      { "img": "faimer.webp", "name": "FAIMER", "label": "World Directory listed" }
+    ],
+    "stats": [
+      { "num": "4", "label": "Partner universities" },
+      { "num": "5.5", "label": "Years, pre-med to MD" },
+      { "num": "1964", "label": "Oldest partner, est." }
+    ],
+    "why": [
+      {
+        "title": "English from day one, everywhere",
+        "text": "Lectures, examinations, ward rounds and patient conversations all happen in English. There is no local-language exam to clear before you can begin, and no translation between you and a patient."
+      },
+      {
+        "title": "A curriculum built for the FMGE",
+        "text": "The Philippine MD follows the American model, which maps closely onto what the FMGE and NExT actually test. This is why Philippine graduates have historically performed well in the Indian screening exam."
+      },
+      {
+        "title": "Hospitals with real patient volume",
+        "text": "Our partner universities train students across affiliated hospitals running into thousands of beds. You take histories and present cases rather than watching from the back of the room."
+      },
+      {
+        "title": "An established Indian community",
+        "text": "Thousands of Indian students already study across these campuses. Indian food, familiar festivals and seniors who have been through the same process are all already in place."
+      },
+      {
+        "title": "Four campuses, one honest recommendation",
+        "text": "Davao, Cebu and Dagupan each suit a different student, budget and NEET profile. A LIMRA counsellor will tell you which of the four fits you, including when the answer is none of them."
+      }
+    ],
+    "clinical": {
+      "intro": "Across our four Philippine partners, students rotate through affiliated hospitals with several thousand beds between them, beginning patient contact in the early years rather than in the final ones.",
+      "highlights": [
+        { "num": "4", "label": "Partner universities" },
+        { "num": "Early", "label": "Patient interaction" },
+        { "num": "English", "label": "Medium throughout" }
+      ]
+    },
+    "gallery": [
+      { "src": "lyceum-1.webp", "alt": "Aerial view of the Lyceum Northwestern University campus", "caption": "Campus from above, Lyceum" },
+      { "src": "dmsf-1.webp", "alt": "Teaching hospital used by DMSF students", "caption": "Teaching hospital, DMSF" },
+      { "src": "gcm-3.webp", "alt": "Students using an Anatomage virtual dissection table at Gullas", "caption": "Anatomage table, Gullas" },
+      { "src": "brokenshire-5.webp", "alt": "Medical library at Brokenshire College of Medicine", "caption": "Medical library, Brokenshire" },
+      { "src": "dmsf-5.webp", "alt": "Simulation laboratory at DMSF", "caption": "Simulation lab, DMSF" },
+      { "src": "gcm-6.webp", "alt": "Student hostel accommodation arranged by LIMRA in Cebu", "caption": "Student hostel we arrange" }
+    ]
+  },
+
+  {
+    "id": "timor-leste",
+    "country": "Timor-Leste",
+    "name": "Timor-Leste",
+    "shortName": "Timor-Leste",
+    "adTitle": "Study MBBS in Timor-Leste",
+    "heroImage": "ucts-hero.webp",
+    "heroAlt": "Campus of a partner medical university in Timor-Leste",
+    "eyebrow": "MBBS in Timor-Leste",
+    "tagline": "Two NMC-aligned partner universities in Dili, English-medium teaching, and a lower total cost than most routes into medicine abroad.",
+    "intro": "Timor-Leste is a younger destination than the Philippines and a smaller one, which is exactly why it suits some students better. Class sizes are small, the cost is lower, and the teaching is in English.",
+    "badges": [
+      "2 partner universities",
+      "100% English medium",
+      "NMC-aligned curriculum",
+      "Free FMGE coaching",
+      "Lower total cost"
+    ],
+    "accreditation": [
+      { "img": "nmc-india.webp", "name": "NMC India", "label": "Curriculum aligned" },
+      { "img": "faimer.webp", "name": "FAIMER", "label": "World Directory listed" }
+    ],
+    "stats": [
+      { "num": "2", "label": "Partner universities" },
+      { "num": "5.5", "label": "Years, pre-med to MD" },
+      { "num": "Dili", "label": "Capital city campuses" }
+    ],
+    "why": [
+      {
+        "title": "Lower cost, without cutting the degree short",
+        "text": "Tuition and living costs in Dili sit below most study-abroad medical routes, while the programme length, structure and NMC alignment stay the same. For many families this is the difference between possible and not."
+      },
+      {
+        "title": "Small cohorts, more contact",
+        "text": "These are smaller universities than the Philippine campuses. That means less competition for time with teaching staff and for hands-on opportunities during rotations."
+      },
+      {
+        "title": "Taught in English",
+        "text": "Teaching, assessment and clinical instruction are conducted in English, so there is no additional language qualification standing between you and the start of the course."
+      },
+      {
+        "title": "Both campuses in the capital",
+        "text": "Both partner universities are in Dili, so accommodation, hospitals and the LIMRA support contact are all within the same city rather than spread across the country."
+      },
+      {
+        "title": "The honest version of the trade-off",
+        "text": "Timor-Leste has a smaller Indian student community than the Philippines and fewer alumni to lean on. We would rather you hear that from us on the call than discover it after you land."
+      }
+    ],
+    "clinical": {
+      "intro": "Students at both Dili universities train in the country's main referral and regional hospitals, with supervised patient contact through the clinical years and an internship before graduation.",
+      "highlights": [
+        { "num": "2", "label": "Partner universities" },
+        { "num": "Dili", "label": "Both campuses" },
+        { "num": "English", "label": "Medium throughout" }
+      ]
+    },
+    "gallery": [
+      { "src": "university-of-peace-1.webp", "alt": "Frontage of the University of PEACE campus in Dili", "caption": "Campus frontage, University of PEACE" },
+      { "src": "ucts-2.webp", "alt": "UCTS students training in a hospital", "caption": "Hospital training, UCTS" },
+      { "src": "university-of-peace-3.webp", "alt": "Virtual anatomy table at the University of PEACE", "caption": "Virtual anatomy table, UNPAZ" },
+      { "src": "ucts-1.webp", "alt": "Clinical skills laboratory at Universidade Catolica Timorense", "caption": "Clinical skills lab, UCTS" },
+      { "src": "ucts-3.webp", "alt": "White coat ceremony for UCTS medical students", "caption": "White coat ceremony, UCTS" },
+      { "src": "university-of-peace-5.webp", "alt": "Student hostel accommodation arranged by LIMRA in Dili", "caption": "Student hostel we arrange" }
+    ]
+  }
+]

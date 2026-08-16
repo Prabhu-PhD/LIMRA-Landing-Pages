@@ -23,11 +23,30 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# Short, memorable ad URLs -> the real campus pages.
+# Brochures are the exception to the rule above. They keep stable filenames,
+# so an immutable year-long cache would leave a returning visitor stuck on last
+# intake's PDF after the client replaces one. A day is short enough to fix
+# itself and long enough to be worth caching.
+[[headers]]
+  for = "/assets/brochures/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+# Short, memorable ad URLs -> the country and campus pages.
 # Lets you run ads on limraedu-lp.com/dmsf without touching the build.
 #
 # ORDER MATTERS: Netlify takes the first rule that matches, so these have to
 # come before the catch-all below or it would swallow them.
+[[redirects]]
+  from = "/ph"
+  to = "/philippines/"
+  status = 301
+
+[[redirects]]
+  from = "/timor"
+  to = "/timor-leste/"
+  status = 301
+
 [[redirects]]
   from = "/davao"
   to = "/dmsf/"

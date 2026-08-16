@@ -1,11 +1,24 @@
 # LIMRA Google Ads Landing Pages
 
-Six conversion-focused landing pages, one per partner college. Google Ads
-traffic lands here; the only job of these pages is to collect a qualified
-enquiry.
+Conversion-focused landing pages. Google Ads traffic lands here; the only job
+of these pages is to collect a qualified enquiry.
 
 This is a **separate repo from the main website** (`LIMRA`). Nothing here
 depends on the main site, and changes here can never break limraedu.com.
+
+## The two country pages, which the ads point at
+
+| Page | Universities | URL |
+|---|---|---|
+| Philippines | DMSF, Gullas, Brokenshire, Lyceum | `/philippines/` |
+| Timor-Leste | UCTS, University of PEACE | `/timor-leste/` |
+
+Two pages rather than six, so the client runs two campaigns instead of six.
+Each page carries every partner university in that country as a comparison
+card, with that university's own counsellor number and its own downloadable
+brochure.
+
+## The six campus pages, still live
 
 | Campus | URL |
 |---|---|
@@ -16,7 +29,10 @@ depends on the main site, and changes here can never break limraedu.com.
 | Universidade Católica Timorense | `/ucts/` |
 | University of PEACE | `/university-of-peace/` |
 
-Short ad-friendly aliases also work: `/davao`, `/cebu`, `/peace`.
+Kept deliberately: no advertising points at them, but they are ready if a
+single-university page is ever wanted for its own domain.
+
+Short ad-friendly aliases: `/ph`, `/timor`, `/davao`, `/cebu`, `/peace`.
 
 ---
 
@@ -139,6 +155,25 @@ who LIMRA is. The LIMRA figures (24+ years, 2,000+ students, free FMGE
 coaching) appear further down, in the LIMRA section. Accreditation is
 per-campus: CHED Philippines, for instance, does not apply to the two
 Timor-Leste universities.
+
+**Brochures download freely, and the ask comes afterwards.** Clicking Download
+is never intercepted: the PDF starts immediately. About a second later, once
+the download is already underway, a dialog offers a counsellor callback and
+carries the university whose brochure was taken, so that lead is attributed to
+the right campus rather than to "not sure yet". It appears once per session, so
+someone comparing all four universities is not asked four times. Gating the
+file behind the form would have traded most of the downloads for a few extra
+leads; the brochure is what earns the right to ask.
+
+**The country pages ask which university, the campus pages do not.** A campus
+page knows its university, so it sends a hidden field. A country page cannot,
+so step 2 has a dropdown defaulting to "Not sure yet, help me choose". That is
+better data either way: it records what the student actually wants rather than
+which page they happened to land on.
+
+**Country pages derive their universities from `campuses.json`.** The filter is
+the `country` field, so adding a seventh college with country "Philippines"
+makes it appear on `/philippines/` with no edit to the country page at all.
 
 **Each campus shows its own phone number.** The counsellor number lives in
 `campuses.json` as `phone` / `phoneDial` and drives the header, the footer, the

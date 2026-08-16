@@ -418,7 +418,9 @@
 
   function enterFocusMode(form) {
     if (focusedForm === form) return;
-    if (form.closest("#lp-exit")) return;
+    // Forms already inside a modal are centred and above a backdrop, so
+    // lifting them again would fight the modal for the same job.
+    if (form.closest("#lp-exit") || form.closest("#lp-brochure")) return;
     if (form.classList.contains("is-done")) return;
 
     if (!veil) {
@@ -753,6 +755,80 @@
 
   /* ---------- init ---------- */
 
+  /* ---------- brochure downloads ----------
+     The client asked for brochures to be freely downloadable, so nothing is
+     gated: the click is never intercepted and the file starts immediately.
+     The callback offer appears afterwards, which is the whole point. Asking
+     first would trade a large share of downloads for a few extra leads, and
+     the brochure is the thing that earns the right to ask.
+
+     Shown once per session. Someone comparing all four universities should
+     not be asked four times. */
+
+  var BROCHURE_ASKED_KEY = "limra_lp_brochure_asked";
+
+  function initBrochures() {
+    var links = document.querySelectorAll("[data-brochure]");
+    if (!links.length) return;
+
+    var modal = document.getElementById("lp-brochure");
+
+    function asked() {
+      try { return sessionStorage.getItem(BROCHURE_ASKED_KEY) === "1"; } catch (e) { return false; }
+    }
+    function converted() {
+      try { return !!sessionStorage.getItem(PENDING_KEY); } catch (e) { return false; }
+    }
+
+    function close() {
+      if (!modal) return;
+      modal.hidden = true;
+      document.body.style.overflow = "";
+    }
+
+    if (modal) {
+      modal.querySelectorAll("[data-brochure-close]").forEach(function (el) {
+        el.addEventListener("click", close);
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && !modal.hidden) close();
+      });
+    }
+
+    links.forEach(function (link) {
+      link.addEventListener("click", function () {
+        var uni = link.getAttribute("data-brochure") || "";
+
+        track("brochure_download", {
+          event_category: "engagement",
+          event_label: uni,
+          college: uni
+        });
+
+        if (!modal || asked() || converted()) return;
+
+        // Let the download actually begin before anything moves on screen.
+        // Opening the dialog in the same tick reads as if it blocked the file.
+        setTimeout(function () {
+          if (!modal.hidden || converted()) return;
+
+          // Carry the university across, so a brochure lead is attributed to
+          // the university whose brochure was taken rather than to "not sure".
+          modal.querySelectorAll("[data-uni-field]").forEach(function (f) { f.value = uni; });
+          var nameSlot = modal.querySelector("[data-brochure-name]");
+          if (nameSlot) nameSlot.textContent = uni;
+
+          modal.hidden = false;
+          document.body.style.overflow = "hidden";
+          try { sessionStorage.setItem(BROCHURE_ASKED_KEY, "1"); } catch (e) {}
+
+          var first = modal.querySelector("input[type=text]");
+          if (first) first.focus({ preventScroll: true });
+        }, 1200);
+      });
+    });
+  }
+
   function init() {
     loadTags();
     firePendingConversion();
@@ -767,6 +843,7 @@
     initMobileEnquire();
     initEngagementTracking();
     initExitIntent();
+    initBrochures();
 
     var yr = document.getElementById("year");
     if (yr) yr.textContent = new Date().getFullYear();

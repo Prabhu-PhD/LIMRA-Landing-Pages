@@ -41,6 +41,9 @@
   {#- Each campus has its own counsellor number. The pages with no campus
       behind them (holding, 404, thank-you, privacy) fall back to the main
       LIMRA line. -#}
+  {#- Campus pages name the university in the lockup; country pages name the
+      country. Both fall back to the LIMRA mark alone. -#}
+  {%- set lockupName = campus.shortName if campus else (country.shortName if country else "") %}
   {%- set telText = campus.phone if campus and campus.phone else site.phonePrimary %}
   {%- set telDial = campus.phoneDial if campus and campus.phoneDial else site.phonePrimaryDial %}
   {#- The WhatsApp number is the same line as the phone number, so it is
@@ -52,11 +55,11 @@
     <div class="lp-bar-inner">
       <div class="lp-lockup" role="img" aria-label="{{ lockupLabel | default(site.name) }}">
         <img src="/assets/logo-white.svg" alt="" class="lp-lockup-limra" />
-        {%- if campus %}
+        {%- if lockupName %}
         <span class="lp-lockup-rule" aria-hidden="true"></span>
-        {#- Name only here. The university's logo appears in the hero, where it
-            has room to be seen properly. -#}
-        <span class="lp-lockup-name">{{ campus.shortName | safe }}</span>
+        {#- Name only here. The university logos appear in the hero, where they
+            have room to be seen properly. -#}
+        <span class="lp-lockup-name">{{ lockupName | safe }}</span>
         {%- endif %}
       </div>
       <div class="lp-bar-right">
