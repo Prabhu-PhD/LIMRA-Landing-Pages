@@ -311,46 +311,50 @@ eleventyComputed:
 </section>
 
 
-<!-- ============ CAMPUS MOSAIC ============ -->
+<!-- ============ CAMPUSES ============ -->
 <section class="lp-section">
+  {#- The heading is contained; the marquee is not. It runs the full width of
+      the viewport, edge to edge, exactly as the main site's home page does:
+      there the section head sits inside .container and the .marquee strip sits
+      outside it. A strip that stops short of the edges reads as a component
+      on the page rather than a band running through it. -#}
   <div class="lp-wrap">
     <div class="lp-head lp-head--centre">
       <p class="lp-eyebrow lp-eyebrow--dark">The campuses</p>
       <h2>Where you will actually study</h2>
       <p class="lp-sub">Real photographs from every one of our {{ country.name }} partner campuses, and the student accommodation we arrange. No stock images.</p>
     </div>
+  </div>
 
-    {#- Two rows scrolling in opposite directions, the same treatment the main
-        site uses on its home page.
+  {#- Two rows scrolling in opposite directions.
 
-        The top row is campuses and buildings, the bottom row is students and
-        facilities, and that order is deliberate: a parent wants to see the
-        institution before they see anyone studying inside it.
+      The top row is campuses and buildings, the bottom row is students and
+      facilities, and that order is deliberate: a parent wants to see the
+      institution before they see anyone studying inside it.
 
-        Every image here is a 700px thumbnail from assets/campus/thumb/, not
-        the full-size file. The originals run to 369KB each, which would have
-        been absurd for a 340px tile. data-full points the lightbox back at
-        the original so the enlarged view stays sharp. -#}
-    <div class="lp-marquee" data-gallery>
-      {%- for row in [country.marquee.buildings, country.marquee.life] %}
-      <div class="lp-marq-row lp-marq-row--{{ 'rtl' if loop.first else 'ltr' }}" data-marq-row>
-        {%- for g in row %}
-        <figure class="lp-marq-item">
-          <button type="button" class="lp-tile-btn" data-lightbox
-                  aria-label="View larger: {{ g.caption }}">
-            <img src="/assets/campus/thumb/{{ g.src }}"
-                 data-full="/assets/campus/{{ g.src }}"
-                 alt="{{ g.alt }}" width="700" height="470" loading="lazy" draggable="false" />
-            <figcaption>{{ g.caption }}</figcaption>
-            <span class="lp-tile-zoom" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>
-            </span>
-          </button>
-        </figure>
-        {%- endfor %}
-      </div>
+      Every image here is a 700px thumbnail from assets/campus/thumb/, not the
+      full-size file. The originals run to 369KB each, which would have been
+      absurd for a 340px tile. data-full points the lightbox back at the
+      original so the enlarged view stays sharp. -#}
+  <div class="lp-marquee" data-gallery>
+    {%- for row in [country.marquee.buildings, country.marquee.life] %}
+    <div class="lp-marq-row lp-marq-row--{{ 'rtl' if loop.first else 'ltr' }}" data-marq-row>
+      {%- for g in row %}
+      <figure class="lp-marq-item">
+        <button type="button" class="lp-tile-btn" data-lightbox
+                aria-label="View larger: {{ g.caption }}">
+          <img src="/assets/campus/thumb/{{ g.src }}"
+               data-full="/assets/campus/{{ g.src }}"
+               alt="{{ g.alt }}" width="700" height="470" loading="lazy" draggable="false" />
+          <figcaption>{{ g.caption }}</figcaption>
+          <span class="lp-tile-zoom" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>
+          </span>
+        </button>
+      </figure>
       {%- endfor %}
     </div>
+    {%- endfor %}
   </div>
 </section>
 
