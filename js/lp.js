@@ -581,10 +581,25 @@
     var triggers = [].slice.call(gallery.querySelectorAll("[data-lightbox]"));
     if (!triggers.length) return;
 
-    var slides = triggers.map(function (t) {
+    /* Slides are deduplicated by source, for two reasons. The marquee rows are
+       cloned to make the loop seamless, so the same photograph appears twice
+       in the DOM; and the enlarged view should load the full-size original
+       rather than the 700px thumbnail the tile displays. */
+    var slides = [];
+    var indexOfSrc = {};
+
+    function fullSrc(t) {
+      var img = t.querySelector("img");
+      return img.getAttribute("data-full") || img.getAttribute("src");
+    }
+
+    triggers.forEach(function (t) {
+      var src = fullSrc(t);
+      if (src in indexOfSrc) return;
       var img = t.querySelector("img");
       var cap = t.querySelector("figcaption");
-      return { src: img.getAttribute("src"), alt: img.getAttribute("alt"), caption: cap ? cap.textContent : "" };
+      indexOfSrc[src] = slides.length;
+      slides.push({ src: src, alt: img.getAttribute("alt"), caption: cap ? cap.textContent : "" });
     });
 
     var index = 0;
@@ -644,8 +659,10 @@
       render();
     }
 
-    triggers.forEach(function (t, i) {
-      t.addEventListener("click", function () { open(i); });
+    /* Bound by source rather than by DOM position, so a cloned marquee tile
+       opens the same slide as the original it was copied from. */
+    triggers.forEach(function (t) {
+      t.addEventListener("click", function () { open(indexOfSrc[fullSrc(t)]); });
     });
 
     box.addEventListener("click", function (e) {
@@ -829,6 +846,36 @@
     });
   }
 
+  /* ---------- campus marquee ----------
+     Each row is duplicated so the -50% translate loops seamlessly. The
+     animation is applied only once that has happened, because a row that is
+     not doubled would scroll into empty space; without JavaScript the rows
+     stay put and the strip becomes an ordinary horizontal scroller instead.
+
+     This runs before initLightbox so the clones are bound too. */
+  function initMarquee() {
+    var marquee = document.querySelector(".lp-marquee");
+    if (!marquee) return;
+
+    marquee.querySelectorAll("[data-marq-row]").forEach(function (row) {
+      var clone = row.cloneNode(true);
+
+      // Mark each copied tile, not the wrapper: the wrapper is discarded when
+      // its children are moved across, so aria-hidden set on it would be lost
+      // and a screen reader would read every caption twice. The copies are
+      // also taken out of the tab order for the same reason.
+      clone.querySelectorAll(".lp-marq-item").forEach(function (item) {
+        item.setAttribute("aria-hidden", "true");
+        var btn = item.querySelector("button");
+        if (btn) btn.setAttribute("tabindex", "-1");
+      });
+
+      while (clone.firstChild) row.appendChild(clone.firstChild);
+    });
+
+    marquee.classList.add("is-ready");
+  }
+
   function init() {
     loadTags();
     firePendingConversion();
@@ -839,6 +886,7 @@
       initSteps(f);
       initFocusMode(f);
     });
+    initMarquee();
     initLightbox();
     initMobileEnquire();
     initEngagementTracking();

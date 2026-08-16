@@ -88,7 +88,73 @@
       ]
     },
     "unisWord": "four",
-    "cardImage": "dmsf-1.webp"
+    "cardImage": "dmsf-1.webp",
+    "marquee": {
+      "buildings": [
+        {
+          "src": "dmsf-hero.webp",
+          "alt": "The Davao Medical School Foundation main building",
+          "caption": "DMSF, Davao"
+        },
+        {
+          "src": "gcm-hero.webp",
+          "alt": "Entrance monument at Gullas College of Medicine, Cebu",
+          "caption": "Gullas College of Medicine, Cebu"
+        },
+        {
+          "src": "brokenshire-hero.webp",
+          "alt": "Brokenshire College of Medicine campus building, Davao",
+          "caption": "Brokenshire College, Davao"
+        },
+        {
+          "src": "lyceum-hero.webp",
+          "alt": "Lyceum Northwestern University campus from above, Dagupan",
+          "caption": "Lyceum Northwestern, Dagupan"
+        },
+        {
+          "src": "dmsf-1.webp",
+          "alt": "The DMSF teaching hospital building in Davao",
+          "caption": "DMSF teaching hospital"
+        },
+        {
+          "src": "lyceum-1.webp",
+          "alt": "Aerial view of the Lyceum Northwestern campus",
+          "caption": "Lyceum campus, Dagupan"
+        }
+      ],
+      "life": [
+        {
+          "src": "brokenshire-5.webp",
+          "alt": "Students studying in the Brokenshire medical library",
+          "caption": "Medical library, Brokenshire"
+        },
+        {
+          "src": "lyceum-3.webp",
+          "alt": "Medical students in white coats during a lecture at Lyceum",
+          "caption": "Lecture theatre, Lyceum"
+        },
+        {
+          "src": "dmsf-2.webp",
+          "alt": "Students working at microscopes in a DMSF laboratory",
+          "caption": "Microscopy lab, DMSF"
+        },
+        {
+          "src": "brokenshire-2.webp",
+          "alt": "Virtual anatomy dissection table in use at Brokenshire",
+          "caption": "Anatomage table, Brokenshire"
+        },
+        {
+          "src": "gcm-5.webp",
+          "alt": "Lecture hall at Gullas College of Medicine",
+          "caption": "Lecture hall, Gullas"
+        },
+        {
+          "src": "gcm-6.webp",
+          "alt": "Student accommodation arranged by LIMRA in Cebu",
+          "caption": "Accommodation we arrange"
+        }
+      ]
+    }
   },
   {
     "id": "timor-leste",
@@ -175,6 +241,52 @@
       ]
     },
     "unisWord": "two",
-    "cardImage": "ucts-3.webp"
+    "cardImage": "ucts-3.webp",
+    "marquee": {
+      "buildings": [
+        {
+          "src": "ucts-hero.webp",
+          "alt": "Campus courtyard at Universidade Catolica Timorense, Dili",
+          "caption": "UCTS campus, Dili"
+        },
+        {
+          "src": "university-of-peace-hero.webp",
+          "alt": "The University of PEACE campus in Dili",
+          "caption": "University of PEACE, Dili"
+        },
+        {
+          "src": "university-of-peace-4.webp",
+          "alt": "The main building of the University of PEACE",
+          "caption": "UNPAZ main building"
+        }
+      ],
+      "life": [
+        {
+          "src": "ucts-3.webp",
+          "alt": "UCTS medical students at their white coat ceremony",
+          "caption": "White coat ceremony, UCTS"
+        },
+        {
+          "src": "ucts-1.webp",
+          "alt": "UCTS students around a clinical skills training table",
+          "caption": "Clinical skills lab, UCTS"
+        },
+        {
+          "src": "ucts-2.webp",
+          "alt": "UCTS students being taught on a hospital ward",
+          "caption": "Hospital training, UCTS"
+        },
+        {
+          "src": "university-of-peace-3.webp",
+          "alt": "Virtual anatomy table at the University of PEACE",
+          "caption": "Virtual anatomy table, UNPAZ"
+        },
+        {
+          "src": "university-of-peace-5.webp",
+          "alt": "Student accommodation arranged by LIMRA in Dili",
+          "caption": "Accommodation we arrange"
+        }
+      ]
+    }
   }
 ]

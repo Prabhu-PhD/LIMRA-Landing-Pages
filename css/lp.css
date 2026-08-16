@@ -1348,61 +1348,69 @@ a { color: inherit; }
   .lp-reason-n { transition: none; }
 }
 
-/* ---------- campuses, grouped by university ----------
-   Replaces the mosaic on country pages. The mosaic gave one campus a large
-   tile and squeezed the others into thin letterboxes, which on a page whose
-   job is comparison told the visitor the wrong thing. Here every partner gets
-   an equal band, labelled, with the photographs kept at 4:3 rather than
-   cropped to fit a cell. */
-.lp-campuses { display: grid; gap: 40px; margin-top: 36px; }
+/* ---------- campus marquee ----------
+   Two rows scrolling opposite ways, matching the main site's home page.
+   The top row is buildings, the bottom row is students and facilities, and
+   that order carries more weight than the motion does: a parent wants to see
+   the institution before they see anyone studying inside it.
 
-.lp-campus-head {
-  display: flex; align-items: center; gap: 14px;
-  padding-bottom: 14px; margin-bottom: 16px;
-  border-bottom: 1px solid var(--line);
+   Without JavaScript the rows are not duplicated, so the animation would
+   scroll into empty space. It is therefore gated on .is-ready, and the strip
+   degrades to an ordinary horizontal scroller. */
+.lp-marquee {
+  display: flex; flex-direction: column; gap: 14px;
+  margin-top: 34px;
+  overflow-x: auto;
 }
-.lp-campus-logo { width: 46px; height: 46px; object-fit: contain; flex: 0 0 auto; }
-.lp-campus-head h3 { font-size: 1.02rem; font-weight: 800; line-height: 1.25; }
-.lp-campus-head p {
-  font-family: var(--font-mono);
-  font-size: .7rem; letter-spacing: .05em; text-transform: uppercase;
-  color: var(--ink-mute); margin-top: 5px;
-}
+.lp-marquee.is-ready { overflow: hidden; }
 
-/* auto-fit means two images per campus render large and three render medium,
-   without the template needing to know how many there are. */
-.lp-campus-shots {
-  display: grid; gap: 14px;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-}
+.lp-marq-row { display: flex; gap: 14px; width: max-content; }
 
-.lp-shot { margin: 0; }
-.lp-shot .lp-tile-btn {
-  display: block; width: 100%; padding: 0; border: 0; cursor: zoom-in;
-  position: relative; overflow: hidden; border-radius: var(--r-md);
-  background: var(--tint);
-}
-.lp-shot img {
-  width: 100%; aspect-ratio: 4 / 3; object-fit: cover;
-  transition: transform .5s cubic-bezier(.2, .7, .3, 1);
-}
-.lp-shot .lp-tile-btn:hover img { transform: scale(1.05); }
+.lp-marquee.is-ready .lp-marq-row { will-change: transform; }
+.lp-marquee.is-ready .lp-marq-row--rtl { animation: lpMarqL 52s linear infinite; }
+.lp-marquee.is-ready .lp-marq-row--ltr { animation: lpMarqR 46s linear infinite; }
 
-.lp-shot figcaption {
+/* Stop for anyone actually trying to look at a photograph, or tabbing through. */
+.lp-marquee:hover .lp-marq-row,
+.lp-marquee:focus-within .lp-marq-row { animation-play-state: paused; }
+
+@keyframes lpMarqL { from { transform: translateX(0);    } to { transform: translateX(-50%); } }
+@keyframes lpMarqR { from { transform: translateX(-50%); } to { transform: translateX(0);    } }
+
+.lp-marq-item {
+  flex: 0 0 clamp(230px, 26vw, 340px);
+  height: 230px; margin: 0;
+  position: relative; overflow: hidden;
+  border-radius: var(--r-md); background: var(--tint);
+}
+.lp-marq-item .lp-tile-btn {
+  display: block; width: 100%; height: 100%;
+  padding: 0; border: 0; cursor: zoom-in; background: none;
+  position: relative;
+}
+.lp-marq-item img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform .6s cubic-bezier(.2, .7, .3, 1);
+}
+.lp-marq-item:hover img { transform: scale(1.06); }
+
+.lp-marq-item figcaption {
   position: absolute; left: 0; right: 0; bottom: 0;
-  padding: 22px 14px 11px;
+  padding: 26px 14px 12px;
   font-size: .8rem; font-weight: 700; color: #fff; text-align: left;
-  background: linear-gradient(to top, rgba(8, 7, 26, .82), transparent);
+  background: linear-gradient(to top, rgba(8, 7, 26, .86), transparent);
 }
 
 @media (max-width: 560px) {
-  .lp-campuses { gap: 30px; }
-  .lp-campus-shots { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .lp-campus-logo { width: 38px; height: 38px; }
-  .lp-shot figcaption { font-size: .72rem; padding: 18px 10px 8px; }
+  .lp-marq-item { flex-basis: 208px; height: 172px; }
+  .lp-marq-item figcaption { font-size: .72rem; padding: 20px 11px 9px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .lp-shot img { transition: none; }
-  .lp-shot .lp-tile-btn:hover img { transform: none; }
+  /* Never animate, but keep every photograph reachable by scrolling. */
+  .lp-marquee, .lp-marquee.is-ready { overflow-x: auto; }
+  .lp-marquee.is-ready .lp-marq-row--rtl,
+  .lp-marquee.is-ready .lp-marq-row--ltr { animation: none; }
+  .lp-marq-item img { transition: none; }
+  .lp-marq-item:hover img { transform: none; }
 }
