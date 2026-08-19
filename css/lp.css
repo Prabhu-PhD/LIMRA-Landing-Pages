@@ -1433,3 +1433,16 @@ a { color: inherit; }
 }
 .lp-foot-map svg { width: 15px; height: 15px; flex: 0 0 auto; }
 .lp-foot-map:hover { color: #fff; }
+
+/* Both official LIMRA numbers, stated in the footer because the two contact
+   rows above may show the same counsellor line on a campus page. */
+.lp-foot-lines {
+  margin-top: 14px; padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, .12);
+  font-family: var(--font-mono);
+  font-size: .68rem; letter-spacing: .06em; text-transform: uppercase;
+  color: rgba(255, 255, 255, .5);
+  display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px;
+}
+.lp-foot-lines a { color: rgba(255, 255, 255, .82); letter-spacing: .03em; }
+.lp-foot-lines a:hover { color: #fff; }

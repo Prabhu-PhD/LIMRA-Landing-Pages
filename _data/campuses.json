@@ -156,7 +156,9 @@
         "title": "Internship",
         "text": "A supervised hospital internship across the five affiliated Davao hospitals."
       }
-    ]
+    ],
+    "phone": "+91 94457 83333",
+    "phoneDial": "+919445783333"
   },
   {
     "id": "gcm",
@@ -328,7 +330,9 @@
         "title": "Internship",
         "text": "A supervised hospital internship where the university and local registration require one. Whether it sits inside the 4.5 years or extends past them differs by university."
       }
-    ]
+    ],
+    "phone": "+91 99529 22333",
+    "phoneDial": "+919952922333"
   },
   {
     "id": "brokenshire",
@@ -482,7 +486,9 @@
         "title": "Internship",
         "text": "A supervised hospital internship where the university and local registration require one. Whether it sits inside the 4.5 years or extends past them differs by university."
       }
-    ]
+    ],
+    "phone": "+91 94454 83333",
+    "phoneDial": "+919445483333"
   },
   {
     "id": "lyceum",
@@ -634,7 +640,9 @@
         "title": "Internship",
         "text": "A supervised hospital internship where the university and local registration require one. Whether it sits inside the 4.5 years or extends past them differs by university."
       }
-    ]
+    ],
+    "phone": "+91 94457 83333",
+    "phoneDial": "+919445783333"
   },
   {
     "id": "ucts",
@@ -787,7 +795,9 @@
         "title": "Rotational internship",
         "text": "A supervised internship across emergency, critical care, wards, operation theatres and rural health centres."
       }
-    ]
+    ],
+    "phone": "+91 94454 83333",
+    "phoneDial": "+919445483333"
   },
   {
     "id": "university-of-peace",
@@ -941,6 +951,8 @@
         "title": "Rotational internship",
         "text": "A supervised internship across emergency, critical care, wards, operation theatres and rural health centres."
       }
-    ]
+    ],
+    "phone": "+91 94443 75000",
+    "phoneDial": "+919444375000"
   }
 ]
