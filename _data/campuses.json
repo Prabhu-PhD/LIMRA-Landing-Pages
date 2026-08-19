@@ -1,8 +1,6 @@
 [
   {
     "id": "dmsf",
-    "phone": "+91 94457 83333",
-    "phoneDial": "+919445783333",
     "name": "Davao Medical School Foundation",
     "shortName": "DMSF",
     "city": "Davao",
@@ -144,8 +142,6 @@
   },
   {
     "id": "gcm",
-    "phone": "+91 99529 22333",
-    "phoneDial": "+919952922333",
     "name": "Gullas College of Medicine",
     "shortName": "GCM",
     "city": "Cebu",
@@ -300,8 +296,6 @@
   },
   {
     "id": "brokenshire",
-    "phone": "+91 94454 83333",
-    "phoneDial": "+919445483333",
     "name": "Brokenshire College of Medicine",
     "shortName": "Brokenshire",
     "city": "Davao",
@@ -438,8 +432,6 @@
   },
   {
     "id": "lyceum",
-    "phone": "+91 94457 83333",
-    "phoneDial": "+919445783333",
     "name": "Lyceum Northwestern University",
     "shortName": "Lyceum",
     "city": "Dagupan",
@@ -574,8 +566,6 @@
   },
   {
     "id": "ucts",
-    "phone": "+91 94454 83333",
-    "phoneDial": "+919445483333",
     "name": "Universidade Católica Timorense",
     "shortName": "UCTS",
     "city": "Dili",
@@ -716,8 +706,6 @@
   },
   {
     "id": "university-of-peace",
-    "phone": "+91 94443 75000",
-    "phoneDial": "+919444375000",
     "name": "University of PEACE",
     "shortName": "University of PEACE",
     "city": "Dili",

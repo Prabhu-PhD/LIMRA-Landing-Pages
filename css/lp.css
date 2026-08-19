@@ -982,42 +982,9 @@ a { color: inherit; }
 /* ---------- focus mode ----------
    The veil dims and blurs the page behind it; the active form is lifted
    above it. Desktop only, set in js/lp.js. */
-.lp-veil {
-  position: fixed; inset: 0; z-index: 90;
-  background: rgba(6, 5, 20, .62);
-  backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
-  opacity: 0; pointer-events: none;
-  transition: opacity .28s ease;
-}
-.lp-veil.is-on { opacity: 1; pointer-events: auto; }
 
-/* Focused card is lifted out and centred on screen. The "translate" property
-   does the centring, which leaves "transform" free for the FLIP animation
-   in lp.js. */
-.lp-form.is-focused {
-  position: fixed; z-index: 95;
-  left: 50%;
-  /* Set from JS against the visual viewport, so the card stays clear of the
-     on-screen keyboard. Falls back to the middle of the layout viewport. */
-  top: var(--lp-centre-y, 50%);
-  translate: -50% -50%;
-  width: min(452px, 92vw);
-  max-height: var(--lp-avail-h, 88vh);
-  overflow-y: auto;
-  transform-origin: top left;
-  transition: transform .42s cubic-bezier(.22, .7, .28, 1);
-  box-shadow: 0 40px 90px rgba(0, 0, 0, .55);
-  /* Solid while centred: the card is the focus, so it should not show the
-     dimmed page through itself. */
-  backdrop-filter: none; -webkit-backdrop-filter: none;
-}
-.lp-form--top.is-focused {
-  background: linear-gradient(160deg, #2B2963 0%, #16152F 100%);
-  border-color: rgba(255, 255, 255, .20);
-}
 
 @media (prefers-reduced-motion: reduce) {
-  .lp-veil { transition: none; }
 }
 
 /* ---------- inline success ---------- */

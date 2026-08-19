@@ -370,9 +370,6 @@
     done.hidden = false;
     form.classList.add("is-done");
 
-    // Release the focus overlay if this form triggered it.
-    exitFocusMode();
-
     // Keep the confirmation in view without yanking the page around.
     var box = done.getBoundingClientRect();
     if (box.top < 0 || box.bottom > window.innerHeight) {
@@ -380,179 +377,6 @@
     }
     done.setAttribute("tabindex", "-1");
     done.focus({ preventScroll: true });
-  }
-
-  /* ---------- focus mode ----------
-     Dims and blurs the page while someone is filling the form, and lifts the
-     card to the middle of the screen, so the only lit thing is the thing we
-     want them to finish. Runs on every screen size.
-
-     Skipped for the exit-intent form, which sits in its own modal and
-     already has a backdrop of its own. */
-
-  var veil = null;
-  var focusedForm = null;
-  var blurTimer = null;
-
-  /* Centres against the VISUAL viewport, not the layout viewport.
-     On a phone the layout viewport does not shrink when the keyboard opens,
-     so a card centred with a plain top:50% ends up sitting behind the
-     keyboard. visualViewport reports the area actually visible, and on
-     desktop it matches the layout viewport, so one path serves both. */
-  function syncViewport() {
-    if (!focusedForm) return;
-    var vv = window.visualViewport;
-    var centre = vv ? vv.offsetTop + vv.height / 2 : window.innerHeight / 2;
-    var avail = (vv ? vv.height : window.innerHeight) * 0.92;
-    focusedForm.style.setProperty("--lp-centre-y", Math.round(centre) + "px");
-    focusedForm.style.setProperty("--lp-avail-h", Math.round(avail) + "px");
-  }
-
-  function watchViewport(on) {
-    var vv = window.visualViewport;
-    if (!vv) return;
-    var method = on ? "addEventListener" : "removeEventListener";
-    vv[method]("resize", syncViewport);
-    vv[method]("scroll", syncViewport);
-  }
-
-  function enterFocusMode(form) {
-    if (focusedForm === form) return;
-    // Forms already inside a modal are centred and above a backdrop, so
-    // lifting them again would fight the modal for the same job.
-    if (form.closest("#lp-exit") || form.closest("#lp-brochure")) return;
-    if (form.classList.contains("is-done")) return;
-
-    if (!veil) {
-      veil = document.createElement("div");
-      veil.className = "lp-veil";
-      veil.addEventListener("click", exitFocusMode);
-      document.body.appendChild(veil);
-    }
-
-    focusedForm = form;
-    centreForm(form);
-    syncViewport();
-    watchViewport(true);
-    // Force a frame so the transition runs rather than snapping on. Re-check
-    // on the way in: if focus mode was exited in between (a fast submit, for
-    // instance), this frame must not switch the veil back on.
-    requestAnimationFrame(function () {
-      if (focusedForm === form) veil.classList.add("is-on");
-    });
-  }
-
-  function exitFocusMode() {
-    if (!focusedForm) return;
-    watchViewport(false);
-    focusedForm.style.removeProperty("--lp-centre-y");
-    focusedForm.style.removeProperty("--lp-avail-h");
-    uncentreForm(focusedForm);
-    focusedForm = null;
-    if (veil) veil.classList.remove("is-on");
-  }
-
-  /* Moves the card to the middle of the screen and back.
-
-     The card is taken out of the document to be centred, so its wrapper is
-     pinned to its current height first, otherwise the page collapses behind
-     the blur and jolts back on release.
-
-     Both directions animate with FLIP: read the position before the change,
-     apply the change, read the new position, then start from the difference
-     and let a transition run it to zero. Centring is done with the `translate`
-     property rather than `transform`, which leaves `transform` free for the
-     animation itself. */
-  function flip(form, mutate) {
-    var first = form.getBoundingClientRect();
-    mutate();
-    var last = form.getBoundingClientRect();
-
-    var dx = first.left - last.left;
-    var dy = first.top - last.top;
-    var scale = last.width ? first.width / last.width : 1;
-
-    form.style.transition = "none";
-    form.style.transform = "translate(" + dx + "px," + dy + "px) scale(" + scale + ")";
-
-    // Read a layout property to force the browser to commit that starting
-    // position. Without this the set and the clear collapse into the same
-    // frame, nothing appears to change, and the card jumps instead of moving.
-    void form.offsetHeight;
-
-    form.style.transition = "";
-    form.style.transform = "";
-  }
-
-  /* The card is moved to the end of <body> while centred.
-
-     z-index alone is not enough: the hero sets `isolation: isolate`, which
-     creates a stacking context, so the card's z-index only competes with its
-     siblings inside the hero. The veil, a child of <body>, paints over the
-     whole hero regardless, which blurred the very card it was meant to
-     highlight. Moving the card out puts it in the same stacking context as
-     the veil, where a higher z-index does what it looks like it should.
-
-     Moving a node blurs whatever was focused inside it, so focus is taken
-     and restored around the move. */
-  var homes = new WeakMap();
-
-  function centreForm(form) {
-    var wrap = form.parentElement;
-    var active = document.activeElement;
-
-    homes.set(form, { wrap: wrap, next: form.nextElementSibling });
-
-    flip(form, function () {
-      wrap.style.height = wrap.offsetHeight + "px";
-      document.body.appendChild(form);
-      form.classList.add("is-focused");
-    });
-
-    if (active && form.contains(active)) active.focus({ preventScroll: true });
-  }
-
-  function uncentreForm(form) {
-    var home = homes.get(form);
-    if (!home) return;
-    var active = document.activeElement;
-
-    flip(form, function () {
-      form.classList.remove("is-focused");
-      if (home.next && home.next.parentElement === home.wrap) {
-        home.wrap.insertBefore(form, home.next);
-      } else {
-        home.wrap.appendChild(form);
-      }
-      home.wrap.style.height = "";
-    });
-
-    if (active && form.contains(active)) active.focus({ preventScroll: true });
-  }
-
-  window.addEventListener("resize", syncViewport);
-
-  function initFocusMode(form) {
-    form.addEventListener("focusin", function () {
-      clearTimeout(blurTimer);
-      enterFocusMode(form);
-    });
-
-    // Moving between fields fires focusout then focusin, so wait a tick
-    // before deciding that focus has genuinely left the form.
-    form.addEventListener("focusout", function () {
-      clearTimeout(blurTimer);
-      blurTimer = setTimeout(function () {
-        if (!form.contains(document.activeElement)) exitFocusMode();
-      }, 120);
-    });
-
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && focusedForm === form) {
-        exitFocusMode();
-        if (document.activeElement) document.activeElement.blur();
-      }
-    });
   }
 
   /* ---------- mobile: tapping Enquire opens the keyboard too ---------- */
@@ -884,7 +708,6 @@
     document.querySelectorAll(".js-lp-form").forEach(function (f) {
       handleForm(f);
       initSteps(f);
-      initFocusMode(f);
     });
     initMarquee();
     initLightbox();

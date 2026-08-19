@@ -27,16 +27,16 @@ module.exports = {
   name: "LIMRA Overseas Education",
   url: env.SITE_URL || "https://limra-lp.netlify.app",
 
-  // Each campus has its own counsellor number, set in _data/campuses.json.
-  // These two are the fallback for the pages that have no campus behind them:
-  // the holding page, the 404 page, the thank-you page and the privacy policy.
-  phonePrimary: "+91 94443 75000",
-  phonePrimaryDial: "+919444375000",
+  // The two official LIMRA contacts, per the client review document.
+  // Standardised across every page: the per-university counsellor numbers
+  // that used to drive this were removed on the client's instruction.
+  phonePrimary: "+91 94457 83333",
+  phonePrimaryDial: "+919445783333",
+  phoneSecondary: "+91 99529 22333",
+  phoneSecondaryDial: "+919952922333",
 
-  // Each campus's WhatsApp is the same line as its phone number, so the campus
-  // pages derive it from campus.phoneDial rather than storing it twice. This
-  // value is only the fallback for the pages with no campus behind them.
-  whatsappDial: "919444375000",
+  // Secondary line doubles as the WhatsApp number.
+  whatsappDial: "919952922333",
 
   // No email address is published on these pages. The client asked for every
   // email ID to be removed, so the routes onward are phone, WhatsApp and the
