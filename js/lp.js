@@ -127,7 +127,15 @@
     var firstBad = null;
     var root = scope || form;
 
-    root.querySelectorAll("[required]").forEach(function (field) {
+    /* Required fields, plus any optional email or phone that has been filled
+       in: email stopped being mandatory, and an optional field with a typo in
+       it should still be caught rather than silently accepted. */
+    var fields = [].slice.call(root.querySelectorAll("[required]"));
+    root.querySelectorAll('input[type="email"], input[type="tel"]').forEach(function (f) {
+      if (fields.indexOf(f) === -1 && f.value.trim()) fields.push(f);
+    });
+
+    fields.forEach(function (field) {
       var valid = field.type === "checkbox" ? field.checked : !!field.value.trim();
 
       if (valid && field.type === "email") {

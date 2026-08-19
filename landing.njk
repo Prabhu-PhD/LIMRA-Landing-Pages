@@ -72,8 +72,8 @@ eleventyComputed:
 
   <div class="lp-step" data-step="2" hidden>
     <div class="lp-field">
-      <label for="{{ slot }}-email">Email address <span aria-hidden="true">*</span></label>
-      <input type="email" id="{{ slot }}-email" name="email" autocomplete="email" placeholder="you@example.com" required />
+      <label for="{{ slot }}-email">Email address <span class="lp-optional">optional</span></label>
+      <input type="email" id="{{ slot }}-email" name="email" autocomplete="email" placeholder="you@example.com" />
     </div>
 
     <div class="lp-field-row">
@@ -103,7 +103,7 @@ eleventyComputed:
     {% if not compact %}
     <ul class="lp-assure">
       <li>No obligation</li>
-      <li>Callback in 2 hours</li>
+      <li>Callback during business hours</li>
     </ul>
     {% endif %}
 
@@ -126,7 +126,7 @@ eleventyComputed:
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
     </div>
     <h3>Thank you, we have your details</h3>
-    <p>A LIMRA counsellor will call you about {{ campus.shortName | safe }}, usually within 2 hours during business hours (Mon to Sat, 9&nbsp;AM to 6&nbsp;PM IST).</p>
+    <p>A LIMRA counsellor will call you about {{ campus.shortName | safe }}, during business hours (Mon to Sat, 9&nbsp;AM to 6&nbsp;PM IST).</p>
 
     <a href="https://wa.me/{{ site.whatsappDial }}?text={{ ('Hi LIMRA, I have just enquired about ' + (campus.name | striptags)) | urlencode }}"
        target="_blank" rel="noopener" class="lp-done-wa" data-track="whatsapp">
@@ -174,6 +174,7 @@ eleventyComputed:
           </div>
           {%- endfor %}
         </div>
+        <p class="lp-accred-note">Listing in the World Directory of Medical Schools does not by itself constitute recognition, accreditation or endorsement. The National Medical Commission does not approve or publish a recognised list of foreign medical universities: eligibility for Indian registration depends on meeting the applicable NMC Foreign Medical Graduate Licentiate Regulations, which LIMRA verifies against each programme before admission.</p>
       </div>
     </div>
 
@@ -291,15 +292,13 @@ eleventyComputed:
 
       <div class="lp-program">
         <h3>How the programme is structured</h3>
+        {%- for ph in campus.phases %}
         <div class="lp-phase">
-          <span class="lp-phase-dur">1 yr</span>
-          <div><strong>Pre-medicine</strong><p>Foundation sciences, medical terminology, clinical orientation and English communication.</p></div>
+          <span class="lp-phase-dur">{{ ph.dur }}</span>
+          <div><strong>{{ ph.title }}</strong><p>{{ ph.text }}</p></div>
         </div>
-        <div class="lp-phase">
-          <span class="lp-phase-dur">4.5 yrs</span>
-          <div><strong>MD medical studies</strong><p>Anatomy through pharmacology, then clinical rotations across major departments, hospital internship, and FMGE preparation integrated throughout.</p></div>
-        </div>
-        <p class="lp-program-note">100% English medium &middot; NMC-aligned curriculum</p>
+        {%- endfor %}
+        <p class="lp-program-note">100% English medium &middot; Curriculum aligned to NMC guidelines</p>
       </div>
 
     </div>
@@ -340,7 +339,7 @@ eleventyComputed:
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
         </div>
         <h3>Free FMGE coaching</h3>
-        <p>Every LIMRA student gets our full FMGE programme at no cost. Your degree only matters if you clear the licensing exam, so we make certain you are ready for it.</p>
+        <p>Every LIMRA student gets our full FMGE programme at no cost. Returning graduates must satisfy India's applicable screening and registration requirements, and we provide structured preparation to help you approach them confidently.</p>
       </div>
 
       <div class="lp-adv">
@@ -394,7 +393,7 @@ eleventyComputed:
       </details>
       <details>
         <summary>How long is the course?</summary>
-        <p>The pathway runs about five and a half years in total: roughly one year of pre-medicine followed by four and a half years of MD medical studies, including clinical rotations and hospital internship.</p>
+        <p>{{ campus.duration }}</p>
       </details>
       <details>
         <summary>Is the course taught in English?</summary>
@@ -422,7 +421,7 @@ eleventyComputed:
       </details>
       <details>
         <summary>What happens after I submit this form?</summary>
-        <p>A LIMRA counsellor calls you back, usually within 2 hours during business hours. It is a free, no-obligation conversation about your NEET score, your budget, and which campus genuinely fits.</p>
+        <p>A LIMRA counsellor calls you back during business hours. It is a free, no-obligation conversation about your NEET score, your budget, and which campus genuinely fits.</p>
       </details>
     </div>
   </div>
@@ -444,7 +443,7 @@ eleventyComputed:
       <li>
         <span class="lp-next-n">1</span>
         <strong>A counsellor calls you back</strong>
-        <p>Usually within 2 hours during business hours. One call, from a real person, not an automated message.</p>
+        <p>During business hours, Monday to Saturday. One call, from a real person, not an automated message.</p>
       </li>
       <li>
         <span class="lp-next-n">2</span>
@@ -495,7 +494,7 @@ eleventyComputed:
     <div class="lp-exit-body">
       <p class="lp-eyebrow lp-eyebrow--dark">Before you go</p>
       <h2 id="lp-exit-title">Want the fee structure for {{ campus.shortName | safe }}?</h2>
-      <p class="lp-exit-sub">Leave your name and number. A counsellor will send the {{ site.currentIntake }} intake details and check your NEET eligibility, usually within 2 hours. No cost, no obligation.</p>
+      <p class="lp-exit-sub">Leave your name and number. A counsellor will send the {{ site.currentIntake }} intake details and check your NEET eligibility, during business hours. No cost, no obligation.</p>
 
       {{ enquiryForm(campus, site, "exit", "", "", "exit-intent", true) }}
 

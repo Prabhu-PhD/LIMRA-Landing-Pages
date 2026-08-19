@@ -1402,3 +1402,34 @@ a { color: inherit; }
   .lp-marq-item img { transition: none; }
   .lp-marq-item:hover img { transform: none; }
 }
+
+/* Regulatory footnote under the hero accreditation strip. Deliberately quiet
+   but readable: it exists because NMC publishes no list of approved foreign
+   universities and a World Directory listing is not an endorsement, so the
+   logos above must not be left to imply either. */
+.lp-accred-note {
+  margin-top: 12px;
+  max-width: 68ch;
+  font-size: .72rem; line-height: 1.5;
+  color: rgba(255, 255, 255, .58);
+}
+@media (max-width: 700px) {
+  .lp-accred-note { font-size: .68rem; }
+}
+
+/* Optional-field marker. The review asked for email to stop being mandatory,
+   so the field has to say so rather than just silently accept being empty. */
+.lp-optional {
+  font-family: var(--font-mono);
+  font-size: .62rem; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--ink-mute); margin-left: 5px;
+}
+
+/* Footer link through to the Chennai office on Google Maps. */
+.lp-foot-map {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 9px; font-size: .82rem; font-weight: 600;
+  color: rgba(255, 255, 255, .8);
+}
+.lp-foot-map svg { width: 15px; height: 15px; flex: 0 0 auto; }
+.lp-foot-map:hover { color: #fff; }

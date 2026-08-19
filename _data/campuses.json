@@ -11,7 +11,7 @@
     "badges": [
       "Clinical Excellence",
       "NMC Aligned",
-      "Internationally Recognized",
+      "Internationally Recognised",
       "Strong FMGE Results",
       "Modern Campus"
     ],
@@ -19,17 +19,17 @@
       {
         "img": "nmc-india.webp",
         "name": "NMC India",
-        "label": "Curriculum aligned"
+        "label": "Eligibility guidance"
       },
       {
         "img": "ched-philippines.webp",
         "name": "CHED Philippines",
-        "label": "Recognised"
+        "label": "Higher-education regulator"
       },
       {
         "img": "faimer.webp",
         "name": "FAIMER",
-        "label": "World Directory listed"
+        "label": "World Directory of Medical Schools"
       }
     ],
     "stats": [
@@ -52,8 +52,8 @@
         "text": "High-volume hospital exposure from the early years, building real diagnostic and clinical skills through genuine patient care."
       },
       {
-        "title": "Internationally Recognized Degree",
-        "text": "NMC aligned and WHO recognized. Your DMSF degree opens doors to practice in India and across the globe."
+        "title": "Internationally Recognised Degree",
+        "text": "Curriculum aligned to NMC guidelines, and listed in the World Directory of Medical Schools. Listing is not in itself recognition, accreditation or endorsement."
       },
       {
         "title": "Strong FMGE and PLE Pass Rates",
@@ -86,7 +86,7 @@
       ],
       "hospitals": [
         "DMS Foundation Hospital",
-        "Davao Medical Center",
+        "Davao Doctors Hospital",
         "Brokenshire Hospital",
         "Southern Philippines Medical Center",
         "San Pedro Hospital"
@@ -138,6 +138,24 @@
         "alt": "Students working at microscopes in a DMSF laboratory",
         "caption": "Microscopy lab"
       }
+    ],
+    "duration": "DMSF states 6.5 years in total, including the internship. Your counsellor will confirm the current structure before you apply.",
+    "phases": [
+      {
+        "dur": "6.5 yrs",
+        "title": "Total programme",
+        "text": "DMSF states 6.5 years in total, including the internship."
+      },
+      {
+        "dur": "4.5 yrs",
+        "title": "Doctor of Medicine",
+        "text": "Anatomy through pharmacology, then clinical clerkship across the major departments, with FMGE preparation running alongside."
+      },
+      {
+        "dur": "12 mths",
+        "title": "Internship",
+        "text": "A supervised hospital internship across the five affiliated Davao hospitals."
+      }
     ]
   },
   {
@@ -153,24 +171,24 @@
       "No Donation Fees",
       "NMC Aligned",
       "Strong FMGE &amp; PLE",
-      "Internationally Recognized",
+      "Internationally Recognised",
       "Premium Accommodation"
     ],
     "accreditation": [
       {
         "img": "nmc-india.webp",
         "name": "NMC India",
-        "label": "Curriculum aligned"
+        "label": "Eligibility guidance"
       },
       {
         "img": "ched-philippines.webp",
         "name": "CHED Philippines",
-        "label": "Recognised"
+        "label": "Higher-education regulator"
       },
       {
         "img": "faimer.webp",
         "name": "FAIMER",
-        "label": "World Directory listed"
+        "label": "World Directory of Medical Schools"
       },
       {
         "img": "bureau-of-immigration.webp",
@@ -200,15 +218,15 @@
     "why": [
       {
         "title": "Zero Donation or Capitation Fees",
-        "text": "What you see is what you pay. Transparent, honest pricing with no hidden charges at any stage of the program."
+        "text": "What you see is what you pay. Transparent, honest pricing with no hidden charges at any stage of the programme."
       },
       {
         "title": "Strong FMGE and PLE Results",
         "text": "A consistent track record of Indian students clearing the FMGE. With free LIMRA coaching, your chances are stronger still."
       },
       {
-        "title": "Internationally Recognized Degree",
-        "text": "NMC aligned and WHO recognized. A GCM degree opens doors to practice in India and abroad."
+        "title": "Internationally Recognised Degree",
+        "text": "Curriculum aligned to NMC guidelines, and listed in the World Directory of Medical Schools. Listing is not in itself recognition, accreditation or endorsement."
       },
       {
         "title": "Extensive Clinical Training",
@@ -292,6 +310,24 @@
         "alt": "Student accommodation arranged by LIMRA in Cebu",
         "caption": "Student accommodation"
       }
+    ],
+    "duration": "Gullas states one year of pre-medicine followed by 4.5 years of medical studies. Your counsellor will confirm the internship requirement before you apply.",
+    "phases": [
+      {
+        "dur": "1 yr",
+        "title": "Pre-medicine",
+        "text": "Foundation sciences, medical terminology, clinical orientation and English communication. Required at some of our Philippine partners, not all."
+      },
+      {
+        "dur": "4.5 yrs",
+        "title": "Doctor of Medicine",
+        "text": "Anatomy through pharmacology, then clinical clerkship across the major departments, with FMGE preparation running alongside."
+      },
+      {
+        "dur": "12 mths",
+        "title": "Internship",
+        "text": "A supervised hospital internship where the university and local registration require one. Whether it sits inside the 4.5 years or extends past them differs by university."
+      }
     ]
   },
   {
@@ -314,12 +350,12 @@
       {
         "img": "nmc-india.webp",
         "name": "NMC India",
-        "label": "Curriculum aligned"
+        "label": "Eligibility guidance"
       },
       {
         "img": "faimer.webp",
         "name": "FAIMER",
-        "label": "World Directory listed"
+        "label": "World Directory of Medical Schools"
       }
     ],
     "stats": [
@@ -355,7 +391,7 @@
       },
       {
         "title": "Affordable Fees, No Hidden Costs",
-        "text": "A transparent pricing structure with no donation fees and no surprise charges. Quality medical education that will not break the family."
+        "text": "A transparent pricing structure with no donation fees and no surprise charges. Quality medical education designed to remain financially manageable for families."
       }
     ],
     "clinical": {
@@ -428,6 +464,24 @@
         "alt": "Students studying in the Brokenshire medical library",
         "caption": "Medical library"
       }
+    ],
+    "duration": "Structure and internship length are confirmed per intake. Your counsellor will go through the current pathway with you before you apply.",
+    "phases": [
+      {
+        "dur": "1 yr",
+        "title": "Pre-medicine",
+        "text": "Foundation sciences, medical terminology, clinical orientation and English communication. Required at some of our Philippine partners, not all."
+      },
+      {
+        "dur": "4.5 yrs",
+        "title": "Doctor of Medicine",
+        "text": "Anatomy through pharmacology, then clinical clerkship across the major departments, with FMGE preparation running alongside."
+      },
+      {
+        "dur": "12 mths",
+        "title": "Internship",
+        "text": "A supervised hospital internship where the university and local registration require one. Whether it sits inside the 4.5 years or extends past them differs by university."
+      }
     ]
   },
   {
@@ -442,7 +496,7 @@
     "badges": [
       "NMC Aligned",
       "English Medium",
-      "WHO Recognized",
+      "World Directory Listed",
       "Affordable Tuition",
       "Real Clinical Exposure"
     ],
@@ -450,26 +504,26 @@
       {
         "img": "nmc-india.webp",
         "name": "NMC India",
-        "label": "Curriculum aligned"
+        "label": "Eligibility guidance"
       },
       {
         "img": "faimer.webp",
         "name": "FAIMER",
-        "label": "World Directory listed"
+        "label": "World Directory of Medical Schools"
       }
     ],
     "stats": [
       {
         "num": "4.5",
-        "label": "Year MD Program"
-      },
-      {
-        "num": "92%",
-        "label": "FMGE Pass Rate"
+        "label": "Year MD programme"
       },
       {
         "num": "1964",
         "label": "Established"
+      },
+      {
+        "num": "Free",
+        "label": "FMGE coaching"
       }
     ],
     "why": [
@@ -486,8 +540,8 @@
         "text": "Hospital rotations, patient rounds, and hands-on clinical decision-making are built in from the very beginning."
       },
       {
-        "title": "Globally Recognized Degree",
-        "text": "NMC aligned and WHO recognized, opening doors to practising medicine in India and internationally."
+        "title": "Globally Recognised Degree",
+        "text": "Curriculum aligned to NMC guidelines, and listed in the World Directory of Medical Schools. Listing is not in itself recognition, accreditation or endorsement."
       },
       {
         "title": "Modern Medical Campus",
@@ -562,6 +616,24 @@
         "alt": "Medical students in white coats during a lecture at Lyceum",
         "caption": "Lecture theatre"
       }
+    ],
+    "duration": "Structure and internship length are confirmed per intake. Your counsellor will go through the current pathway with you before you apply.",
+    "phases": [
+      {
+        "dur": "1 yr",
+        "title": "Pre-medicine",
+        "text": "Foundation sciences, medical terminology, clinical orientation and English communication. Required at some of our Philippine partners, not all."
+      },
+      {
+        "dur": "4.5 yrs",
+        "title": "Doctor of Medicine",
+        "text": "Anatomy through pharmacology, then clinical clerkship across the major departments, with FMGE preparation running alongside."
+      },
+      {
+        "dur": "12 mths",
+        "title": "Internship",
+        "text": "A supervised hospital internship where the university and local registration require one. Whether it sits inside the 4.5 years or extends past them differs by university."
+      }
     ]
   },
   {
@@ -584,12 +656,12 @@
       {
         "img": "nmc-india.webp",
         "name": "NMC India",
-        "label": "Curriculum aligned"
+        "label": "Eligibility guidance"
       },
       {
         "img": "faimer.webp",
         "name": "FAIMER",
-        "label": "World Directory listed"
+        "label": "World Directory of Medical Schools"
       }
     ],
     "stats": [
@@ -702,6 +774,19 @@
         "alt": "UCTS students being taught on a hospital ward",
         "caption": "Hospital training"
       }
+    ],
+    "duration": "UCTS states 5.5 years in total: 4.5 years of medical study followed by a 12-month internship. There is no separate pre-medicine year.",
+    "phases": [
+      {
+        "dur": "4.5 yrs",
+        "title": "Medical studies",
+        "text": "A curriculum patterned on the Indian MBBS and taught in English, with clinical rotations through the Dili hospitals."
+      },
+      {
+        "dur": "12 mths",
+        "title": "Rotational internship",
+        "text": "A supervised internship across emergency, critical care, wards, operation theatres and rural health centres."
+      }
     ]
   },
   {
@@ -724,12 +809,12 @@
       {
         "img": "nmc-india.webp",
         "name": "NMC India",
-        "label": "Curriculum aligned"
+        "label": "Eligibility guidance"
       },
       {
         "img": "faimer.webp",
         "name": "FAIMER",
-        "label": "World Directory listed"
+        "label": "World Directory of Medical Schools"
       }
     ],
     "stats": [
@@ -842,6 +927,19 @@
         "src": "university-of-peace-5.webp",
         "alt": "Student accommodation arranged by LIMRA in Dili",
         "caption": "Student accommodation"
+      }
+    ],
+    "duration": "The University of PEACE states 4.5 years of study followed by a 12-month rotational internship at the affiliated Guido Valadares National Hospital in Dili.",
+    "phases": [
+      {
+        "dur": "4.5 yrs",
+        "title": "Medical studies",
+        "text": "A curriculum patterned on the Indian MBBS and taught in English, with clinical rotations through the Dili hospitals."
+      },
+      {
+        "dur": "12 mths",
+        "title": "Rotational internship",
+        "text": "A supervised internship across emergency, critical care, wards, operation theatres and rural health centres."
       }
     ]
   }

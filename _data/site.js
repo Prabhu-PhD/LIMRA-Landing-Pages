@@ -46,6 +46,11 @@ module.exports = {
   address:
     "New No.177, Royapettah High Road, 1st Floor, SMS Centre, Mylapore, Chennai 600 004",
 
+  // A search URL rather than a place link, because LIMRA has not supplied a
+  // Google Business place ID. Send one and this should be swapped for it, so
+  // the pin lands on the office rather than on a geocoded guess.
+  mapsUrl: "https://www.google.com/maps/search/?api=1&query=New%20No.177%2C%20Royapettah%20High%20Road%2C%201st%20Floor%2C%20SMS%20Centre%2C%20Mylapore%2C%20Chennai%20600%20004%2C%20India",
+
   yearsExperience: "24",
   studentsPlaced: "2,000+",
   currentIntake: "2026",

@@ -8,8 +8,8 @@
     "heroImage": "gcm-hero.webp",
     "heroAlt": "Campus of a partner medical university in the Philippines",
     "eyebrow": "MBBS in the Philippines",
-    "tagline": "Four NMC-aligned partner universities, an American-model MD curriculum taught entirely in English, and the hospital exposure that actually gets you through the FMGE.",
-    "intro": "The Philippines has taught medicine in English for over seventy years, on a curriculum built to the American model. For an Indian student that means no language barrier, a degree recognised at home, and clinical training in genuinely busy hospitals.",
+    "tagline": "Four NMC-aligned partner universities, an American-model MD curriculum taught entirely in English, and clinical exposure designed to strengthen practical understanding and support FMGE preparation.",
+    "intro": "The Philippines has taught medicine in English for over seventy years, on a curriculum built to the American model. For an Indian student that means no language barrier, a pathway that must satisfy the applicable NMC FMGL requirements for Indian registration, and clinical training in genuinely busy hospitals.",
     "badges": [
       "4 partner universities",
       "100% English medium",
@@ -21,17 +21,17 @@
       {
         "img": "nmc-india.webp",
         "name": "NMC India",
-        "label": "Curriculum aligned"
+        "label": "Eligibility guidance"
       },
       {
         "img": "ched-philippines.webp",
         "name": "CHED Philippines",
-        "label": "Recognised"
+        "label": "Higher-education regulator"
       },
       {
         "img": "faimer.webp",
         "name": "FAIMER",
-        "label": "World Directory listed"
+        "label": "World Directory of Medical Schools"
       }
     ],
     "stats": [
@@ -40,8 +40,8 @@
         "label": "Partner universities"
       },
       {
-        "num": "5.5",
-        "label": "Years, pre-med to MD"
+        "num": "5.5–6.5",
+        "label": "Years, by university"
       },
       {
         "num": "1964",
@@ -160,7 +160,25 @@
         }
       ]
     },
-    "adjective": "Philippine"
+    "adjective": "Philippine",
+    "phases": [
+      {
+        "dur": "1 yr",
+        "title": "Pre-medicine",
+        "text": "Foundation sciences, medical terminology, clinical orientation and English communication. Required at some of our Philippine partners, not all."
+      },
+      {
+        "dur": "4.5 yrs",
+        "title": "Doctor of Medicine",
+        "text": "Anatomy through pharmacology, then clinical clerkship across the major departments, with FMGE preparation running alongside."
+      },
+      {
+        "dur": "12 mths",
+        "title": "Internship",
+        "text": "A supervised hospital internship where the university and local registration require one. Whether it sits inside the 4.5 years or extends past them differs by university."
+      }
+    ],
+    "duration": "The exact structure differs by university, so we will not quote one figure for all four. DMSF states 6.5 years in total including the internship. Gullas states one year of pre-medicine followed by 4.5 years of medical studies. Your counsellor will confirm the current pathway, and the internship requirement, for whichever university you choose."
   },
   {
     "id": "timor-leste",
@@ -185,12 +203,12 @@
       {
         "img": "nmc-india.webp",
         "name": "NMC India",
-        "label": "Curriculum aligned"
+        "label": "Eligibility guidance"
       },
       {
         "img": "faimer.webp",
         "name": "FAIMER",
-        "label": "World Directory listed"
+        "label": "World Directory of Medical Schools"
       }
     ],
     "stats": [
@@ -200,7 +218,7 @@
       },
       {
         "num": "5.5",
-        "label": "Years, pre-med to MD"
+        "label": "Years, incl. internship"
       },
       {
         "num": "Dili",
@@ -299,6 +317,19 @@
         }
       ]
     },
-    "adjective": "Timor-Leste"
+    "adjective": "Timor-Leste",
+    "phases": [
+      {
+        "dur": "4.5 yrs",
+        "title": "Medical studies",
+        "text": "A curriculum patterned on the Indian MBBS and taught in English, with clinical rotations through the Dili hospitals."
+      },
+      {
+        "dur": "12 mths",
+        "title": "Rotational internship",
+        "text": "A supervised internship across emergency, critical care, wards, operation theatres and rural health centres."
+      }
+    ],
+    "duration": "Both Dili universities state 4.5 years of medical study followed by a 12-month internship, so 5.5 years in total. There is no separate pre-medicine year, which is where the Timor-Leste route differs from the Philippine one."
   }
 ]
