@@ -503,63 +503,6 @@ eleventyComputed:
 </section>
 
 
-<!-- ============ FAQ ============ -->
-<section class="lp-section lp-section--tint">
-  <div class="lp-wrap lp-wrap--narrow">
-    <div class="lp-head lp-head--centre">
-      <p class="lp-eyebrow lp-eyebrow--dark">Common questions</p>
-      <h2>What parents and students ask us first</h2>
-    </div>
-    <div class="lp-faq">
-      <details>
-        <summary>Which of these universities should I choose?</summary>
-        <p>That depends on your NEET score, your budget, and how far from home you are willing to be. Each of our {{ country.unisWord }} partner universities in {{ country.name }} suits a different student profile. A counsellor will go through the options with you on the call, and will tell you plainly if none of them is the right fit.</p>
-      </details>
-      <details>
-        <summary>Is a degree from {{ country.name }} valid for practising in India?</summary>
-        <p>Yes. These MD programmes are aligned with National Medical Commission guidelines. Like every foreign medical graduate, you will clear the FMGE or NExT screening exam to register in India, and free LIMRA FMGE coaching is built in from day one.</p>
-      </details>
-      <details>
-        <summary>Do I need NEET to apply?</summary>
-        <p>Yes. A qualifying NEET score is mandatory for Indian students seeking an NMC-recognised medical degree abroad. Our counsellors will confirm your eligibility on the call.</p>
-      </details>
-      <details>
-        <summary>What does it actually cost?</summary>
-        <p>Fees vary by university and intake, and we do not publish figures that go stale. A counsellor will walk you through current tuition, hostel and living costs for whichever campuses you are considering, with no donation or capitation charges.</p>
-      </details>
-      <details>
-        <summary>How long is the course?</summary>
-        <p>{{ country.duration }}</p>
-      </details>
-      <details>
-        <summary>Is the course taught in English?</summary>
-        <p>Yes. Lectures, examinations, clinical teaching and patient interaction are all conducted in English, so there is no language barrier and no local-language exam to clear before you begin.</p>
-      </details>
-      <details>
-        <summary>Is it safe for students, especially girls?</summary>
-        <p>Our partner cities host established Indian student communities. LIMRA arranges verified hostel accommodation, Indian food, and a local support contact you can reach at any time throughout the course.</p>
-      </details>
-      <details>
-        <summary>What about food? Will Indian food be available?</summary>
-        <p>Yes. Indian food arrangements are part of the accommodation we set up, including vegetarian options. This is one of the practical things we handle for you rather than leaving you to work out after you land.</p>
-      </details>
-      <details>
-        <summary>What support do I get for the FMGE?</summary>
-        <p>Every LIMRA student receives our FMGE coaching programme, worth about &#8377;1 lakh, at no additional cost. Preparation is integrated alongside your studies rather than left until after graduation.</p>
-      </details>
-      <details>
-        <summary>Who handles the visa and travel?</summary>
-        <p>We do. LIMRA manages the application, admission letter, visa process, travel arrangements and airport pickup, and stays your point of contact after you arrive. You are not handed off to a third party.</p>
-      </details>
-      <details>
-        <summary>What happens after I submit this form?</summary>
-        <p>A LIMRA counsellor calls you back during business hours. It is a free, no-obligation conversation about your NEET score, your budget, and which campus genuinely fits.</p>
-      </details>
-    </div>
-  </div>
-</section>
-
-
 <!-- ============ WHAT HAPPENS NEXT ============ -->
 <section class="lp-next">
   <div class="lp-wrap">
@@ -592,7 +535,7 @@ eleventyComputed:
 
 <!-- ============ CLOSING CTA + SECOND FORM ============ -->
 <section class="lp-close">
-  <div class="lp-wrap lp-close-inner">
+  <div class="lp-wrap lp-close-inner lp-close-inner--solo">
     <div class="lp-close-copy">
       <p class="lp-eyebrow">Next step</p>
       <h2>Ready to talk about MBBS in {{ country.name }}?</h2>
@@ -602,11 +545,14 @@ eleventyComputed:
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         <span>Prefer to call? {{ site.phonePrimary }}</span>
       </a>
+
+        <a href="https://wa.me/{{ site.whatsappDial }}?text={{ ('Hi LIMRA, I would like details about MBBS in ' + country.shortName) | urlencode }}"
+           target="_blank" rel="noopener" class="lp-close-wa" data-track="whatsapp">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <span>Or message us on WhatsApp</span>
+        </a>
     </div>
 
-    <div class="lp-close-form">
-      {{ enquiryForm(country, unis, site, "bottom", "Request a callback", "", "closing-form", false) }}
-    </div>
   </div>
 </section>
 
@@ -623,10 +569,15 @@ eleventyComputed:
 
     <div class="lp-exit-body">
       <p class="lp-eyebrow lp-eyebrow--dark">Your download has started</p>
-      <h2 id="lp-brochure-title">Want the fees that go with <span data-brochure-name>it</span>?</h2>
-      <p class="lp-exit-sub">The brochure covers the university. It does not cover what you will actually pay, or whether your NEET score qualifies. Leave your number and a counsellor will cover both, during business hours.</p>
+      <h2 id="lp-brochure-title">Where should we send the <span data-brochure-name>brochure</span>?</h2>
+      <p class="lp-exit-sub">Your name and number, and the brochure downloads straight away. A counsellor will also call with the current fees and an honest read on your eligibility, which the brochure does not cover.</p>
 
       {{ enquiryForm(country, unis, site, "brochure", "", "", "brochure-download", true) }}
+
+      <p class="lp-brochure-fallback" data-brochure-fallback hidden>
+        Your download should have started.
+        <a href="#" data-brochure-manual download>Tap here if it did not.</a>
+      </p>
     </div>
   </div>
 </div>

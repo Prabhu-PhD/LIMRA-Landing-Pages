@@ -276,6 +276,7 @@
                happen and the conversion fires straight away. */
             fireConversion(campus);
             showDone(form);
+            form.dispatchEvent(new CustomEvent("lp:success", { bubbles: true }));
           } else {
             say("Sorry, something went wrong. Please try again, or call us directly.", true);
             restore();
@@ -605,28 +606,49 @@
   /* ---------- init ---------- */
 
   /* ---------- brochure downloads ----------
-     The client asked for brochures to be freely downloadable, so nothing is
-     gated: the click is never intercepted and the file starts immediately.
-     The callback offer appears afterwards, which is the whole point. Asking
-     first would trade a large share of downloads for a few extra leads, and
-     the brochure is the thing that earns the right to ask.
+     Gated: the click is intercepted, the form is asked first, and the file
+     starts the moment the lead is captured. This reverses the earlier
+     free-download behaviour, at the client's request.
 
-     Shown once per session. Someone comparing all four universities should
-     not be asked four times. */
+     Three things stop the gate being hostile:
 
-  var BROCHURE_ASKED_KEY = "limra_lp_brochure_asked";
+       - It asks ONCE per visit. The Philippines page carries four brochures,
+         and someone comparing all four must not meet four forms. After the
+         first submission every other brochure downloads on the first click.
+       - The link keeps its real href and is only intercepted by JavaScript,
+         so if the script fails the brochure is still a plain download rather
+         than a dead button.
+       - The automatic download is backed by a visible manual link, because a
+         browser can refuse a programmatic download and the visitor has by
+         then already paid for the file with their phone number. */
+
+  var BROCHURE_UNLOCKED_KEY = "limra_lp_brochure_unlocked";
 
   function initBrochures() {
     var links = document.querySelectorAll("[data-brochure]");
     if (!links.length) return;
 
     var modal = document.getElementById("lp-brochure");
+    var pending = null;   // { href, uni } captured on click, released on submit
 
-    function asked() {
-      try { return sessionStorage.getItem(BROCHURE_ASKED_KEY) === "1"; } catch (e) { return false; }
+    function unlocked() {
+      try {
+        return sessionStorage.getItem(BROCHURE_UNLOCKED_KEY) === "1" ||
+               !!sessionStorage.getItem(PENDING_KEY);
+      } catch (e) { return false; }
     }
-    function converted() {
-      try { return !!sessionStorage.getItem(PENDING_KEY); } catch (e) { return false; }
+
+    function download(href, uni) {
+      track("brochure_download", {
+        event_category: "engagement", event_label: uni, college: uni
+      });
+      var a = document.createElement("a");
+      a.href = href;
+      a.setAttribute("download", "");
+      a.rel = "noopener";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
     }
 
     function close() {
@@ -642,38 +664,59 @@
       document.addEventListener("keydown", function (e) {
         if (e.key === "Escape" && !modal.hidden) close();
       });
+
+      /* The lead is in. Release the file, reveal the manual fallback, and
+         remember the unlock so nothing asks again this visit. */
+      var gateForm = modal.querySelector(".js-lp-form");
+      if (gateForm) {
+        gateForm.addEventListener("lp:success", function () {
+          try { sessionStorage.setItem(BROCHURE_UNLOCKED_KEY, "1"); } catch (e) {}
+          if (!pending) return;
+
+          var fallback = modal.querySelector("[data-brochure-fallback]");
+          var manual = modal.querySelector("[data-brochure-manual]");
+          if (manual) manual.setAttribute("href", pending.href);
+          if (fallback) fallback.hidden = false;
+
+          download(pending.href, pending.uni);
+          pending = null;
+        });
+      }
     }
 
     links.forEach(function (link) {
-      link.addEventListener("click", function () {
+      link.addEventListener("click", function (e) {
         var uni = link.getAttribute("data-brochure") || "";
+        var href = link.getAttribute("href");
 
-        track("brochure_download", {
-          event_category: "engagement",
-          event_label: uni,
-          college: uni
-        });
+        // Details already given this visit, or nothing to ask with: let the
+        // browser download the file as it normally would.
+        if (!modal || unlocked()) {
+          track("brochure_download", {
+            event_category: "engagement", event_label: uni, college: uni
+          });
+          return;
+        }
 
-        if (!modal || asked() || converted()) return;
+        e.preventDefault();
+        pending = { href: href, uni: uni };
 
-        // Let the download actually begin before anything moves on screen.
-        // Opening the dialog in the same tick reads as if it blocked the file.
-        setTimeout(function () {
-          if (!modal.hidden || converted()) return;
+        track("brochure_gate_shown", { event_category: "engagement", event_label: uni });
 
-          // Carry the university across, so a brochure lead is attributed to
-          // the university whose brochure was taken rather than to "not sure".
-          modal.querySelectorAll("[data-uni-field]").forEach(function (f) { f.value = uni; });
-          var nameSlot = modal.querySelector("[data-brochure-name]");
-          if (nameSlot) nameSlot.textContent = uni;
+        // Attribute the lead to the university whose brochure was asked for,
+        // rather than letting it arrive as "not sure yet".
+        modal.querySelectorAll("[data-uni-field]").forEach(function (f) { f.value = uni; });
+        var slot = modal.querySelector("[data-brochure-name]");
+        if (slot) slot.textContent = uni + " brochure";
 
-          modal.hidden = false;
-          document.body.style.overflow = "hidden";
-          try { sessionStorage.setItem(BROCHURE_ASKED_KEY, "1"); } catch (e) {}
+        var fallback = modal.querySelector("[data-brochure-fallback]");
+        if (fallback) fallback.hidden = true;
 
-          var first = modal.querySelector("input[type=text]");
-          if (first) first.focus({ preventScroll: true });
-        }, 1200);
+        modal.hidden = false;
+        document.body.style.overflow = "hidden";
+
+        var first = modal.querySelector("input[type=text]");
+        if (first) first.focus({ preventScroll: true });
       });
     });
   }

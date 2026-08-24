@@ -1446,3 +1446,28 @@ a { color: inherit; }
 }
 .lp-foot-lines a { color: rgba(255, 255, 255, .82); letter-spacing: .03em; }
 .lp-foot-lines a:hover { color: #fff; }
+
+/* Shown after the brochure gate releases the file. A browser can refuse a
+   programmatic download, and by this point the visitor has already paid for
+   the file with their phone number, so there has to be a manual way to get it. */
+.lp-brochure-fallback {
+  margin-top: 14px; padding-top: 13px;
+  border-top: 1px solid var(--line);
+  font-size: .88rem; color: var(--ink-soft); text-align: center;
+}
+.lp-brochure-fallback a { font-weight: 700; color: var(--navy); text-decoration: underline; }
+
+/* The closing section lost its form, so the copy column now stands alone
+   and should centre rather than sit in a phantom half-width grid. */
+.lp-close-inner--solo {
+  grid-template-columns: 1fr;
+  max-width: 720px; text-align: center;
+}
+.lp-close-inner--solo .lp-close-copy { align-items: center; }
+.lp-close-wa {
+  display: inline-flex; align-items: center; gap: 9px;
+  margin-top: 12px; font-weight: 700; font-size: .95rem;
+  color: rgba(255, 255, 255, .88);
+}
+.lp-close-wa svg { width: 19px; height: 19px; flex: 0 0 auto; color: #4AD07D; }
+.lp-close-wa:hover { color: #fff; }
