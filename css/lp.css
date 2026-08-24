@@ -1457,17 +1457,50 @@ a { color: inherit; }
 }
 .lp-brochure-fallback a { font-weight: 700; color: var(--navy); text-decoration: underline; }
 
-/* The closing section lost its form, so the copy column now stands alone
-   and should centre rather than sit in a phantom half-width grid. */
+/* The closing section lost its form, so the copy column stands alone and
+   centres. The two remaining routes are styled as a matched pair: the call is
+   the primary action in brand colour, WhatsApp the secondary in a white pill.
+   Both are scoped to --solo so the six campus pages, which still carry a form
+   here, keep their existing treatment.
+
+   The earlier version of this styled WhatsApp in white text, which was written
+   for a dark section. This band is light (#EEEEF6), so it rendered as a bare
+   underlined link. */
 .lp-close-inner--solo {
   grid-template-columns: 1fr;
   max-width: 720px; text-align: center;
 }
 .lp-close-inner--solo .lp-close-copy { align-items: center; }
+
+.lp-close-inner--solo .lp-close-actions {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;
+  margin-top: 28px;
+}
+
+/* Primary: solid brand, matching the submit buttons elsewhere on the page. */
+.lp-close-inner--solo .lp-close-call {
+  margin-top: 0;
+  background: linear-gradient(135deg, var(--red) 0%, var(--orange) 100%);
+  border: none; color: #fff;
+  box-shadow: 0 10px 26px rgba(238, 64, 56, .28);
+}
+.lp-close-inner--solo .lp-close-call svg { color: #fff; }
+.lp-close-inner--solo .lp-close-call:hover { filter: brightness(1.05); }
+
+/* Secondary: white pill, same height and radius as the primary. */
 .lp-close-wa {
   display: inline-flex; align-items: center; gap: 9px;
-  margin-top: 12px; font-weight: 700; font-size: .95rem;
-  color: rgba(255, 255, 255, .88);
+  padding: 13px 24px; border-radius: 100px;
+  background: #fff; border: 1.5px solid var(--line);
+  font-weight: 700; font-size: .95rem; color: var(--ink);
+  text-decoration: none;
+  box-shadow: var(--shadow);
+  transition: border-color .25s ease, transform .25s ease;
 }
-.lp-close-wa svg { width: 19px; height: 19px; flex: 0 0 auto; color: #4AD07D; }
-.lp-close-wa:hover { color: #fff; }
+.lp-close-wa svg { width: 19px; height: 19px; flex: 0 0 auto; color: #25D366; }
+.lp-close-wa:hover { border-color: #25D366; transform: translateY(-1px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .lp-close-wa { transition: none; }
+  .lp-close-wa:hover { transform: none; }
+}

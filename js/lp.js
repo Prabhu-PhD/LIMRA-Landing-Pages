@@ -706,8 +706,10 @@
         // Attribute the lead to the university whose brochure was asked for,
         // rather than letting it arrive as "not sure yet".
         modal.querySelectorAll("[data-uni-field]").forEach(function (f) { f.value = uni; });
+        // Short name in the heading: "Davao Medical School Foundation brochure"
+        // wraps to three lines in the dialog.
         var slot = modal.querySelector("[data-brochure-name]");
-        if (slot) slot.textContent = uni + " brochure";
+        if (slot) slot.textContent = (link.getAttribute("data-brochure-short") || uni) + " brochure";
 
         var fallback = modal.querySelector("[data-brochure-fallback]");
         if (fallback) fallback.hidden = true;
