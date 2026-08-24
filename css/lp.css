@@ -987,7 +987,14 @@ a { color: inherit; }
 @media (prefers-reduced-motion: reduce) {
 }
 
-/* ---------- inline success ---------- */
+/* ---------- inline success ----------
+   Dark text by DEFAULT, with white scoped to the hero form alone.
+
+   It was the other way round: white was the default, overridden back to dark
+   for the two forms known to sit on light cards. When the brochure gate began
+   submitting, its form was a third light card that nobody had added to that
+   list, so the whole confirmation rendered white on white. Only the tick was
+   visible. Defaulting to dark means a new form placement fails legibly. */
 .lp-done { text-align: center; padding: 8px 0 4px; outline: none; }
 .lp-done-check {
   width: 62px; height: 62px; border-radius: 50%; margin: 0 auto 18px;
@@ -995,29 +1002,30 @@ a { color: inherit; }
   box-shadow: 0 12px 30px rgba(238, 64, 56, .34);
 }
 .lp-done-check svg { width: 30px; height: 30px; }
-.lp-done h3 { font-size: 1.24rem; font-weight: 800; color: #fff; }
-.lp-done p { margin-top: 12px; font-size: .92rem; color: rgba(255, 255, 255, .70); }
+.lp-done h3 { font-size: 1.24rem; font-weight: 800; color: var(--ink); }
+.lp-done p { margin-top: 12px; font-size: .92rem; color: var(--ink-soft); }
 .lp-done-wa {
   display: inline-flex; align-items: center; justify-content: center; gap: 9px;
   margin-top: 20px; padding: 12px 22px; border-radius: 100px;
-  background: rgba(37, 211, 102, .14); border: 1px solid rgba(37, 211, 102, .42);
-  color: #fff; text-decoration: none; font-weight: 700; font-size: .9rem;
+  background: rgba(37, 211, 102, .10); border: 1px solid rgba(37, 211, 102, .45);
+  color: var(--ink); text-decoration: none; font-weight: 700; font-size: .9rem;
 }
 .lp-done-wa svg { width: 17px; height: 17px; color: #25D366; }
-.lp-done-wa:hover { background: rgba(37, 211, 102, .22); }
+.lp-done-wa:hover { background: rgba(37, 211, 102, .20); }
 .lp-done-fine {
   margin-top: 16px; font-family: var(--font-mono);
   font-size: .7rem; letter-spacing: .08em; text-transform: uppercase;
-  color: rgba(255, 255, 255, .38);
+  color: var(--ink-mute);
 }
 
-/* light-card variants: closing form and exit modal */
-.lp-form--bottom .lp-done h3, .lp-form--exit .lp-done h3 { color: var(--ink); }
-.lp-form--bottom .lp-done p, .lp-form--exit .lp-done p { color: var(--ink-soft); }
-.lp-form--bottom .lp-done-wa, .lp-form--exit .lp-done-wa {
-  color: var(--ink); background: rgba(37, 211, 102, .10); border-color: rgba(37, 211, 102, .45);
+/* The hero form is the only one on a dark ground. */
+.lp-form--top .lp-done h3 { color: #fff; }
+.lp-form--top .lp-done p { color: rgba(255, 255, 255, .70); }
+.lp-form--top .lp-done-wa {
+  color: #fff; background: rgba(37, 211, 102, .14); border-color: rgba(37, 211, 102, .42);
 }
-.lp-form--bottom .lp-done-fine, .lp-form--exit .lp-done-fine { color: var(--ink-mute); }
+.lp-form--top .lp-done-wa:hover { background: rgba(37, 211, 102, .22); }
+.lp-form--top .lp-done-fine { color: rgba(255, 255, 255, .38); }
 
 /* ---------- what happens next ---------- */
 .lp-next { padding: clamp(52px, 7vw, 88px) 0; background: #fff; }
