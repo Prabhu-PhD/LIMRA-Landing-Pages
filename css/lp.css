@@ -1471,6 +1471,10 @@ a { color: inherit; }
   max-width: 720px; text-align: center;
 }
 .lp-close-inner--solo .lp-close-copy { align-items: center; }
+/* max-width on the body copy means centring the text is not enough:
+   the box itself has to be centred, or it hangs to the left of the
+   heading above it. */
+.lp-close-inner--solo .lp-close-body { margin-inline: auto; }
 
 .lp-close-inner--solo .lp-close-actions {
   display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;

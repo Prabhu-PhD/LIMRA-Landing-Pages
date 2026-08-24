@@ -55,7 +55,7 @@ eleventyComputed:
     That is better data than before, because it records what the
     student actually wants rather than which page they landed on.
 ============================================================ -#}
-{% macro enquiryForm(country, unis, site, slot, heading, sub, source, compact) %}
+{% macro enquiryForm(country, unis, site, slot, heading, sub, source, compact, submitLabel) %}
 <form class="lp-form js-lp-form lp-form--{{ slot }}{% if compact %} lp-form--compact{% endif %}"
       action="https://api.web3forms.com/submit" method="POST" novalidate>
   <input type="hidden" name="access_key" value="{{ site.web3formsKey }}" />
@@ -150,7 +150,7 @@ eleventyComputed:
     </ul>
     {% endif %}
 
-    <button type="submit" class="lp-submit">{% if compact %}Send me the details{% else %}Get free counselling{% endif %} &rarr;</button>
+    <button type="submit" class="lp-submit">{% if submitLabel %}{{ submitLabel }}{% elif compact %}Send me the details{% else %}Get free counselling{% endif %} &rarr;</button>
     {% if not compact %}
     <button type="button" class="lp-step-back" data-step-back>&larr; Back</button>
     {% endif %}
@@ -572,9 +572,8 @@ eleventyComputed:
     <div class="lp-exit-body">
       <p class="lp-eyebrow lp-eyebrow--dark">One quick step</p>
       <h2 id="lp-brochure-title">Get the <span data-brochure-name>brochure</span></h2>
-      <p class="lp-exit-sub">Two details, and your download starts straight away.</p>
 
-      {{ enquiryForm(country, unis, site, "brochure", "", "", "brochure-download", true) }}
+      {{ enquiryForm(country, unis, site, "brochure", "", "", "brochure-download", true, "Download the brochure") }}
 
       <p class="lp-brochure-fallback" data-brochure-fallback hidden>
         Your download should have started.
