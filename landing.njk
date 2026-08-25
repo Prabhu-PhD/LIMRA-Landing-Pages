@@ -31,7 +31,7 @@ eleventyComputed:
   {% if not compact %}
   <div class="lp-form-head">
     <h2>{{ heading }}</h2>
-    {% if sub %}<p data-step1-only>{{ sub }}</p>{% endif %}
+    {% if sub %}<p>{{ sub }}</p>{% endif %}
   </div>
   {% endif %}
 
@@ -49,11 +49,7 @@ eleventyComputed:
   <input type="hidden" name="utm_content" value="" data-fill="utm_content" />
   <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none !important" aria-hidden="true" />
 
-  {% if not compact %}
-  <p class="lp-step-count" data-step-count aria-live="polite">Step 1 of 2</p>
-  {% endif %}
-
-  <div class="lp-step" data-step="1">
+  <div class="lp-fields">
     <div class="lp-field">
       <label for="{{ slot }}-name">Student's full name <span aria-hidden="true">*</span></label>
       <input type="text" id="{{ slot }}-name" name="name" autocomplete="name" placeholder="e.g. Ananya Sharma" required />
@@ -64,33 +60,14 @@ eleventyComputed:
       <input type="tel" id="{{ slot }}-phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="10-digit mobile number" required />
     </div>
 
-    {#- Step 1 ends here on the full form. Everything below is step 2, which
-        is revealed in place by js/lp.js. Nothing navigates away. -#}
-    {% if not compact %}
-    <button type="button" class="lp-submit" data-step-next>Continue &rarr;</button>
-  </div>
-
-  <div class="lp-step" data-step="2" hidden>
+    {#- Single step, matching the country pages. There is no university field
+        here because the page IS the campus: `college` is set as a hidden
+        input above. City and intake were dropped for the same reason as on
+        the country pages, a counsellor settles both on the call. -#}
     <div class="lp-field">
-      <label for="{{ slot }}-email">Email address <span class="lp-optional">optional</span></label>
-      <input type="email" id="{{ slot }}-email" name="email" autocomplete="email" placeholder="you@example.com" />
+      <label for="{{ slot }}-email">Email address <span aria-hidden="true">*</span></label>
+      <input type="email" id="{{ slot }}-email" name="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required />
     </div>
-
-    <div class="lp-field-row">
-      <div class="lp-field">
-        <label for="{{ slot }}-city">City</label>
-        <input type="text" id="{{ slot }}-city" name="city" autocomplete="address-level2" placeholder="e.g. Chennai" />
-      </div>
-      <div class="lp-field">
-        <label for="{{ slot }}-intake">Planning to join</label>
-        <select id="{{ slot }}-intake" name="intake">
-          <option value="2026 intake" selected>2026 intake</option>
-          <option value="2027 intake">2027 intake</option>
-          <option value="Still deciding">Still deciding</option>
-        </select>
-      </div>
-    </div>
-    {% endif %}
 
     <label class="lp-consent">
       <input type="checkbox" name="consent" value="yes" required />
@@ -108,9 +85,6 @@ eleventyComputed:
     {% endif %}
 
     <button type="submit" class="lp-submit">{% if compact %}Send me the details{% else %}Get free counselling{% endif %} &rarr;</button>
-    {% if not compact %}
-    <button type="button" class="lp-step-back" data-step-back>&larr; Back</button>
-    {% endif %}
   </div>
 
   <p class="lp-form-msg" data-form-msg role="status" aria-live="polite"></p>

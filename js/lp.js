@@ -87,18 +87,33 @@
     window.gtag("event", event, params || {});
   }
 
-  var PENDING_KEY = "limra_lp_pending_conversion";
+  var SUBMITTED_KEY = "limra_lp_submitted";
+  var CONVERTED_KEY = "limra_lp_converted";
 
-  /* Success is confirmed inside the form, so there is no navigation to lose a
-     tag to and the conversion fires immediately. The pending-flag path below
-     is only reached from /thank-you/, which is where a visitor lands if the
-     form was submitted without JavaScript. */
-  function firePendingConversion() {
-    var campus;
-    try { campus = sessionStorage.getItem(PENDING_KEY); } catch (e) { return; }
-    if (!campus) return;
-    try { sessionStorage.removeItem(PENDING_KEY); } catch (e) {}
-    fireConversion(campus);
+  function flag(key) { try { sessionStorage.setItem(key, "1"); } catch (e) {} }
+  function hasFlag(key) {
+    try { return !!sessionStorage.getItem(key); } catch (e) { return false; }
+  }
+
+  /* The client asked for the Ads event snippet on /thank-you/ only. That page
+     is a fallback: with JavaScript on, the form confirms in place and never
+     navigates, so a conversion that only fired there would almost never fire.
+     Worse, /thank-you/ is a normal URL - firing on arrival would invent a
+     conversion for anyone who simply opened it.
+
+     So the conversion fires on a CONFIRMED submission wherever that lands,
+     and /thank-you/ is included rather than relied upon:
+
+       - inline success  -> fires immediately (the usual path)
+       - /thank-you/     -> fires only if this session actually submitted the
+                            form AND the inline path has not already counted it
+
+     Both are deduped through CONVERTED_KEY, so one lead can never count twice. */
+  function fireThankYouConversion() {
+    if (!/\/thank-you\/?$/.test(location.pathname)) return;
+    if (!hasFlag(SUBMITTED_KEY)) return;   // arrived without submitting: not a lead
+    if (hasFlag(CONVERTED_KEY)) return;    // already counted inline
+    fireConversion("thank-you");
   }
 
   function fireConversion(campus) {
@@ -111,8 +126,12 @@
     });
 
     if (CFG.adsConversionId && CFG.adsConversionLabel) {
+      if (hasFlag(CONVERTED_KEY)) return;
+      flag(CONVERTED_KEY);
       track("conversion", {
-        send_to: CFG.adsConversionId + "/" + CFG.adsConversionLabel
+        send_to: CFG.adsConversionId + "/" + CFG.adsConversionLabel,
+        value: CFG.adsConversionValue,
+        currency: CFG.adsConversionCurrency
       });
     }
   }
@@ -128,8 +147,9 @@
     var root = scope || form;
 
     /* Required fields, plus any optional email or phone that has been filled
-       in: email stopped being mandatory, and an optional field with a typo in
-       it should still be caught rather than silently accepted. */
+       in: an optional field with a typo in it should still be caught rather
+       than silently accepted. Name, email and phone are all required now, so
+       in practice the second pass only catches optional extras. */
     var fields = [].slice.call(root.querySelectorAll("[required]"));
     root.querySelectorAll('input[type="email"], input[type="tel"]').forEach(function (f) {
       if (fields.indexOf(f) === -1 && f.value.trim()) fields.push(f);
@@ -150,58 +170,10 @@
     });
 
     if (firstBad) {
-      // If the offending field is on a hidden step, reveal that step first.
-      var owner = firstBad.closest("[data-step]");
-      if (owner && owner.hidden) showStep(form, owner.getAttribute("data-step"));
       firstBad.focus();
       firstBad.scrollIntoView({ block: "center", behavior: "smooth" });
     }
     return ok;
-  }
-
-  /* ---------- two-step form ----------
-     Both steps live in the same card. Nothing navigates, nothing reloads,
-     and the values entered in step 1 stay in the DOM, so going back and
-     forth never loses what someone has typed. */
-
-  function showStep(form, n) {
-    form.querySelectorAll("[data-step]").forEach(function (step) {
-      step.hidden = step.getAttribute("data-step") !== String(n);
-    });
-    var counter = form.querySelector("[data-step-count]");
-    if (counter) counter.textContent = "Step " + n + " of 2";
-
-    // The intro explains step 1. On step 2 the visitor has already given
-    // those details, so it is describing something they have done.
-    var intro = form.querySelector("[data-step1-only]");
-    if (intro) intro.hidden = String(n) !== "1";
-  }
-
-  function initSteps(form) {
-    var steps = form.querySelectorAll("[data-step]");
-    if (steps.length < 2) return; // compact form stays single-step
-
-    var next = form.querySelector("[data-step-next]");
-    var back = form.querySelector("[data-step-back]");
-
-    if (next) {
-      next.addEventListener("click", function () {
-        var one = form.querySelector('[data-step="1"]');
-        if (!validate(form, one)) return;
-        showStep(form, 2);
-        track("form_step_2", { event_category: "form" });
-        var first = form.querySelector('[data-step="2"] input');
-        if (first) first.focus({ preventScroll: true });
-      });
-    }
-
-    if (back) {
-      back.addEventListener("click", function () {
-        showStep(form, 1);
-        var first = form.querySelector('[data-step="1"] input');
-        if (first) first.focus({ preventScroll: true });
-      });
-    }
   }
 
   /* Google Sheet delivery. Fire-and-forget with no-cors: the Apps Script
@@ -273,7 +245,9 @@
         .then(function (res) {
           if (res && res.success) {
             /* No navigation, so the old mid-navigation tag loss cannot
-               happen and the conversion fires straight away. */
+               happen and the conversion fires straight away. The flag is what
+               lets /thank-you/ tell a real lead from a stray visit. */
+            flag(SUBMITTED_KEY);
             fireConversion(campus);
             showDone(form);
             form.dispatchEvent(new CustomEvent("lp:success", { bubbles: true }));
@@ -317,9 +291,8 @@
       try { return sessionStorage.getItem(EXIT_SHOWN_KEY) === "1"; } catch (e) { return false; }
     }
 
-    function converted() {
-      try { return !!sessionStorage.getItem(PENDING_KEY); } catch (e) { return false; }
-    }
+    // Do not ambush someone who has already given us their details.
+    function converted() { return hasFlag(SUBMITTED_KEY); }
 
     function open() {
       if (!armed || closed || alreadyShown() || converted()) return;
@@ -372,8 +345,10 @@
     var done = form.querySelector("[data-form-done]");
     if (!done) return;
 
+    // .lp-fields wraps every input, the consent box, the assurances and the
+    // submit button, so hiding it clears the whole form in one go.
     form.querySelectorAll(
-      "[data-step], [data-step-count], [data-form-msg], [data-form-fine]"
+      ".lp-fields, [data-form-msg], [data-form-fine]"
     ).forEach(function (el) { el.hidden = true; });
 
     done.hidden = false;
@@ -631,11 +606,9 @@
     var modal = document.getElementById("lp-brochure");
     var pending = null;   // { href, uni } captured on click, released on submit
 
+    // Anyone who has already submitted the form has cleared the gate.
     function unlocked() {
-      try {
-        return sessionStorage.getItem(BROCHURE_UNLOCKED_KEY) === "1" ||
-               !!sessionStorage.getItem(PENDING_KEY);
-      } catch (e) { return false; }
+      return hasFlag(BROCHURE_UNLOCKED_KEY) || hasFlag(SUBMITTED_KEY);
     }
 
     function download(href, uni) {
@@ -755,12 +728,11 @@
 
   function init() {
     loadTags();
-    firePendingConversion();
+    fireThankYouConversion();
     fillHiddenFields();
     trackOutboundClicks();
     document.querySelectorAll(".js-lp-form").forEach(function (f) {
       handleForm(f);
-      initSteps(f);
     });
     initMarquee();
     initLightbox();

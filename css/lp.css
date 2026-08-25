@@ -31,6 +31,15 @@
   --shadow-lg: 0 28px 80px rgba(14, 13, 36, .28);
 
   --bar-h: 62px;
+
+  /* Vertical rhythm, in one place. Every section used to hardcode its own
+     clamp, so "the page scrolls too much" meant hunting nine separate rules
+     and hoping they stayed in proportion. These are roughly a third shorter
+     than the values they replace: the old ceiling was 92-100px per section
+     side, which across ~10 stacked sections is close to two extra phone
+     screens of nothing. */
+  --sec-y: clamp(26px, 4.4vw, 60px);      /* was clamp(52px, 7vw, 92px)  */
+  --sec-y-lg: clamp(32px, 5.2vw, 70px);   /* feature bands, still larger */
 }
 
 * { box-sizing: border-box; }
@@ -109,7 +118,7 @@ a { color: inherit; }
 .lp-hero {
   position: relative;
   background: var(--bg-dark);
-  padding: clamp(38px, 6vw, 74px) 0 clamp(48px, 7vw, 90px);
+  padding: clamp(30px, 4.4vw, 54px) 0 clamp(36px, 5vw, 64px);
   overflow: hidden;
   isolation: isolate;
 }
@@ -173,18 +182,22 @@ a { color: inherit; }
 .lp-form-head h2 { font-size: 1.32rem; font-weight: 800; }
 .lp-form-head p { margin-top: 8px; font-size: .88rem; color: var(--ink-mute); }
 
-.lp-field { margin-bottom: 14px; }
-.lp-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+/* Roomier than before. The form is one step now, so it is taller, and tight
+   14px gaps made a five-field stack read as a wall. Labels also sit further
+   from the control above them than from their own input, so each label groups
+   with the field it belongs to rather than floating between two. */
+.lp-field { margin-bottom: 18px; }
 .lp-field label {
-  display: block; font-size: .79rem; font-weight: 700; color: var(--ink-soft);
-  margin-bottom: 6px; letter-spacing: .01em;
+  display: block; margin-bottom: 7px;
+  font-size: .82rem; font-weight: 700; letter-spacing: .01em;
 }
 .lp-field label span { color: var(--red); }
 .lp-field input, .lp-field select {
-  width: 100%; padding: 12px 14px;
+  width: 100%; padding: 13px 15px;
+  font-family: inherit; font-size: 1rem;   /* 16px stops iOS zooming on focus */
+  color: var(--ink); background: #fff;
   border: 1.5px solid var(--line); border-radius: var(--r-sm);
-  font-family: inherit; font-size: .94rem; color: var(--ink); background: #fff;
-  transition: border-color .16s, box-shadow .16s, background .16s;
+  transition: border-color .18s ease, box-shadow .18s ease;
 }
 .lp-field input::placeholder { color: #A9A9BC; }
 .lp-field input:focus, .lp-field select:focus {
@@ -289,18 +302,24 @@ a { color: inherit; }
 .lp-stat-l { font-size: .78rem; color: rgba(255, 255, 255, .62); letter-spacing: .04em; text-transform: uppercase; }
 
 /* ---------- sections ---------- */
-.lp-section { padding: clamp(52px, 7vw, 92px) 0; }
+.lp-section { padding: var(--sec-y) 0; }
 .lp-section--tint { background: var(--tint); }
 
-.lp-head { max-width: 720px; margin-bottom: clamp(30px, 4vw, 48px); }
+/* Widened and tightened. The sub-line was wrapping to three lines inside a
+   720px box on desktop while the section head already reserved a 48px gap
+   beneath it, so every one of the eight section heads cost ~250px before any
+   content appeared. */
+.lp-head { max-width: 820px; margin-bottom: clamp(22px, 2.8vw, 32px); }
 .lp-head--centre { margin-inline: auto; text-align: center; }
 .lp-head h2 { font-size: clamp(1.5rem, 3vw, 2.15rem); font-weight: 800; }
 
 /* `balance` evens out the line lengths of short intro paragraphs, which stops
    them ending on a stranded word or two. Longer body copy keeps `pretty`. */
 .lp-sub {
-  margin-top: 14px; color: var(--ink-soft); font-size: 1.02rem;
-  text-wrap: balance; max-width: 62ch;
+  margin-top: 10px; color: var(--ink-soft); font-size: 1.02rem;
+  /* 62ch forced three lines on desktop for most of these; 78ch lands them in
+     two without running past a comfortable measure. */
+  text-wrap: balance; max-width: 78ch;
 }
 .lp-head--centre .lp-sub { margin-inline: auto; }
 .lp-hero-tag, .lp-close-body, .lp-form-head p, .lp-ty-lead, .lp-foot-tag { text-wrap: balance; }
@@ -339,12 +358,12 @@ a { color: inherit; }
   background:
     radial-gradient(ellipse 60% 55% at 50% 0%, rgba(238, 64, 56, .20) 0%, transparent 68%),
     var(--bg-dark);
-  color: #fff; padding: clamp(58px, 7vw, 100px) 0;
+  color: #fff; padding: var(--sec-y-lg) 0;
 }
 .lp-advantage h2 { color: #fff; }
 .lp-advantage .lp-sub { color: rgba(255, 255, 255, .68); }
 
-.lp-adv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.lp-adv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 .lp-adv {
   background: rgba(255, 255, 255, .05);
   border: 1px solid rgba(255, 255, 255, .12);
@@ -408,7 +427,7 @@ a { color: inherit; }
   background:
     radial-gradient(ellipse 55% 60% at 12% 30%, rgba(37, 36, 93, .10) 0%, transparent 70%),
     linear-gradient(180deg, #EEEEF6 0%, #E6E6F1 100%);
-  padding: clamp(56px, 7vw, 96px) 0;
+  padding: var(--sec-y-lg) 0;
   border-top: 1px solid var(--line);
 }
 .lp-close-inner { display: grid; grid-template-columns: 1fr minmax(380px, 452px); gap: clamp(30px, 5vw, 60px); align-items: center; }
@@ -427,7 +446,7 @@ a { color: inherit; }
 .lp-foot {
   position: relative; overflow: hidden;
   background: var(--bg-deep); color: rgba(255, 255, 255, .66);
-  padding: clamp(46px, 6vw, 72px) 0 34px;
+  padding: var(--sec-y) 0 28px;
   isolation: isolate;
 }
 .lp-foot::before {
@@ -446,8 +465,10 @@ a { color: inherit; }
   background: var(--accent);
 }
 .lp-foot-inner { width: min(1180px, 92vw); margin-inline: auto; position: relative; z-index: 1; }
+/* Two columns since the 'Talk to us' block was removed: brand, then the
+   Chennai office. */
 .lp-foot-top {
-  display: grid; grid-template-columns: 1.5fr 1fr 1fr;
+  display: grid; grid-template-columns: 1.6fr 1fr;
   gap: clamp(28px, 4vw, 56px);
   padding-bottom: 36px; border-bottom: 1px solid rgba(255, 255, 255, .12);
 }
@@ -463,19 +484,6 @@ a { color: inherit; }
   font-family: var(--font-display); font-size: .72rem; font-weight: 700;
   letter-spacing: .16em; text-transform: uppercase; color: var(--orange); margin-bottom: 16px;
 }
-.lp-foot-row {
-  display: flex; align-items: center; gap: 12px; text-decoration: none;
-  padding: 9px 0; color: rgba(255, 255, 255, .72);
-}
-.lp-foot-row:hover { color: #fff; }
-.lp-foot-ico {
-  flex-shrink: 0; width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center;
-  background: rgba(255, 255, 255, .07); border: 1px solid rgba(255, 255, 255, .14); color: var(--sky);
-}
-.lp-foot-ico--wa { color: #25D366; }
-.lp-foot-ico svg { width: 17px; height: 17px; }
-.lp-foot-row strong { display: block; font-size: .92rem; font-weight: 700; color: #fff; }
-.lp-foot-row em { font-style: normal; font-size: .76rem; color: rgba(255, 255, 255, .50); }
 .lp-foot-addr { font-size: .87rem; max-width: 30ch; }
 .lp-foot-hours { font-size: .8rem; color: rgba(255, 255, 255, .48); margin-top: 12px; }
 .lp-foot-bottom {
@@ -525,7 +533,7 @@ a { color: inherit; }
 .lp-ty-step p { font-size: .88rem; color: var(--ink-soft); }
 
 /* legal / prose pages */
-.lp-prose { padding: clamp(46px, 6vw, 78px) 0; }
+.lp-prose { padding: var(--sec-y) 0; }
 .lp-prose-inner { width: min(760px, 92vw); margin-inline: auto; }
 .lp-prose h1 { font-size: clamp(1.8rem, 3.6vw, 2.4rem); font-weight: 800; margin-bottom: 10px; }
 .lp-prose .lp-updated { font-size: .84rem; color: var(--ink-mute); margin-bottom: 34px; }
@@ -600,8 +608,27 @@ a { color: inherit; }
   .lpm-form { color: var(--orange); }
 }
 
+/* Mobile is where "too much scroll" is actually felt. At 375px every grid
+   collapses to one column, so each card's padding is paid once per card
+   rather than once per row, and the clamp MINIMUMS are what apply because
+   4.4vw is only 16px. Spacing only here, no content removed. */
+@media (max-width: 560px) {
+  .lp-head { margin-bottom: 18px; }
+  .lp-sub { margin-top: 8px; font-size: .96rem; }
+  .lp-unis { margin-top: 16px; gap: 12px; }
+  .lp-uni { padding: 16px 16px 14px; }
+  .lp-uni-stats { padding: 12px 0; }
+  .lp-reasons { margin-top: 18px; gap: 12px; }
+  .lp-reason { padding: 18px 18px 20px; }
+  .lp-reason-ico { width: 38px; height: 38px; margin-bottom: 10px; }
+  .lp-clin-hl { padding: 15px 14px; }
+  .lp-clin-highlights { gap: 10px; }
+  .lp-adv { padding: 20px; }
+  .lp-adv-grid { gap: 12px; }
+  .lp-field { margin-bottom: 14px; }
+}
+
 @media (max-width: 480px) {
-  .lp-field-row { grid-template-columns: 1fr; }
   .lp-hero-copy h1 { font-size: 1.72rem; }
   .lp-cred-row { gap: 18px; }
   .lp-cred-row img { height: 34px; }
@@ -679,14 +706,14 @@ a { color: inherit; }
 .lp-why-card--feature p { color: rgba(255, 255, 255, .74); font-size: .98rem; max-width: 62ch; }
 
 /* ---------- clinical training ---------- */
-.lp-clinical { padding: clamp(52px, 7vw, 92px) 0; background: #fff; }
+.lp-clinical { padding: var(--sec-y) 0; background: #fff; }
 
 .lp-clin-highlights {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
   margin-bottom: clamp(28px, 4vw, 44px);
 }
 .lp-clin-hl {
-  text-align: center; padding: 26px 18px;
+  text-align: center; padding: 19px 18px;
   border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--tint);
 }
 .lp-clin-hl-n {
@@ -695,8 +722,8 @@ a { color: inherit; }
 }
 .lp-clin-hl-l { font-size: .82rem; color: var(--ink-mute); font-weight: 600; margin-top: 4px; }
 
-.lp-clin-body { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 44px); align-items: start; }
-.lp-clin-hospitals h3, .lp-program h3 { font-size: 1.12rem; font-weight: 700; margin-bottom: 18px; }
+.lp-clin-body { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(20px, 2.6vw, 30px); align-items: start; }
+.lp-clin-hospitals h3, .lp-program h3 { font-size: 1.12rem; font-weight: 700; margin-bottom: 13px; }
 .lp-clin-hospitals ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
 .lp-clin-hospitals li {
   display: flex; align-items: center; gap: 12px;
@@ -834,24 +861,6 @@ a { color: inherit; }
 }
 
 /* ---------- two-step form ---------- */
-.lp-step-count {
-  font-family: var(--font-mono); font-size: .68rem; font-weight: 700;
-  letter-spacing: .12em; text-transform: uppercase;
-  color: rgba(255, 255, 255, .45); margin-bottom: 14px;
-}
-.lp-step[hidden] { display: none; }
-.lp-step-back {
-  display: block; width: 100%; margin-top: 10px; padding: 9px;
-  background: none; border: none; cursor: pointer;
-  font-family: inherit; font-size: .82rem; font-weight: 600;
-  color: rgba(255, 255, 255, .55);
-}
-.lp-step-back:hover { color: #fff; }
-
-/* the closing form sits on a light card, so its step chrome inverts */
-.lp-form--bottom .lp-step-count { color: var(--ink-mute); }
-.lp-form--bottom .lp-step-back { color: var(--ink-mute); }
-.lp-form--bottom .lp-step-back:hover { color: var(--ink); }
 
 /* ---------- director ---------- */
 .lp-director {
@@ -1028,7 +1037,7 @@ a { color: inherit; }
 .lp-form--top .lp-done-fine { color: rgba(255, 255, 255, .38); }
 
 /* ---------- what happens next ---------- */
-.lp-next { padding: clamp(52px, 7vw, 88px) 0; background: #fff; }
+.lp-next { padding: var(--sec-y) 0; background: #fff; }
 .lp-next-steps {
   list-style: none; padding: 0; margin: 0;
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
@@ -1108,7 +1117,7 @@ a { color: inherit; }
 }
 
 /* ---------- unlisted review index ---------- */
-.lp-review { padding: clamp(44px, 6vw, 76px) 0 clamp(56px, 7vw, 88px); background: var(--tint); }
+.lp-review { padding: var(--sec-y) 0 var(--sec-y-lg); background: var(--tint); }
 .lp-review-inner { width: min(880px, 92vw); margin-inline: auto; }
 .lp-review h1 { font-size: clamp(1.7rem, 3.4vw, 2.3rem); font-weight: 800; }
 .lp-review .lp-ty-lead { max-width: 62ch; }
@@ -1172,13 +1181,13 @@ a { color: inherit; }
 
 /* ---------- university comparison cards ---------- */
 .lp-unis {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px;
-  margin-top: 34px;
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;
+  margin-top: 22px;
 }
 .lp-uni {
   display: flex; flex-direction: column;
   background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg);
-  padding: 24px 24px 20px;
+  padding: 20px 20px 16px;
   transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
 .lp-uni:hover {
@@ -1288,7 +1297,7 @@ a { color: inherit; }
    Five cards wrap three-then-two and stay centred, which is why this is flex
    and not grid: a grid strands the odd card in a left-hand column. */
 .lp-reasons {
-  list-style: none; margin: 36px 0 0; padding: 0;
+  list-style: none; margin: 26px 0 0; padding: 0;
   display: flex; flex-wrap: wrap; justify-content: center;
   gap: 18px;
 }
@@ -1332,6 +1341,21 @@ a { color: inherit; }
   margin-bottom: 9px; text-wrap: balance;
 }
 .lp-reason p { font-size: .93rem; color: var(--ink-soft); }
+
+/* The why-cards now carry the client's bullet lists instead of prose. Custom
+   markers rather than list-style, so the dot picks up each card's rotating
+   accent colour and lines up with the first line of a wrapped item. */
+.lp-reason-points { list-style: none; margin: 0; padding: 0; }
+.lp-reason-points li {
+  position: relative; padding-left: 18px;
+  font-size: .91rem; line-height: 1.55; color: var(--ink-soft);
+}
+.lp-reason-points li + li { margin-top: 6px; }
+.lp-reason-points li::before {
+  content: ""; position: absolute; left: 0; top: .58em;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+}
 
 @media (max-width: 700px) {
   .lp-reasons { gap: 14px; }
@@ -1425,8 +1449,8 @@ a { color: inherit; }
   .lp-accred-note { font-size: .68rem; }
 }
 
-/* Optional-field marker. The review asked for email to stop being mandatory,
-   so the field has to say so rather than just silently accept being empty. */
+/* Optional-field marker. Email is mandatory again; this now marks the
+   university select, the one field on the form that can be left alone. */
 .lp-optional {
   font-family: var(--font-mono);
   font-size: .62rem; letter-spacing: .06em; text-transform: uppercase;
@@ -1442,17 +1466,25 @@ a { color: inherit; }
 .lp-foot-map svg { width: 15px; height: 15px; flex: 0 0 auto; }
 .lp-foot-map:hover { color: #fff; }
 
-/* Both official LIMRA numbers, stated in the footer because the two contact
-   rows above may show the same counsellor line on a campus page. */
+/* Both official LIMRA numbers. These used to sit under the 'Talk to us'
+   block; that block is gone, so they moved to the bottom bar rather than
+   being deleted with it. Inline here, so no rule off the top. */
 .lp-foot-lines {
-  margin-top: 14px; padding-top: 12px;
-  border-top: 1px solid rgba(255, 255, 255, .12);
   font-family: var(--font-mono);
   font-size: .68rem; letter-spacing: .06em; text-transform: uppercase;
   color: rgba(255, 255, 255, .5);
   display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px;
 }
-.lp-foot-lines a { color: rgba(255, 255, 255, .82); letter-spacing: .03em; }
+.lp-foot-lines a {
+  color: rgba(255, 255, 255, .82); letter-spacing: .03em;
+  /* These are tel: links. They sat at a 30px tap target on mobile, which is
+     under the 44px guideline for something a visitor is meant to press with
+     a thumb to start a call. */
+  display: inline-block;
+}
+/* Higher specificity than the generic `.lp-foot-bottom a` padding, which is
+   what was capping these at 30px. */
+.lp-foot-bottom .lp-foot-lines a { padding: 11px 6px; }
 .lp-foot-lines a:hover { color: #fff; }
 
 /* Shown after the brochure gate releases the file. A browser can refuse a

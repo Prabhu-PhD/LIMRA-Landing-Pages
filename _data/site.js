@@ -72,9 +72,26 @@ module.exports = {
   sheetEndpoint: env.SHEET_ENDPOINT ||
     "https://script.google.com/macros/s/AKfycbyLPRhSBDqKEXtwW5w0zyE6yaBLCkp_fJWTygKHVEye4eZh2c1gfqR-yPF2Bkb5lz1WCQ/exec",
 
-  // Until ga4Id holds a real G-XXXXXXX value, no analytics or advertising
-  // script loads at all and no cookies are set. That is deliberate.
+  // Until these hold real values, no analytics or advertising script loads at
+  // all and no cookies are set. That is deliberate.
+  //
+  // The Google Ads tag is configured HERE, not pasted into the pages. The
+  // client supplied the standard gtag snippet, which loads gtag.js itself and
+  // bootstraps window.dataLayer / window.gtag. This site already does both in
+  // js/lp.js: it loads gtag.js exactly once and then issues one
+  // gtag("config", id) per ID. Pasting the snippet as well would fetch
+  // gtag.js a second time, redefine window.gtag, replay gtag("js", ...) and
+  // send a duplicate page_view on every page - inflating GA4 sessions and
+  // muddying the Ads data the tag exists to collect. One ID here reaches
+  // every page through _includes/base.njk.
   ga4Id: env.GA4_ID || "G-KCMZYD7HFW",
-  adsConversionId: env.ADS_CONVERSION_ID || "",
-  adsConversionLabel: env.ADS_CONVERSION_LABEL || ""
+  adsConversionId: env.ADS_CONVERSION_ID || "AW-11218154452",
+
+  // The "Submit lead form" conversion action. Client supplied the event
+  // snippet; only these three values differ from the generic one, so they
+  // live here rather than being pasted as a <script> into a page. See
+  // fireConversion() in js/lp.js for where and when it actually fires.
+  adsConversionLabel: env.ADS_CONVERSION_LABEL || "hoXxCPfmwOccENTnneUp",
+  adsConversionValue: 1.0,
+  adsConversionCurrency: "INR"
 };

@@ -63,7 +63,7 @@ eleventyComputed:
   {% if not compact %}
   <div class="lp-form-head">
     <h2>{{ heading }}</h2>
-    {% if sub %}<p data-step1-only>{{ sub }}</p>{% endif %}
+    {% if sub %}<p>{{ sub }}</p>{% endif %}
   </div>
   {% endif %}
 
@@ -80,11 +80,7 @@ eleventyComputed:
   <input type="hidden" name="utm_content" value="" data-fill="utm_content" />
   <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none !important" aria-hidden="true" />
 
-  {% if not compact %}
-  <p class="lp-step-count" data-step-count aria-live="polite">Step 1 of 2</p>
-  {% endif %}
-
-  <div class="lp-step" data-step="1">
+  <div class="lp-fields">
     <div class="lp-field">
       <label for="{{ slot }}-name">Student's full name <span aria-hidden="true">*</span></label>
       <input type="text" id="{{ slot }}-name" name="name" autocomplete="name" placeholder="e.g. Ananya Sharma" required />
@@ -95,46 +91,30 @@ eleventyComputed:
       <input type="tel" id="{{ slot }}-phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="10-digit mobile number" required />
     </div>
 
-    {#- The compact exit and brochure forms still need a university, but
-        asking for it in a two-field form would defeat the point. They carry
-        it as a hidden field that JavaScript sets instead. -#}
+    <div class="lp-field">
+      <label for="{{ slot }}-email">Email address <span aria-hidden="true">*</span></label>
+      <input type="email" id="{{ slot }}-email" name="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required />
+    </div>
+
+    {#- City and intake year are gone. Both were guesses a counsellor can
+        settle on the call in one sentence, and every extra field on a paid
+        landing page costs completions. University stays because it routes the
+        lead to the right counsellor, but it is optional and defaults to
+        "not sure yet".
+
+        The compact exit and brochure forms have no room for a select, so they
+        carry the university as a hidden field that JavaScript fills in. -#}
     {% if compact %}
     <input type="hidden" name="college" value="Not sure yet" data-uni-field />
-    {% endif %}
-
-    {% if not compact %}
-    <button type="button" class="lp-submit" data-step-next>Continue &rarr;</button>
-  </div>
-
-  <div class="lp-step" data-step="2" hidden>
+    {% else %}
     <div class="lp-field">
-      <label for="{{ slot }}-uni">Which university interests you?</label>
+      <label for="{{ slot }}-uni">Which university interests you? <span class="lp-optional">optional</span></label>
       <select id="{{ slot }}-uni" name="college" data-uni-field>
         <option value="Not sure yet" selected>Not sure yet, help me choose</option>
         {%- for u in unis %}
         <option value="{{ u.name | striptags }}">{{ u.name | striptags }}, {{ u.city }}</option>
         {%- endfor %}
       </select>
-    </div>
-
-    <div class="lp-field">
-      <label for="{{ slot }}-email">Email address <span class="lp-optional">optional</span></label>
-      <input type="email" id="{{ slot }}-email" name="email" autocomplete="email" placeholder="you@example.com" />
-    </div>
-
-    <div class="lp-field-row">
-      <div class="lp-field">
-        <label for="{{ slot }}-city">City</label>
-        <input type="text" id="{{ slot }}-city" name="city" autocomplete="address-level2" placeholder="e.g. Chennai" />
-      </div>
-      <div class="lp-field">
-        <label for="{{ slot }}-intake">Planning to join</label>
-        <select id="{{ slot }}-intake" name="intake">
-          <option value="2026 intake" selected>2026 intake</option>
-          <option value="2027 intake">2027 intake</option>
-          <option value="Still deciding">Still deciding</option>
-        </select>
-      </div>
     </div>
     {% endif %}
 
@@ -151,9 +131,6 @@ eleventyComputed:
     {% endif %}
 
     <button type="submit" class="lp-submit">{% if submitLabel %}{{ submitLabel }}{% elif compact %}Send me the details{% else %}Get free counselling{% endif %} &rarr;</button>
-    {% if not compact %}
-    <button type="button" class="lp-step-back" data-step-back>&larr; Back</button>
-    {% endif %}
   </div>
 
   <p class="lp-form-msg" data-form-msg role="status" aria-live="polite"></p>
@@ -334,7 +311,16 @@ eleventyComputed:
       <li class="lp-reason">
         <span class="lp-reason-ico" aria-hidden="true">{{ reasonIcon(w.icon) }}</span>
         <h3>{{ w.title }}</h3>
-        <p>{{ w.text }}</p>
+        {#- Bullets rather than a paragraph. These arrived from the client as
+            lists, and a list is what they are: each line is a separate,
+            scannable claim, not a sentence in an argument. Prose would also
+            have meant rewriting the client's own wording to join the points
+            up. -#}
+        <ul class="lp-reason-points">
+          {%- for pt in w.points %}
+          <li>{{ pt }}</li>
+          {%- endfor %}
+        </ul>
       </li>
       {%- endfor %}
     </ul>
