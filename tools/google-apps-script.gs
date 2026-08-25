@@ -56,8 +56,6 @@ var COLUMNS = [
   { header: 'Phone',          key: 'phone' },
   { header: 'WhatsApp',       wa: true },
   { header: 'University',     key: 'college' },
-  { header: 'City',           key: 'city' },
-  { header: 'Intake',         key: 'intake' },
   { header: 'Email',          key: 'email' },
   { header: 'Consent',        key: 'consent' },
   { header: 'gclid',          key: 'gclid' },
@@ -71,8 +69,19 @@ var COLUMNS = [
   { header: 'Page',           key: 'page_url' }
 ];
 
-// Index (1-based) of the first advertising column, and how many there are.
-var ADS_FIRST_COL = 14;
+/* Index (1-based) of the first advertising column, and how many there are.
+   Derived rather than hardcoded. It was a literal 14 while City and Intake
+   still existed; dropping those two shifted every later column left by two,
+   and a stale 14 would have quietly hidden the wrong nine columns - taking
+   Email and Consent out of the team's view while leaving two utm columns
+   showing. Anchoring it to gclid means the next column change cannot
+   reintroduce that. */
+var ADS_FIRST_COL = (function () {
+  for (var i = 0; i < COLUMNS.length; i++) {
+    if (COLUMNS[i].key === 'gclid') return i + 1;
+  }
+  throw new Error('Advertising columns start at gclid, which is missing from COLUMNS.');
+})();
 var ADS_COL_COUNT = COLUMNS.length - ADS_FIRST_COL + 1;
 
 var STATUSES = [
@@ -369,6 +378,78 @@ function migrateFromOldLayout() {
  * Writes one clearly marked row so you can see the layout before any real
  * lead arrives. Delete the row afterwards.
  */
+/* One-time migration: removes the City and Intake columns from a sheet that
+   already has leads in it.
+
+   The landing pages stopped collecting either field, so both columns now fill
+   with blanks forever and take up room in a queue the counselling team reads
+   left to right. Run this ONCE from the Apps Script editor, then redeploy.
+
+   Three things this is careful about, because it rewrites every row of a live
+   sheet:
+
+   1. It copies the sheet to a timestamped backup tab BEFORE clearing
+      anything, so there is a restore point that does not depend on undo.
+   2. It maps by HEADER NAME, not column position, so Status, Owner, Next
+      action on and Notes - the columns the team fills in by hand - land back
+      where they belong instead of shifting by two.
+   3. It re-applies safeCell on the way back in. Sheets does not return the
+      leading apostrophe that neutralises a formula, so a cell holding
+      =IMPORTXML(...) as text reads back as a bare formula string and would be
+      written back as a LIVE formula. Without this the migration would undo
+      the injection guard on every historical row.
+
+   Safe to run twice: if City and Intake are already gone it reports that and
+   changes nothing. */
+function migrateDropCityIntake() {
+  var ss = SpreadsheetApp.openById(SHEET_ID);
+  var sheet = ss.getSheets()[0];
+  var last = sheet.getLastRow();
+
+  if (last === 0) { setupSheet(); return 'Sheet was empty. Set up with the new columns.'; }
+
+  var width = sheet.getLastColumn();
+  var head = sheet.getRange(1, 1, 1, width).getValues()[0]
+    .map(function (h) { return String(h).trim(); });
+
+  if (head.indexOf('City') === -1 && head.indexOf('Intake') === -1) {
+    return 'Already migrated: no City or Intake column present. Nothing changed.';
+  }
+  if (head.indexOf('Name') === -1 || head.indexOf('Phone') === -1) {
+    throw new Error(
+      'Header does not look like the current layout (no Name/Phone column). ' +
+      'Nothing changed. Run migrateFromOldLayout first if this is the ' +
+      'original submitted_at sheet.'
+    );
+  }
+
+  var stamp = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy-MM-dd HHmm');
+  var backupName = 'Backup before City-Intake removal ' + stamp;
+  sheet.copyTo(ss).setName(backupName);
+
+  var rows = [];
+  if (last > 1) {
+    sheet.getRange(2, 1, last - 1, width).getValues().forEach(function (r) {
+      var lead = {};
+      head.forEach(function (h, i) { lead[h] = r[i]; });
+      rows.push(COLUMNS.map(function (col) { return safeCell(lead[col.header]); }));
+    });
+  }
+
+  var filter = sheet.getFilter();
+  if (filter) filter.remove();
+  sheet.clear();
+
+  setupSheet();
+
+  if (rows.length) {
+    sheet.getRange(2, 1, rows.length, COLUMNS.length).setValues(rows);
+  }
+
+  return 'Migrated ' + rows.length + ' row(s) to ' + COLUMNS.length +
+         ' columns. Backup saved as "' + backupName + '".';
+}
+
 function testConnection() {
   doPost({ postData: { contents: JSON.stringify({
     submitted_at: new Date().toISOString(),
