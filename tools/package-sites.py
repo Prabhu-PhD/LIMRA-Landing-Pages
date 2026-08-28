@@ -95,9 +95,57 @@ Questions: contact Prabhu.
 """
 
 
+ABS_HTML_REF = re.compile(r'(?:href|src|data-full|content)="(/[^"]*)"')
+ABS_CSS_REF = re.compile(r"""url\(\s*["']?(/[^"')]+)""")
+
+SKIP_PREFIXES = ("http:", "https:", "//", "mailto:", "tel:", "data:", "#")
+
+
 def copy(src, dst):
     os.makedirs(os.path.dirname(dst), exist_ok=True)
     shutil.copy2(src, dst)
+
+
+def relativise(root):
+    """Rewrite root-absolute references to depth-relative ones.
+
+    A bundle full of "/css/lp.css" only works when it is served from a domain
+    root. Dropped into a subdirectory instead, those resolve against the PARENT
+    site - which, on a WordPress host, answers with its own HTML page at status
+    200 and Content-Type text/html rather than a 404. The browser then refuses
+    to apply it as a stylesheet and the page renders as naked markup with
+    broken images, with nothing in the network log flagged red.
+
+    Relative paths let the folder sit at any depth, root included.
+    """
+    changed = 0
+    for dirpath, _, files in os.walk(root):
+        rel_dir = os.path.relpath(dirpath, root).replace("\\", "/")
+        depth = 0 if rel_dir == "." else rel_dir.count("/") + 1
+        prefix = "../" * depth
+
+        for f in files:
+            if not f.endswith((".html", ".css")):
+                continue
+            path = os.path.join(dirpath, f)
+            text = original = open(path, encoding="utf-8").read()
+
+            def rewrite(match):
+                whole, ref = match.group(0), match.group(1)
+                if ref.startswith("//"):
+                    return whole                    # protocol-relative, leave it
+                new = prefix + ref.lstrip("/")
+                if not new:
+                    new = "./"                      # href="/" sitting at the root
+                return whole.replace(ref, new, 1)
+
+            pattern = ABS_HTML_REF if f.endswith(".html") else ABS_CSS_REF
+            text = pattern.sub(rewrite, text)
+
+            if text != original:
+                open(path, "w", encoding="utf-8").write(text)
+                changed += 1
+    return changed
 
 
 def build_one(campus):
@@ -143,6 +191,8 @@ def build_one(campus):
     with open(os.path.join(root, "netlify.toml"), "w", encoding="utf-8") as fh:
         fh.write(NETLIFY.format(name=name))
 
+    relativise(root)
+
     with open(os.path.join(root, "READ-ME-FIRST.txt"), "w", encoding="utf-8") as fh:
         fh.write(README.format(name=name, short=short, ident=ident, rule="=" * (len(name) + 15)))
 
@@ -158,11 +208,17 @@ def verify(root, ident):
                 continue
             page = os.path.join(dirpath, f)
             html = open(page, encoding="utf-8").read()
-            for ref in re.findall(r'(?:href|src)="(/[^"]*)"', html):
+            # Paths are relative after relativise(), so resolve each one from
+            # the directory of the file that names it rather than from the root.
+            for ref in re.findall(r'(?:href|src)="([^":#?][^"]*)"', html):
                 ref = ref.split("?")[0].split("#")[0]
-                if not ref or ref.endswith("/"):
+                if not ref or ref.startswith(SKIP_PREFIXES):
+                    continue
+                if " " in ref or ("/" not in ref and "." not in ref):
+                    continue
+                if ref.endswith("/"):
                     ref = ref + "index.html"
-                target = os.path.join(root, ref.lstrip("/"))
+                target = os.path.normpath(os.path.join(dirpath, ref))
                 if not os.path.exists(target):
                     missing.append(f"{os.path.relpath(page, root)} -> {ref}")
     return missing

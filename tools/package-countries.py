@@ -104,6 +104,57 @@ Questions: contact Prabhu.
 """
 
 
+# After relativise() the shipped paths are relative, so verify() needs its own
+# patterns. crawl() still uses HTML_REF/CSS_REF because it runs first, on the
+# absolute form.
+REL_HTML_REF = re.compile(r'(?:href|src|data-full|content)="([^":#?][^"]*)"')
+REL_CSS_REF = re.compile(r"""url\(\s*["']?([^"')][^"')]*)""")
+
+SKIP_PREFIXES = ("http:", "https:", "//", "mailto:", "tel:", "data:", "#")
+
+
+def relativise(root):
+    """Rewrite root-absolute references to depth-relative ones.
+
+    The bundle previously assumed a domain root. Dropped into a subdirectory
+    instead - limraedu.com/philippines-lp/ - every "/css/lp.css" resolved
+    against the PARENT site, which answered with its own HTML page at status
+    200 and Content-Type text/html. The browser refused to apply that as a
+    stylesheet, so the page rendered as naked markup with broken images: total
+    failure, and no 404 anywhere to point at it.
+
+    Relative paths let the folder sit at any depth, root included.
+    """
+    changed = 0
+    for dirpath, _, files in os.walk(root):
+        rel_dir = os.path.relpath(dirpath, root).replace("\\", "/")
+        depth = 0 if rel_dir == "." else rel_dir.count("/") + 1
+        prefix = "../" * depth
+
+        for f in files:
+            if not f.endswith((".html", ".css")):
+                continue
+            path = os.path.join(dirpath, f)
+            text = original = open(path, encoding="utf-8").read()
+
+            def rewrite(match):
+                whole, ref = match.group(0), match.group(1)
+                if ref.startswith("//"):
+                    return whole                    # protocol-relative, leave it
+                new = prefix + ref.lstrip("/")
+                if not new:
+                    new = "./"                      # href="/" sitting at the root
+                return whole.replace(ref, new, 1)
+
+            pattern = HTML_REF if f.endswith(".html") else CSS_REF
+            text = pattern.sub(rewrite, text)
+
+            if text != original:
+                open(path, "w", encoding="utf-8").write(text)
+                changed += 1
+    return changed
+
+
 def copy(src, dst):
     os.makedirs(os.path.dirname(dst), exist_ok=True)
     shutil.copy2(src, dst)
@@ -156,6 +207,7 @@ def build_one(country, unis):
     copy(os.path.join(SITE, "robots.txt"), os.path.join(root, "robots.txt"))
 
     crawl(root)
+    relativise(root)
 
     with open(os.path.join(root, "netlify.toml"), "w", encoding="utf-8") as fh:
         fh.write(NETLIFY.format(name=country["adTitle"]))
@@ -179,13 +231,21 @@ def verify(root):
                 continue
             path = os.path.join(dirpath, f)
             text = open(path, encoding="utf-8").read()
-            pattern = HTML_REF if f.endswith(".html") else CSS_REF
+            pattern = REL_HTML_REF if f.endswith(".html") else REL_CSS_REF
             for ref in pattern.findall(text):
                 ref = ref.split("?")[0].split("#")[0]
-                if not ref or ref.startswith("//"):
+                if not ref or ref.startswith(SKIP_PREFIXES):
                     continue
-                rel = ref.lstrip("/") + ("index.html" if ref.endswith("/") else "")
-                if not os.path.exists(os.path.join(root, rel)):
+                # `content` carries prose as often as it carries a path - meta
+                # descriptions, viewport, robots. A real reference has no
+                # spaces and either a directory separator or a file extension.
+                if " " in ref or ("/" not in ref and "." not in ref):
+                    continue
+                if ref.endswith("/"):
+                    ref += "index.html"
+                # Relative to the file that names it, not to the bundle root.
+                target = os.path.normpath(os.path.join(dirpath, ref))
+                if not os.path.exists(target):
                     missing.append("{} -> {}".format(os.path.relpath(path, root), ref))
     return missing
 
